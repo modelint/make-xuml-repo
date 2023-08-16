@@ -7,7 +7,7 @@ working/
 *.pyc
 *.db
 .DS_Store
-src/make-xuml-repo.egg-info
+src/make_xuml_repo.egg-info
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
