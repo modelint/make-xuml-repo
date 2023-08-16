@@ -3,19 +3,22 @@ metamodel.py – Parses the SM Metamodel and uses it to create a corresponding d
 
 For now, we focus only on the Class and Attribute Subsystem
 """
-import sys
 import logging
 from pathlib import Path
 from xcm_parser.class_model_parser import ClassModelParser
-from xcm_parser.exceptions import ModelParseError, MPIOException
 from pyral.database import Database
 from pyral.relvar import Relvar
 from pyral.rtypes import Attribute, Mult as DBMult
 import yaml
 
+# Default output file names
+_mmclass_nt_fname = "mmclass_nt.py"
+_mmdb_fname = "mmdb.txt"
 
 def unspace(sdelim: str) -> str:
     """
+    Convert from space to underscore delimited name
+
     :param sdelim: space delimited string
     :return: underscore delimited string
     """
@@ -39,8 +42,8 @@ class Metamodel:
     db = None
 
     # Metamodel Home
-    mm_home = Path(__file__).parent.parent / "metamodel"
-    mm_file = "mmdb.txt"
+    mm_home = Path(__file__).parent.parent.parent / "metamodel"
+    mm_types = mm_home / "mm_types.yaml"
 
     # The user does not suppy the metamodel, so we can assume it is located within
     # our module as indicated.
@@ -49,11 +52,10 @@ class Metamodel:
     # Subsystem class model files
     subsys_cm_files = list(metamodel_pkg.glob('*.xcm'))
 
-    metamodel = None  # The current parsed metamodel subsystem
     types = None  # These are defined for all subsystems in the domain_name (not loaded yet)
-    mm_tuples = [
+    mmclass_ntuples = [
         '"""',
-        'pop_types.py - Generated named tuples corresponding to each MM class',
+        f'{_mmclass_nt_fname} - Generated named tuples corresponding to each MM class',
         '"""',
         '\n',
         'from collections import namedtuple',
@@ -100,19 +102,18 @@ class Metamodel:
 
             # Parse the metamodel
             current_subsystem = cls.parse(cm_path=subsys_cm_file)
-            cls.mm_tuples.append(f"\n# {current_subsystem.subsystem['name']} subsystem")
+            cls.mmclass_ntuples.append(f"\n# {current_subsystem.subsystem['name']} subsystem")
 
             # Add each class to tclral and add an mm_tuple for it
             for c in current_subsystem.classes:
                 cls.add_class(c)
                 attr_string = ' '.join([f"{unspace(a['name'])}" for a in c['attributes']])
                 cname_string = f"{unspace(c['name'])}_i"
-                cls.mm_tuples.append(f"{cname_string} = namedtuple('{cname_string}', '{attr_string}')")
+                cls.mmclass_ntuples.append(f"{cname_string} = namedtuple('{cname_string}', '{attr_string}')")
 
-        # Create the pop_types.py file
-        pp_file = Path(__file__).parent.parent / "class_ntuples.py"
-        pass
-
+        # Create the metamodel class named tuples .py file
+        pp_file = Path.cwd() / _mmclass_nt_fname
+        pp_file.write_text('\n'.join(cls.mmclass_ntuples))
 
         # Now that all classes are present in the tclral, add all the constraints
         for sname, subsys in cls.metamodel_subsystem.items():
@@ -120,33 +121,21 @@ class Metamodel:
                 cls.add_rel(r)
         Database.names()  # Log all created relvar names
         Database.constraint_names()  # Log all created constraints
-        Database.save(fname=cls.mm_home / cls.mm_file)
+        Database.save(fname=cls.mm_home / _mmdb_fname)
 
     @classmethod
     def parse(cls, cm_path):
         """
         Parse the metamodel
 
-        :return:
+        :return: The parse tree as a subsystem
         """
         sname = cm_path.stem
-        try:
-            cls.metamodel = ModelParser(model_file_path=cm_path, debug=False)
-        except MPIOException as e:
-            sys.exit(e)
-        try:
-            cls.metamodel_subsystem[sname] = cls.metamodel.parse()
-        except ModelParseError as e:
-            sys.exit(e)
-
-        # TODO: use this Pathlib style to redo the indented with open code below
-        # types_path = cm_path.join('types.yaml')
-        # type_text = types_path.read_text()
-        # cls.types = yaml.safe_load(type_text)
+        cls.metamodel_subsystem[sname] = ClassModelParser.parse_file(file_input=cm_path, debug=False)[0]
 
         # Get the datatypes
-        with open("class_model_dsl/metamodel/mm_types.yaml", 'r') as file:
-            cls.types = yaml.safe_load(file)
+        type_text = cls.mm_types.read_text()
+        cls.types = yaml.safe_load(type_text)
 
         return cls.metamodel_subsystem[sname]
 
@@ -171,7 +160,6 @@ class Metamodel:
             if e.args[0] not in cls.types:
                 cls._logger.error(f"Type [{e.args[0]}] not found in mm_types.yaml file")
             raise
-
 
         ids = {}
         for a in mm_class['attributes']:
@@ -229,7 +217,7 @@ class Metamodel:
         example:
         relvar association R3 Domain_Partition Domain + Modeled_Domain Name 1
 
-        :param rel:  The association
+        :param association:
         """
         rnum = association['rnum']
 
@@ -318,7 +306,7 @@ class Metamodel:
         """
         Add partition constraint to metamodel tclral
 
-        :param mm_class:
+        :param generalization:
         """
         rnum = generalization['rnum']
         if generalization['superclass'] not in cls.schema_classes:

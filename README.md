@@ -1,4 +1,4 @@
-# Make a Executable UML Repository
+# Make an Executable UML Repository
 
 Creates a model repository database from a Shlaer-Mellor Executable UML metamodel.
 
