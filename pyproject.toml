@@ -23,7 +23,7 @@ build = ["build", "twine"]
 dev = ["bump2version", "pytest"]
 
 [project.scripts]
-makexumlrepo = "makexumlrepo.__main__:main"
+makexumlrepo = "make_xuml_repo.__main__:main"
 
 [project.urls]
 repository    = "https://github.com/modelint/make-xuml-repo"
