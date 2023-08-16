@@ -106,10 +106,12 @@ class Metamodel:
 
             # Add each class to tclral and add an mm_tuple for it
             for c in current_subsystem.classes:
-                cls.add_class(c)
-                attr_string = ' '.join([f"{unspace(a['name'])}" for a in c['attributes']])
-                cname_string = f"{unspace(c['name'])}_i"
-                cls.mmclass_ntuples.append(f"{cname_string} = namedtuple('{cname_string}', '{attr_string}')")
+                # Skip imported classes
+                if not c.get('import'):
+                    cls.add_class(c)
+                    attr_string = ' '.join([f"{unspace(a['name'])}" for a in c['attributes']])
+                    cname_string = f"{unspace(c['name'])}_i"
+                    cls.mmclass_ntuples.append(f"{cname_string} = namedtuple('{cname_string}', '{attr_string}')")
 
         # Create the metamodel class named tuples .py file
         pp_file = Path.cwd() / _mmclass_nt_fname
@@ -121,7 +123,7 @@ class Metamodel:
                 cls.add_rel(r)
         Database.names()  # Log all created relvar names
         Database.constraint_names()  # Log all created constraints
-        Database.save(fname=cls.mm_home / _mmdb_fname)
+        Database.save(fname= Path.cwd() / _mmdb_fname)
 
     @classmethod
     def parse(cls, cm_path):
@@ -147,10 +149,6 @@ class Metamodel:
         :param mm_class:
         :return:
         """
-        # Skip imported classes
-        if mm_class.get('import'):
-            return
-
         cname = unspace(mm_class['name'])
         try:
             attrs = [Attribute(name=a['name'], type=cls.types[a['type']]) for a in mm_class['attributes']]

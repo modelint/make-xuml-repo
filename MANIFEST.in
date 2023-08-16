@@ -1,1 +1,2 @@
-include src/xmdb/log.conf
+include src/make_xuml_repo/log.conf
+include metamodel/
