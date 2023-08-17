@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "make-xuml-repo"
-version = "0.1.2"
+version = "0.1.3"
 description = "Generates a database from a set of *.xcm (executable class model) files"
 readme = "README.md"
 authors = [{ name = "Leon Starr", email = "leon_starr@modelint.com" }]
