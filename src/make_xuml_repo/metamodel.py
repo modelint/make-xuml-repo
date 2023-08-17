@@ -42,7 +42,7 @@ class Metamodel:
     db = None
 
     # Metamodel Home
-    mm_home = Path(__file__).parent.parent.parent / "metamodel"
+    mm_home = Path(__file__).parent.parent / "metamodel"
     mm_types = mm_home / "mm_types.yaml"
 
     # The user does not suppy the metamodel, so we can assume it is located within

@@ -1,2 +1,2 @@
 include src/make_xuml_repo/log.conf
-include metamodel/*
+include src/metamodel/*
