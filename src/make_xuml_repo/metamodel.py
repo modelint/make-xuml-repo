@@ -133,7 +133,7 @@ class Metamodel:
         :return: The parse tree as a subsystem
         """
         sname = cm_path.stem
-        cls.metamodel_subsystem[sname] = ClassModelParser.parse_file(file_input=cm_path, debug=False)[0]
+        cls.metamodel_subsystem[sname] = ClassModelParser.parse_file(file_input=cm_path, debug=False)
 
         # Get the datatypes
         type_text = cls.mm_types.read_text()
