@@ -31,7 +31,6 @@ attributes
     Action : Action ID {I, R1159}
     Activity : Activity Number {I, R1159, R1161}
     Attribute : Attribute Name {I, R1159}
-    Table : Table Name {I, R1159}
     Domain : Domain Name {I, R1159, R1161}
     Value : Value Representation {R1161}
     Comparison : Comp Op
@@ -42,7 +41,6 @@ attributes
     Action : Action ID {I, R1159}
     Activity : Activity Number {I, R1159}
     Attribute : Attribute Name {I, R1159}
-    Table : Table Name {I, R1159}
     Domain : Domain Name {I, R1159, R1160}
     Operation : Equivalence Op
     Value : Value Representation
@@ -99,7 +97,6 @@ attributes
     Action : Action ID {I, R1159}
     Activity : Activity Number {I, R1159}
     Attribute : Attribute Name {I, R1159}
-    Table : Table Name {I, R1159}
     Domain : Domain Name {I, R1159}
     Order : Ascending Descending
 --
