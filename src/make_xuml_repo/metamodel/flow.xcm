@@ -99,7 +99,6 @@ attributes
     Activity : Activity Number {I, R802}
     Domain : Domain Name {I, R802, R804}
     Type : Type Name {R804}
-    Tuple : Boolean
 --
 class Unlabeled Flow
 attributes
