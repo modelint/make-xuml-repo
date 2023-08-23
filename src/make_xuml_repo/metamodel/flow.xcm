@@ -4,7 +4,7 @@ metadata
     Document ID : mint.sm-meta.action.td.2
     Version : 1.5.1 /// Excerpt based on xmm 1.5.0, excludes Table Flow components for now
     /// Creation date : September 10, 2021
-    Modification date : June 22, 2023
+    Modification date : Aug 23, 2023
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -51,12 +51,12 @@ attributes
     Domain : Domain Name {I, R802, R803}
     Class : Type Name {R803}
 --
-class Label
+class Labeled Flow
 attributes
-    Name : Flow Name {I}
-    Flow : Flow ID {I2, R808}
-    Activity : Activity Number {I, I2, R808}
-    Domain : Domain Name {I, I2, R808}
+    ID : Flow ID {I, R808}
+    Activity : Activity Number {I, R808}
+    Domain : Domain Name {I, R808}
+    Name : Flow Name
 --
 class Multiple Instance Flow
 attributes
@@ -77,11 +77,21 @@ attributes
     Domain : Domain Name {I, R801, R806}
     Type : Type Name {R806}
 --
+class Scalar <import:Type>
+attributes
+    Name {I}
+    Domain {I}
+--
 class Single Instance Flow
 attributes
     ID : Flow ID {I, R805}
     Activity : Activity Number {I, R805}
     Domain : Domain Name {I, R805}
+--
+class Table <import:Type>
+attributes
+    Name {I}
+    Domain {I}
 --
 class Table Flow
 attributes
@@ -90,6 +100,12 @@ attributes
     Domain : Domain Name {I, R802, R804}
     Type : Type Name {R804}
     Tuple : Boolean
+--
+class Unlabeled Flow
+attributes
+    ID : Flow ID {I, R808}
+    Activity : Activity Number {I, R808}
+    Domain : Domain Name {I, R808}
 --
 relationships
     R800
@@ -116,9 +132,9 @@ relationships
     Instance Flow.(Class, Domain) -> Class Type.(Name, Domain)
 --
     R804
-    flows values of, 1 Table Type
+    flows values of, 1 Table
     defines values in, 1 Table Flow
-    Table Flow.(Type, Domain) -> Table Type.(Name, Domain)
+    Table Flow.(Type, Domain) -> Table.(Name, Domain)
 --
     R805
     Instance Flow +
@@ -128,11 +144,18 @@ relationships
 --
     R806
     defines values in, Mc Scalar Flow
-    values are defined by, 1 Scalar Type
-    Scalar Flow.(Type, Domain) -> Scalar Type.(Name, Domain)
+    values are defined by, 1 Scalar
+    Scalar Flow.(Type, Domain) -> Scalar.(Name, Domain)
 --
     R808
-    names, 1 Flow
-    is named by, 1c Label
-    Label.(Flow, Activity, Domain) -> Flow.(ID, Activity, Domain)
+    Flow +
+        Labeled Flow
+        Unlabeled Flow
+    <subclass>.(ID, Activity, Domain) -> Flow.(ID, Activity, Domain)
+--
+    R809
+    Flow +
+        Tuple Flow
+        Relation Flow
+    <subclass>.(ID, Activity, Domain) -> Table Flow.(ID, Activity, Domain)
 --
