@@ -2,7 +2,7 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 1.5.1 /// Excerpt based on xmm 1.5.0, excludes Table Flow components for now
+    Version : 1.9.3 /// Excerpt based on xmm 1.9.3
     /// Creation date : September 10, 2021
     Modification date : Aug 23, 2023
     Organization : Model Integration, LLC / www.modelint.com
@@ -70,6 +70,12 @@ attributes
     Activity : Activity Number {I, R801}
     Domain : Domain Name {I, R801}
 --
+class Relation Flow
+attributes
+    ID : Flow ID {I, R809}
+    Activity : Activity Number {I, R809}
+    Domain : Domain Name {I, R809}
+--
 class Scalar Flow
 attributes
     ID : Flow ID {I, R801}
@@ -99,6 +105,12 @@ attributes
     Activity : Activity Number {I, R802}
     Domain : Domain Name {I, R802, R804}
     Type : Type Name {R804}
+--
+class Tuple Flow
+attributes
+    ID : Flow ID {I, R809}
+    Activity : Activity Number {I, R809}
+    Domain : Domain Name {I, R809}
 --
 class Unlabeled Flow
 attributes
