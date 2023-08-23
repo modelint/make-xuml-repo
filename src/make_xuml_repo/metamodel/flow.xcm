@@ -165,7 +165,7 @@ relationships
     <subclass>.(ID, Activity, Domain) -> Flow.(ID, Activity, Domain)
 --
     R809
-    Flow +
+    Table Flow +
         Tuple Flow
         Relation Flow
     <subclass>.(ID, Activity, Domain) -> Table Flow.(ID, Activity, Domain)
