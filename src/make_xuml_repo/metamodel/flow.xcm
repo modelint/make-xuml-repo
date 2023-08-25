@@ -2,7 +2,7 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 1.9.4 /// Excerpt based on xmm 1.9.3
+    Version : 1.9.5 /// Excerpt based on xmm 1.9.5
     /// Creation date : September 10, 2021
     Modification date : Aug 25, 2023
     Organization : Model Integration, LLC / www.modelint.com
@@ -54,9 +54,9 @@ attributes
 class Labeled Flow
 attributes
     ID : Flow ID {I, R808}
-    Activity : Activity Number {I, R808}
-    Domain : Domain Name {I, R808}
-    Name : Flow Name
+    Activity : Activity Number {I, I2, R808}
+    Domain : Domain Name {I, I2, R808}
+    Name : Flow Name {I2}
 --
 class Multiple Instance Flow
 attributes
