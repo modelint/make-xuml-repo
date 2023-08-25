@@ -2,9 +2,9 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 1.9.3 /// Excerpt based on xmm 1.9.3
+    Version : 1.9.4 /// Excerpt based on xmm 1.9.3
     /// Creation date : September 10, 2021
-    Modification date : Aug 23, 2023
+    Modification date : Aug 25, 2023
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -144,7 +144,7 @@ relationships
 --
     R804
     flows values of, 1 Table
-    defines values in, 1 Table Flow
+    defines values in, M Table Flow
     Table Flow.(Type, Domain) -> Table.(Name, Domain)
 --
     R805
