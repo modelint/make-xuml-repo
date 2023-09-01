@@ -1,0 +1,103 @@
+metadata
+    Title : Attribute Access Subsystem / Shlaer-Mellor Metamodel
+    Author : Leon Starr
+    Document ID : mint.sm-meta.action.td.8
+    Version : 0.4.1
+    /// Creation date : September 11, 2021
+    Modification date : September 1, 2023
+    Organization : Model Integration, LLC / www.modelint.com
+    Copyright notice > MIT
+    Organization logo > mint
+domain Metamodel, META
+subsystem Attribute Access, AA 1000-1024
+class Attribute <import:Classes And Attributes>
+attributes
+    Name {I}
+    Class {I}
+    Domain {I}
+--
+class Attribute Read Access
+attributes
+    Attribute : Attribute Name {I, R1003}
+    Class : Type Name {I, R1003}
+    Read action : Action ID {I, R1003}
+    Activity : Activity Number {I, R1003, R1004}
+    Domain : Domain Name {I, R1003, R1004}
+    Output flow : Flow ID {R1004}
+--
+class Attribute Write Access
+attributes
+    Attribute : Attribute Name {I, R1000}
+    Class : Type Name {I, R1000}
+    Write action : Action ID {I, R1000}
+    Activity : Activity Number {I, R1000, R1005}
+    Domain : Domain Name {I, R1000, R1005}
+    Input flow : Flow ID {R1005}
+--
+class Instance Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Read Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901, R1006}
+    Domain : Domain Name {I, R901, R1006}
+    Instance flow : Flow ID {R1006}
+--
+class Scalar Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Single Instance Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Write Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901, R1002}
+    Domain : Domain Name {I, R901, R1002}
+    Instance flow : Flow ID {R1002}
+--
+relationships
+    R1000
+    is updated by, Mc Write Action
+    updates value of, M Attribute
+    1 Attribute Write Access
+    Attribute Write Access.(Attribute, Class, Domain) -> Attribute.(Name, Class, Domain)
+    Attribute Write Access.(Write action, Activity, Domain) -> Write Action.(ID, Activity, Domain)
+--
+    R1002
+    updates instances in, 1 Instance Flow
+    provides instances to update by, Mc Write Action
+    Write Action.(Instance flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
+--
+    R1003
+    reads value of, M Attribute
+    has value read by, Mc Read Action
+    1 Attribute Access
+    Attribute Read Access.(Attribute, Class, Domain) -> Attribute.(Name, Class, Domain)
+    Attribute Read Access.(Read action, Activity, Domain) -> Read Action.(ID, Activity, Domain)
+--
+    R1004
+    outputs value in, 1 Scalar Flow
+    obtains value from, 1c Attribute Read Access
+    Attribute Read Access.(Output flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R1005
+    obtains value from, 1 Scalar Flow
+    provides value to, Mc Attribute Write Access
+    Attribute Write Access.(Input flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R1006
+    reads attributes of instance in, 1 Single Instance Flow
+    provides instance to be read by, Mc Read Action
+    Read Action.(Instance flow, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
+--
