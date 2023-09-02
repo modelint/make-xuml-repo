@@ -27,6 +27,12 @@ attributes
     Activity {I, R901}
     Domain {I, R901}
 --
+class Read Action <import:Attribute Access>
+attributes
+    ID {I, R901}
+    Activity {I, R901}
+    Domain {I, R901}
+--
 class Relation Action <import:Relational Action>
 attributes
     ID {I, R901}
@@ -57,5 +63,6 @@ relationships
         Select Action
         Traverse Action
         Relational Action
+        Read Action
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
