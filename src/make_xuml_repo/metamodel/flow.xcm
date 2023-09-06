@@ -70,7 +70,7 @@ attributes
     Activity : Activity Number {I, R801}
     Domain : Domain Name {I, R801}
 --
-class Relation Flow
+class Table Flow
 attributes
     ID : Flow ID {I, R809}
     Activity : Activity Number {I, R809}
@@ -99,7 +99,7 @@ attributes
     Name {I}
     Domain {I}
 --
-class Table Flow
+class Relation Flow
 attributes
     ID : Flow ID {I, R802}
     Activity : Activity Number {I, R802}
@@ -134,7 +134,7 @@ relationships
     R802
     Non Scalar Flow +
         Instance Flow
-        Table Flow
+        Relation Flow
     <subclass>.(ID, Activity, Domain) -> Non Scalar Flow.(ID, Activity, Domain)
 --
     R803
@@ -144,8 +144,8 @@ relationships
 --
     R804
     flows values of, 1 Table
-    defines values in, M Table Flow
-    Table Flow.(Type, Domain) -> Table.(Name, Domain)
+    defines values in, M Relation Flow
+    Relation Flow.(Type, Domain) -> Table.(Name, Domain)
 --
     R805
     Instance Flow +
@@ -165,8 +165,8 @@ relationships
     <subclass>.(ID, Activity, Domain) -> Flow.(ID, Activity, Domain)
 --
     R809
-    Table Flow +
+    Relation Flow +
         Tuple Flow
-        Relation Flow
-    <subclass>.(ID, Activity, Domain) -> Table Flow.(ID, Activity, Domain)
+        Table Flow
+    <subclass>.(ID, Activity, Domain) -> Relation Flow.(ID, Activity, Domain)
 --
