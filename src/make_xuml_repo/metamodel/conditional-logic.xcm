@@ -1,0 +1,171 @@
+metadata
+    Title : Conditional Logic Subsystem / Shlaer-Mellor Metamodel
+    Author : Leon Starr
+    Document ID : mint.sm-meta.action.td.10
+    Version : 0.6.3
+    /// Creation date : May 12, 2022
+    Modification date : September 5, 2023
+    Organization : Model Integration, LLC / www.modelint.com
+    Copyright notice > MIT
+    Organization logo > mint
+domain Metamodel, META
+subsystem Conditional Logic, CLOGIC 1050-1074
+class Action <import:Action>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Case
+attributes
+    Value : Enumeration Value {I2}
+    Switch action : Action ID {I2, R1152}
+    Flow : Flow ID {I, R1053}
+    Activity : Activity Number {I, I2, R1053, R1152}
+    Domain : Domain Name {I, I2, R1053, R1152}
+--
+class Control Dependency
+attributes
+    Control flow : Flow ID {I, R1051}
+    Action : Action ID {I, R1051}
+    Activity : Activity Number {I, R1051}
+    Domain : Domain Name {I, R1051}
+--
+class Control Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Data Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Decision Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901}
+    Predicate : Predicate
+--
+class Decision Input
+attributes
+    Decision action : Action ID {I, R1057}
+    Flow : Flow ID {I, R1057}
+    Activity : Activity Number {I, R1057}
+    Domain : Domain Name {I, R1057}
+--
+class Generalization <import:Relationship>
+attributes
+    Rnum {I}
+    Domain {I}
+--
+class Result
+attributes
+    Decision : Boolean {I2}
+    Decision action : Action ID {I2, R1060}
+    Flow : Flow ID {I, R1053}
+    Activity : Activity Number {I, I2, R1053, R1060}
+    Domain : Domain Name {I, I2, R1053, R1060}
+--
+class Scalar Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Scalar Switch Action
+attributes
+    ID : Action ID {I, R1053}
+    Activity : Activity Number {I, R1053, R1056}
+    Domain : Domain Name {I, R1053, R1056}
+    Scalar input : Flow ID {R1056}
+    Enumerated type : Type Name
+--
+class Sequence Flow
+attributes
+    Source action : Action ID {R1050}
+    Flow : Flow ID {I, R1053}
+    Activity : Activity Number {I, R1053, R1050}
+    Domain : Domain Name {I, R1053, R1050}
+--
+class Single Instance Flow <import:Flow>
+attributes
+    Flow {I}
+    Activity {I}
+    Domain {I}
+--
+class Subclass Switch Action
+attributes
+    ID : Action ID {I, R1053}
+    Activity : Activity Number {I, R1053, R1054}
+    Domain : Domain Name {I, R1053, R1054, R1055}
+    Superclass instance : Flow ID {R1054c}
+    Generalization : Relationship Number {R1055}
+--
+class Switch Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901}
+--
+relationships
+    R1050
+    is output by, 1 Action
+    outputs, 1c Sequence Flow
+    Sequence Flow.(Source action, Activity, Domain) -> Action.(ID, Activity, Domain)
+--
+    R1051
+    enables, M Action
+    is enabled by, Mc Control Flow
+    1 Control Dependency
+    Control Dependency.(Action, Activity, Domain) -> Action.(ID, Activity, Domain)
+    Control Dependency.(Control flow, Activity, Domain) -> Control Flow.(ID, Activity, Domain)
+--
+    R1052
+    selects, M Case
+    is selected by, 1 Switch Action
+    Case.(Switch action, Activity, Domain) -> Switch Action.(ID, Activity, Domain)
+--
+    R1053
+    Control Flow +
+        Result
+        Case
+        Sequence Flow
+    <subclass>.(Flow, Activity, Domain) -> Control Flow.(ID, Activity, Domain)
+--
+    R1054
+    provides superclass instance to, Mc Subclass Switch Action
+    gets superclass instance from, 1 Single Instance Flow
+    Subclass Switch Action.(Superclass instance, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
+--
+    R1055
+    switches on subclasses of, 1 Generalization
+    subclasses are switched in, Mc Subclass Switch Action
+    Subclass Switch Action.(Generalization, Domain) -> Generalization.(Rnum, Domain)
+--
+    R1056
+    is switch input to, Mc Scalar Switch Action
+    switches on input from, 1 Scalar Flow
+    Scalar Switch Action.(Scalar input, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R1057
+    is based on input from, Mc Data Flow
+    provides input to, Mc Decision Action
+    1 Decision Input
+    Decision Input.(Decision action, Activity, Domain) -> Decision Action.(ID, Activity, Domain)
+    Decision Input.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
+    R1058
+    Switch Action +
+        Subclass Switch Action
+        Scalar Switch Action
+    <subclass>.(ID, Activity, Domain) -> Switch Action.(ID, Activity, Domain)
+--
+    R1060
+    is yielded by, 1 Decision Action
+    yields, M Result
+    Result.(Decision action, Activity, Domain) -> Decision Action.(ID, Activity, Domain)
+--
