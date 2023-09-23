@@ -45,6 +45,12 @@ attributes
     Activity {I, R901}
     Domain {I, R901}
 --
+class Switch Action <import:Conditional Logic>
+attributes
+    ID {I, R901}
+    Activity {I, R901}
+    Domain {I, R901}
+--
 class Traverse Action <import:Navigation>
 attributes
     ID {I, R901}
@@ -64,5 +70,6 @@ relationships
         Traverse Action
         Relational Action
         Read Action
+        Switch Action
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
