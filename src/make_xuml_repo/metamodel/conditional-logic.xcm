@@ -58,7 +58,7 @@ attributes
 --
 class Match Value
 attributes
-    Switch action : Action ID {I, R1059}
+    Case flow : Flow ID {I, R1059}
     Activity : Activity Number {I, R1059}
     Domain : Domain Name {I, R1059}
     Value : Enumeration Value
@@ -172,7 +172,7 @@ relationships
     R1059
     matches, M Match Value
     is matched by, 1 Case
-    Match Value.(Switch action, Activity, Domain) -> Case.(Switch action, Activity, Domain)
+    Match Value.(Case flow, Activity, Domain) -> Case.(Flow, Activity, Domain)
 --
     R1060
     is yielded by, 1 Decision Action
