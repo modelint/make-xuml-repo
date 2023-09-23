@@ -82,7 +82,6 @@ attributes
     Activity : Activity Number {I, R1053, R1056}
     Domain : Domain Name {I, R1053, R1056}
     Scalar input : Flow ID {R1056}
-    Enumerated type : Type Name
 --
 class Sequence Flow
 attributes
