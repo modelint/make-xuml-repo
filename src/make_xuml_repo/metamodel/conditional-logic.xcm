@@ -18,10 +18,10 @@ attributes
 --
 class Case
 attributes
-    Switch action : Action ID {I2, R1152}
     Flow : Flow ID {I, R1053}
-    Activity : Activity Number {I, I2, R1053, R1152}
-    Domain : Domain Name {I, I2, R1053, R1152}
+    Activity : Activity Number {I, R1053, R1152}
+    Domain : Domain Name {I, R1053, R1152}
+    Switch action : Action ID {R1152}
 --
 class Control Dependency
 attributes
