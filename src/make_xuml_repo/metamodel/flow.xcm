@@ -2,9 +2,9 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 1.9.5 /// Excerpt based on xmm 1.9.5
+    Version : 2.0.1 /// Excerpt based on xmm 1.9.5
     /// Creation date : September 10, 2021
-    Modification date : Aug 25, 2023
+    Modification date : September 25, 2023
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -37,6 +37,12 @@ attributes
     ID : Flow ID {I, R800}
     Activity : Activity Number {I, R800}
     Domain : Domain Name {I, R800}
+--
+class Data Flow Switch
+attributes
+    Output flow : Flow ID {I, R110}
+    Activity : Activity Number {I, R110}
+    Domain : Domain Name {I, R110}
 --
 class Flow
 attributes
@@ -93,6 +99,13 @@ attributes
     ID : Flow ID {I, R805}
     Activity : Activity Number {I, R805}
     Domain : Domain Name {I, R805}
+--
+class Switched Data Flow
+attributes
+    Input flow : Flow ID {I, R111c}
+    Activity : Activity Number {I, R111}
+    Domain : Domain Name {I, R111}
+    Output flow : Flow ID {I, R111}
 --
 class Table <import:Type>
 attributes
@@ -169,4 +182,16 @@ relationships
         Tuple Flow
         Table Flow
     <subclass>.(ID, Activity, Domain) -> Relation Flow.(ID, Activity, Domain)
+--
+    R810
+    is output by, 1c Data Flow Switch
+    outputs, 1 Data Flow
+    Data Flow Switch.(Output flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
+    R811
+    feeds, Mc Data Flow Switch
+    switches among, M Data Flow
+    1 Switched Data Flow
+    Switched Data Flow.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+    Switched Data Flow.(Output flow, Activity, Domain) -> Data Flow Switch.(Output flow, Activity, Domain)
 --
