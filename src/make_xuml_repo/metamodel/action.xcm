@@ -71,6 +71,5 @@ relationships
         Relational Action
         Read Action
         Switch Action
-        Class Accessor
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --

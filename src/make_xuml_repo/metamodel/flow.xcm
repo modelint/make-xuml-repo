@@ -2,9 +2,9 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 2.0.1 /// Excerpt based on xmm 1.9.5
+    Version : 2.1.1 /// Excerpt based on xmm 1.9.5
     /// Creation date : September 10, 2021
-    Modification date : September 25, 2023
+    Modification date : September 29, 2023
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -12,7 +12,7 @@ domain Metamodel, META
 subsystem Flow, FLOW 800-824
 class Activity <import:Activity>
 attributes
-    ID {I}
+    Anum {I}
     Domain {I}
 --
 class Attribute <import:Class Attribute>
@@ -20,6 +20,13 @@ attributes
     Name {I}
     Class {I}
     Domain {I}
+--
+class Class Accessor
+attributes
+    Class : Type Name {I, R812}
+    Activity : Activity Number {I, I2, R812, R813}
+    Domain : Domain Name {I, I2, R812, R813}
+    Output flow : Flow ID {I2, R813}
 --
 class Class Type <import:Type>
 attributes
@@ -194,4 +201,16 @@ relationships
     1 Switched Data Flow
     Switched Data Flow.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
     Switched Data Flow.(Output flow, Activity, Domain) -> Data Flow Switch.(Output flow, Activity, Domain)
+--
+    R812
+    is accessed in, Mc Activity
+    accesses, Mc Class Accessor
+    1 Class Accessor
+    Class Accessor.(Class, Domain) -> Class.(Name, Domain)
+    Class Accessor.(Activity, Domain) -> Activity.(Anum, Domain)
+--
+    R813
+    outputs, 1 Multiple Instance Flow
+    is output by, 1c Class Accessor
+    Class Accessor.(Output flow, Activity, Domain) -> Multiple Instance Flow.(ID, Activity, Domain)
 --
