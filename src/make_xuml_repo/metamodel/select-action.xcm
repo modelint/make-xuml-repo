@@ -10,6 +10,14 @@ metadata
     Organization logo > mint
 domain Metamodel, META
 subsystem Select Action, SEL 875-899
+class Class Accessor
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901, R884}
+    Domain : Domain Name {I, R901, R883, R884}
+    Class : Type Name {R883c}
+    Output flow : Flow ID {R884}
+--
 class Class Restriction Condition <import:Relational Action>
 attributes
     Select action {I, R1152}
@@ -113,4 +121,14 @@ relationships
         Zero One Cardinality Select
         Criterion One Select
     <subclass>.(ID, Activity, Domain) -> Single Select.(ID, Activity, Domain)
+--
+    R883
+    outputs population of, 1 Class
+    has population output by, Mc Class Accessor
+    Class Accessor.(Class, Domain) -> Class.(Name, Domain)
+--
+    R884
+    outputs, 1 Multiple Instance Flow
+    is output by, 1c Class Accessor
+    Class Accessor.(Output flow, Activity, Domain) -> Multiple Instance Flow.(ID, Activity, Domain)
 --
