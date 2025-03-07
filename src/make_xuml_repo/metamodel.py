@@ -3,13 +3,17 @@ metamodel.py – Parses the SM Metamodel and uses it to create a corresponding d
 
 For now, we focus only on the Class and Attribute Subsystem
 """
+
+# System
 import logging
 from pathlib import Path
+import yaml
+
+# Model Integratino
 from xcm_parser.class_model_parser import ClassModelParser
 from pyral.database import Database
 from pyral.relvar import Relvar
 from pyral.rtypes import Attribute, Mult as DBMult
-import yaml
 
 # Default output file names
 _mmclass_nt_fname = "mmclass_nt.py"

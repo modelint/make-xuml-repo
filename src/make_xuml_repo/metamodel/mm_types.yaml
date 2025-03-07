@@ -49,6 +49,7 @@ State Model Name : string
 Subsystem Alias : string
 Subsystem Name : string
 Subsystem Element Label : string
+System Name : string
 Table Name : string
 Type Number : string
 Type Name : string

@@ -4,16 +4,19 @@ __main__.py
 Make an xUML repo
 """
 
+# System
 import logging
 import logging.config
 import sys
 import argparse
 from pathlib import Path
+
+# Make xuml repo
 from make_xuml_repo.metamodel import Metamodel
 from make_xuml_repo import version
 
 _logpath = Path("make_xuml_repo.log")
-_progname = 'Make xUML repsitory'
+_progname = 'Make xUML repository'
 
 def get_logger():
     """Initiate the logger"""
