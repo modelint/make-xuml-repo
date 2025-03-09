@@ -1,7 +1,5 @@
 """
 metamodel.py – Parses the SM Metamodel and uses it to create a corresponding database schema
-
-For now, we focus only on the Class and Attribute Subsystem
 """
 
 # System
@@ -9,7 +7,7 @@ import logging
 from pathlib import Path
 import yaml
 
-# Model Integratino
+# Model Integration
 from xcm_parser.class_model_parser import ClassModelParser
 from pyral.database import Database
 from pyral.relvar import Relvar
@@ -17,7 +15,8 @@ from pyral.rtypes import Attribute, Mult as DBMult
 
 # Default output file names
 _mmclass_nt_fname = "mmclass_nt.py"
-_mmdb_fname = "mmdb.txt"
+_mmdb_fname = "mmdb.ral"
+mmdb = "mmdb"
 
 def unspace(sdelim: str) -> str:
     """
@@ -42,8 +41,6 @@ class Metamodel:
     A user model can then be populated into this schema.
     """
     _logger = logging.getLogger(__name__)
-
-    db = None
 
     # Metamodel Home
     mm_home = Path(__file__).parent / "metamodel"
@@ -98,7 +95,7 @@ class Metamodel:
         :return:
         """
         # Create a TclRAL session with an empty tclral
-        cls.db = Database.init()
+        cls.db = Database.open_session(mmdb)
 
         # Parse each metamodel file and add each class to the tclral
         for subsys_cm_file in cls.metamodel_pkg.glob("*.xcm"):
@@ -125,9 +122,9 @@ class Metamodel:
         for sname, subsys in cls.metamodel_subsystem.items():
             for r in subsys.rels:
                 cls.add_rel(r)
-        Database.names()  # Log all created relvar names
-        Database.constraint_names()  # Log all created constraints
-        Database.save(fname= Path.cwd() / _mmdb_fname)
+        Database.names(db=mmdb)  # Log all created relvar names
+        Database.constraint_names(db=mmdb)  # Log all created constraints
+        Database.save(db=mmdb, fname = str(Path.cwd() / _mmdb_fname))
 
     @classmethod
     def parse(cls, cm_path):
@@ -171,7 +168,7 @@ class Metamodel:
                     ids[i[0]] = [a['name']]
                 else:
                     ids[i[0]].append(a['name'])
-        Relvar.create_relvar(tclral=cls.db, name=cname, attrs=attrs, ids=ids)
+        Relvar.create_relvar(db=mmdb, name=cname, attrs=attrs, ids=ids)
         cls.schema_classes.add(mm_class['name'])
 
     @classmethod
@@ -245,7 +242,7 @@ class Metamodel:
             referring_mult = cls.mult_tclral[association['p_side']['mult']]
             referenced_mult = cls.mult_tclral[association['t_side']['mult']]
 
-        Relvar.create_association(tclral=cls.db, name=rnum,
+        Relvar.create_association(db=mmdb, name=rnum,
                                   from_relvar=referring_class, from_attrs=referring_attrs, from_mult=referring_mult,
                                   to_relvar=referenced_class, to_attrs=referenced_attrs, to_mult=referenced_mult,
                                   )
@@ -296,7 +293,7 @@ class Metamodel:
 
         # Find matching t or p side to obtain multiplicity
 
-        Relvar.create_correlation(tclral=cls.db, name=rnum, correlation_relvar=assoc_class,
+        Relvar.create_correlation(db=mmdb, name=rnum, correlation_relvar=assoc_class,
                                   correl_a_attrs=ref1_from_attrs, a_mult=ref1_mult, a_relvar=ref1_class,
                                   a_ref_attrs=ref1_to_attrs,
                                   correl_b_attrs=ref2_from_attrs, b_mult=ref2_mult, b_relvar=ref2_class,
@@ -331,5 +328,5 @@ class Metamodel:
                 referring_subclass_name = unspace(g['source']['class'])
                 subclasses[referring_subclass_name] = [unspace(a) for a in g['source']['attrs']]
 
-        Relvar.create_partition(tclral=cls.db, name=rnum, superclass_name=unspace(superclass_name),
+        Relvar.create_partition(db=mmdb, name=rnum, superclass_name=unspace(superclass_name),
                                 super_attrs=superclass_attrs, subs=subclasses)
