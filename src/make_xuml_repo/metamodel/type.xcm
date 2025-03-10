@@ -39,9 +39,9 @@ attributes
 --
 class Table Attribute
 attributes
-    Name : Attribute Name {I}
-    Table : Type Name {I, R1127}
-    Domain : Domain Name {I, R1127, R1128}
+    Name : Attribute Name {I, R1129}
+    Table : Type Name {I, R1127, R1129}
+    Domain : Domain Name {I, R1127, R1128, R1129}
     Scalar : Type Name {R1128}
 --
 class Type
