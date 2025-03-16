@@ -71,7 +71,7 @@ class Multiple Assigner
 attributes
     Rnum : Relationship Number {I, R514}
     Domain : Domain Name {I, R514, R517, R518}
-    Loop : Constrained Loop Number {R517c}
+//    Loop : Constrained Loop Number {R517c} - Temporarily disabled
     Partitioning class : Type Name {R518c}
 --
 class Non Deletion State
@@ -226,11 +226,12 @@ relationships
     requires input defined by, 1 State Signature
     Real State.(Signature, Domain) -> State Signature.(SIGnum, Domain)
 --
-    R517
-    manages within constraint set by, 1 Constrained Loop
-    establishes constraint for, Mc Multiple Assigner
-    Multiple Assigner.(Loop, Domain) -> Constrained Loop.(CLnum, Domain)
---
+// Temporarily disabled until supported by xcm and xuml_populate
+//    R517
+//    manages within constraint set by, 1 Constrained Loop
+//    establishes constraint for, Mc Multiple Assigner
+//    Multiple Assigner.(Loop, Domain) -> Constrained Loop.(CLnum, Domain)
+//--
     R518
     managed instance subset is partitioned by, 1 Class
     partitions managed instance subset for, Mc Multiple Assigner
