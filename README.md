@@ -30,9 +30,9 @@ With the default usage just type:
 
     % makexumlrepo
 
-Two files will be created in this directory as a result. An mmdb.txt file and a mmclass_ntuples.py file.
+Two files will be created in this directory as a result. An mmdb.ral file and a mmclass_ntuples.py file.
 
-The mmdb.txt file can be opened by TclRAL (via PyRAL) and it will establish an empty relvar per
+The mmdb.ral file is actually a text file that can be opened by TclRAL (via PyRAL) and it will establish an empty relvar per
 metamodel class. You can use the previously mentioned populator, or your own, to load it up with
 instances of your modeled domains.
 
