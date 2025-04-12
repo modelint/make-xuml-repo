@@ -4,11 +4,11 @@ presentation default
 orientation landscape
 color teal
 sheet A1
-padding l300 b500
+padding l150 b300
 frame Model Integration Diagram
 frame_presentation default
 nodes
-    Activity 4,1-2 : 9-10,13
+    Activity 4,1 : 9-10,13
     Class Accessor 8,12
     Data Flow Switch/2 7-8,5-6
     Switched Data Flow/2 6,4
@@ -26,8 +26,8 @@ nodes
     Table 4-5,11
     Tuple Flow 3,8-9
     Table Flow 3,10
-    Unlabeled Flow 2,3
-    Labeled Flow 2,4-5
+    Unlabeled Flow 2,3-4
+    Labeled Flow 2,5
 connectors
     +R800 : r|Flow { l-2|Data Flow, l+1|Control Flow }
     +R801 : r|Data Flow { l|Scalar Flow, l-1|Non Scalar Flow }

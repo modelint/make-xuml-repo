@@ -9,17 +9,22 @@ frame Model Integration Diagram
 frame_presentation default
 nodes
     Action 7,7
+    Action Input 8,5-6
+    Action Output 6,5-6
     Activity 9,7
+    Flow 7,4
     Wave 9,10
-    Read Action 5,3
-    Computation 5,7
-    Switch Action 5,10
-    Traverse Action 5,11
-    Select Action 5,12
-    Relation Action 5,15
+    Read Action 2,3
+    Computation 2,7
+    Switch Action 2,10
+    Traverse Action 2,11
+    Select Action 2,12
+    Relation Action 2,15
 connectors
     +R900 : -/1 t|Action : -/1 b*|Activity
-    +R901 : b|Action { t|Select Action, t|Traverse Action, t|Read Action, t|Computation, t|Switch Action, t|Relation Action }
+    +R901 : b|Action { t|Select Action, t|Traverse Action, t|Read Action, t|Computation, t|Switch Action, t|Relation Action : L3 }
     +R902 : -/2 r|Activity : -/2 l*|Wave
     +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L10R-2 L11R-2
     -R904 : -/2 r|Action : +/2 b|Wave
+    -R905 : +/2 l+2|Action : +/2 r*|Flow, b|Action Input
+    +R906 : -/2 l-2|Action : -/2 r*|Flow, t|Action Output

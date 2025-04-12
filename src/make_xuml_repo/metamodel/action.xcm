@@ -17,6 +17,20 @@ attributes
     Domain : Domain Name {I, R900, R904}
     Wave : Ordinal {R904}
 --
+class Action Input
+attributes
+    Flow {I, R905}
+    Action {I, R905}
+    Activity {I, R905}
+    Domain {I, R905}
+--
+class Action Output
+attributes
+    Flow {I, R906}
+    Activity {I, R906}
+    Domain {I, R906}
+    Action {R906}
+--
 class Activity <import:Activity>
 attributes
     Anum {I}
@@ -27,6 +41,12 @@ attributes
     ID {I, R901}
     Activity {I, R901}
     Domain {I, R901}
+--
+class Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
 --
 class Read Action <import:Attribute Access>
 attributes
@@ -93,4 +113,18 @@ relationships
     moves input data to output in, 1 Wave
     pushes input data to output for, M Action
     Action.(Wave, Activity, Domain) -> Wave.(Number, Activity, Domain)
+--
+    R905
+    takes input from, Mc Flow
+    provides input to, Mc Action
+    1 Action Input
+    Action Input.(Flow, Activity, Domain) -> Flow.(ID, Activity, Domain)
+    Action Input.(Action, Activity, Domain) -> Action.(ID, Activity, Domain)
+--
+    R906
+    produces output on, Mc Flow
+    conveys output from, 1c Action
+    1 Action Output
+    Action Output.(Flow, Activity, Domain) -> Flow.(ID, Activity, Domain)
+    Action Output.(Action, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
