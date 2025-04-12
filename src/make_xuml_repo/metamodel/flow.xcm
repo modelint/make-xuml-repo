@@ -15,10 +15,9 @@ attributes
     Anum {I}
     Domain {I}
 --
-class Attribute <import:Class Attribute>
+class Class <import:Class Attribute>
 attributes
     Name {I}
-    Class {I}
     Domain {I}
 --
 class Class Accessor
@@ -27,11 +26,6 @@ attributes
     Activity : Activity Number {I, I2, R812, R813}
     Domain : Domain Name {I, I2, R812, R813}
     Output flow : Flow ID {I2, R813}
---
-class Class Type <import:Type>
-attributes
-    Name {I}
-    Domain {I}
 --
 class Control Flow
 attributes
@@ -177,6 +171,11 @@ relationships
     defines values in, Mc Scalar Flow
     values are defined by, 1 Scalar
     Scalar Flow.(Type, Domain) -> Scalar.(Name, Domain)
+--
+    R807
+    communicates internally with, Mc Flow
+    communicates within, 1 Activity
+    Flow.(Activity, Domain) -> Activity.(Anum, Domain)
 --
     R808
     Flow +
