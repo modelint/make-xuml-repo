@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.4.0
+    Version : 0.5.1
     /// Creation date : September 7, 2021
-    Modification date : August 11, 2023
+    Modification date : April 11, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -13,8 +13,9 @@ subsystem Action, ACTION 900-924
 class Action
 attributes
     ID : Action ID {I}
-    Activity : Activity Number {I, R900}
-    Domain : Domain Name {I, R900}
+    Activity : Activity Number {I, R900, R904}
+    Domain : Domain Name {I, R900, R904}
+    Wave : Ordinal {R904}
 --
 class Activity <import:Activity>
 attributes
@@ -45,6 +46,12 @@ attributes
     Activity {I, R901}
     Domain {I, R901}
 --
+class Wave
+attributes
+    Number : Ordinal {I, OR903}
+    Activity : Activity Number {I, R902}
+    Domain : Domain Name {I, R902}
+--
 class Switch Action <import:Conditional Logic>
 attributes
     ID {I, R901}
@@ -68,8 +75,22 @@ relationships
         Computation
         Select Action
         Traverse Action
-        Relational Action
+        Relation Action
         Read Action
         Switch Action
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
+--
+    R902
+    independent flows of data are pushed in sequential, Mc Wave
+    pushes independent flows of data in, 1 Activity
+    Wave.(Activity, Domain) -> Activity.(Anum, Domain)
+--
+    OR903
+    undulates before / undulates after, Wave
+    Wave : I
+--
+    R904
+    moves input data to output in, 1 Wave
+    pushes input data to output for, M Action
+    Action.(Wave, Activity, Domain) -> Wave.(Number, Activity, Domain)
 --
