@@ -108,6 +108,11 @@ attributes
     Output flow : Flow ID {R831}
     Type : Type Name {R829}
 --
+class Type <import:Type>
+attributes
+    Name {I}
+    Domain {I}
+--
 relationships
     R825
     Activity +

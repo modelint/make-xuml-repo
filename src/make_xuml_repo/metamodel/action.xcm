@@ -19,17 +19,17 @@ attributes
 --
 class Action Input
 attributes
-    Flow {I, R905}
-    Action {I, R905}
-    Activity {I, R905}
-    Domain {I, R905}
+    Flow : Flow ID {I, R905}
+    Action : Action ID {I, R905}
+    Activity : Activity Number {I, R905}
+    Domain : Domain Name {I, R905}
 --
 class Action Output
 attributes
-    Flow {I, R906}
-    Activity {I, R906}
-    Domain {I, R906}
-    Action {R906}
+    Flow : Flow ID {I, R906}
+    Activity : Activity Number {I, R906}
+    Domain : Domain Name {I, R906}
+    Action : Action ID {R906}
 --
 class Activity <import:Activity>
 attributes

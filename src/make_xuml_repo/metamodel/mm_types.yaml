@@ -33,6 +33,7 @@ NT Response : string
 One Many : string
 Operation Name : string
 Operator Symbol : string
+Ordinal : int
 Parameter Name : string
 Path Name : string
 Phrase Name : string
