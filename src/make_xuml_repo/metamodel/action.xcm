@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.5.1
+    Version : 0.6.0
     /// Creation date : September 7, 2021
-    Modification date : April 11, 2025
+    Modification date : April 15, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -16,20 +16,6 @@ attributes
     Activity : Activity Number {I, R900, R904}
     Domain : Domain Name {I, R900, R904}
     Wave : Ordinal {R904}
---
-class Action Input
-attributes
-    Flow : Flow ID {I, R905}
-    Action : Action ID {I, R905}
-    Activity : Activity Number {I, R905}
-    Domain : Domain Name {I, R905}
---
-class Action Output
-attributes
-    Flow : Flow ID {I, R906}
-    Activity : Activity Number {I, R906}
-    Domain : Domain Name {I, R906}
-    Action : Action ID {R906}
 --
 class Activity <import:Activity>
 attributes
@@ -47,6 +33,15 @@ attributes
     ID {I}
     Activity {I}
     Domain {I}
+--
+class Flow Dependency
+attributes
+    From action : Action ID {I, R905}
+    To action : Action ID {I, R905}
+    Activity : Activity Number {I, R905}
+    Domain : Domain Name {I, R905}
+    Flow : Flow ID {R906}
+    Conditional : Boolean
 --
 class Read Action <import:Attribute Access>
 attributes
@@ -115,16 +110,14 @@ relationships
     Action.(Wave, Activity, Domain) -> Wave.(Number, Activity, Domain)
 --
     R905
-    takes input from, Mc Flow
-    provides input to, Mc Action
-    1 Action Input
-    Action Input.(Flow, Activity, Domain) -> Flow.(ID, Activity, Domain)
-    Action Input.(Action, Activity, Domain) -> Action.(ID, Activity, Domain)
+    produces output for, Mc Action
+    requires input from, Mc Action
+    1 Flow Dependency
+    Flow Dependency.(From action, Activity, Domain) -> Action.(ID, Activity, Domain)
+    Flow Dependency.(To action, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
     R906
-    produces output on, Mc Flow
-    conveys output from, 1c Action
-    1 Action Output
-    Action Output.(Flow, Activity, Domain) -> Flow.(ID, Activity, Domain)
-    Action Output.(Action, Activity, Domain) -> Action.(ID, Activity, Domain)
+    establishes, Mc Flow Dependency
+    is established by, 1 Flow
+    Flow Dependency.(Flow, Activity, Domain) -> Flow.(ID, Activity, Domain)
 --
