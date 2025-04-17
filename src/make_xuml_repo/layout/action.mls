@@ -14,14 +14,14 @@ nodes
     Flow 7,2-3
     Wave 9,10
     Read Action 2,3
-    Computation 2,7
+    Computation Action 2,7
     Switch Action 2,10
     Traverse Action 2,11
     Select Action 2,12
     Relation Action 2,15
 connectors
     -R900 : +/1 t|Action : +/1 b*|Activity
-    +R901 : b|Action { t|Select Action, t|Traverse Action, t|Read Action, t|Computation, t|Switch Action, t|Relation Action : L3 }
+    +R901 : b|Action { t|Select Action, t|Traverse Action, t|Read Action, t|Computation Action, t|Switch Action, t|Relation Action : L3 }
     +R902 : -/2 r|Activity : -/2 l*|Wave
     +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L10R-2 L11R-2
     -R904 : -/2 r|Action : +/2 b|Wave

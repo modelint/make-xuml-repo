@@ -6,6 +6,7 @@ metamodel.py – Parses the SM Metamodel and uses it to create a corresponding d
 import logging
 from pathlib import Path
 import yaml
+from contextlib import redirect_stdout
 
 # Model Integration
 from xcm_parser.class_model_parser import ClassModelParser
@@ -125,6 +126,12 @@ class Metamodel:
         Database.names(db=mmdb)  # Log all created relvar names
         Database.constraint_names(db=mmdb)  # Log all created constraints
         Database.save(db=mmdb, fname = str(Path.cwd() / _mmdb_fname))
+
+        # Output a text file of the mmdb schema
+        mmdb_printout = f"mmdb.txt"
+        with open(mmdb_printout, 'w') as f:
+            with redirect_stdout(f):
+                Relvar.printall(db=mmdb)
 
     @classmethod
     def parse(cls, cm_path):
