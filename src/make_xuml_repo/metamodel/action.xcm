@@ -42,6 +42,7 @@ attributes
     Domain : Domain Name {I, R905}
     Flow : Flow ID {R906}
     Conditional : Boolean
+    Merge : Boolean
 --
 class Read Action <import:Attribute Access>
 attributes
