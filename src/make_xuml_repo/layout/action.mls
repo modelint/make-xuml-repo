@@ -13,6 +13,7 @@ nodes
     Activity 9,7
     Flow 7,2-3
     Wave 9,10
+    Wave Assignment 6,9
     Read Action 2,3
     Computation Action 2,7
     Switch Action 2,10
@@ -24,6 +25,6 @@ connectors
     +R901 : b|Action { t|Select Action, t|Traverse Action, t|Read Action, t|Computation Action, t|Switch Action, t|Relation Action : L3 }
     +R902 : -/2 r|Activity : -/2 l*|Wave
     +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L10R-2 L11R-2
-    -R904 : -/2 r|Action : +/2 b|Wave
+    -R904 : -/2 r|Action : +/2 b|Wave, t|Wave Assignment
     +R905.2-1 : +/1 l+2|Action : -/1 l-2|Action, r|Flow Dependency : L6
     -R906 : +/1 l|Flow Dependency : +/1 r*|Flow

@@ -55,3 +55,4 @@ Table Name : string
 Type Number : string
 Type Name : string
 Value Representation : string
+Wave Number : int

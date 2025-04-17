@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.6.1
+    Version : 0.6.2
     /// Creation date : September 7, 2021
-    Modification date : April 16, 2025
+    Modification date : April 17, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -62,12 +62,6 @@ attributes
     Activity {I, R901}
     Domain {I, R901}
 --
-class Wave
-attributes
-    Number : Ordinal {I, OR903}
-    Activity : Activity Number {I, R902}
-    Domain : Domain Name {I, R902}
---
 class Switch Action <import:Conditional Logic>
 attributes
     ID {I, R901}
@@ -79,6 +73,19 @@ attributes
     ID {I, R901}
     Activity {I, R901}
     Domain {I, R901}
+--
+class Wave
+attributes
+    Number : Wave Number {I, OR903}
+    Activity : Activity Number {I, R902}
+    Domain : Domain Name {I, R902}
+--
+class Wave Assignment
+attributes
+    Action : Action ID {I, R904}
+    Activity : Activity Number {I, R904}
+    Domain : Domain Name {I, R904}
+    Wave : Wave Number {R904}
 --
 relationships
     R900
@@ -106,9 +113,11 @@ relationships
     Wave : I
 --
     R904
-    moves input data to output in, 1 Wave
+    moves input data to output in, 1c Wave
     pushes input data to output for, M Action
-    Action.(Wave, Activity, Domain) -> Wave.(Number, Activity, Domain)
+    1 Wave Assignment
+    Wave Assignment.(Action, Activity, Domain) -> Action.(ID, Activity, Domain)
+    Wave Assignment.(Wave, Activity, Domain) -> Wave.(Number, Activity, Domain)
 --
     R905
     produces output for, Mc Action
