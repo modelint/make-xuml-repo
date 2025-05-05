@@ -1,5 +1,6 @@
 ---
 Action ID : string
+Action Type : string
 Activity Number : string
 Alias Name : string
 Ascending Descending : string
