@@ -2,9 +2,9 @@ metadata
     Title : Table Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.14
-    Version : 0.5.7
+    Version : 0.5.8
     /// Creation date : August 22, 2022
-    Modification date : August 11, 2023
+    Modification date : May 19, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -124,7 +124,7 @@ attributes
 --
 class Restrict Action
 attributes
-    Action : Action ID {I, R1150}
+    ID : Action ID {I, R1150}
     Activity : Activity Number {I, R1150}
     Domain : Domain Name {I, R1150}
 --
@@ -224,7 +224,7 @@ relationships
     R1154
     applies, 1 Table Restriction Condition
     is applied by, 1 Restrict Action
-    Table Restriction Condition.(Restrict action, Activity, Domain) -> Restrict Action.(Action, Activity, Domain)
+    Table Restriction Condition.(Restrict action, Activity, Domain) -> Restrict Action.(ID, Activity, Domain)
 --
     R1155
     renames, 1 Model Attribute
