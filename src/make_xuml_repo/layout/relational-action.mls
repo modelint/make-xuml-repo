@@ -10,7 +10,7 @@ frame_presentation default
 nodes
     Restrict Action 9-10,10
     Restriction Condition 8,6
-    Ranked Restrict Action 8,10 >top
+    Rank Restrict Action 8,10 >top
     Project Action 7,10
     Rename Action 6,10
     Table Restriction Condition/2 9-10,7
@@ -33,7 +33,7 @@ nodes
     Relational Action 8,14
     Tuple Flow 11,14-15
 connectors
-    +R1150 : l|Table Action { r|Restrict Action, r|Ranked Restrict Action, r|Project Action, r|Rename Action, r|Extend Action, l|Set Action }
+    +R1150 : l|Table Action { r|Restrict Action, r|Rank Restrict Action, r|Project Action, r|Rename Action, r|Extend Action, l|Set Action }
     +R1151.2 : -/1 b|Restriction Condition : -/1 l|Model Attribute, r|Criterion
     +R1152 : t|Restriction Condition { b|Table Restriction Condition, b|Class Restriction Condition }
     -R1153.2 : +/1 l|Project Action : +/1 t+1|Model Attribute, b|Projected Attribute
@@ -54,4 +54,4 @@ connectors
     -R1168 : +/2 t|Extract Action : +/1 r|Table Attribute.2
     -R1169 : +/1 l*|Tuple Flow : +/1 r+1|Extract Action
     -R1170.2 : +/2 b+1|Scalar Flow : +/1 l|Source Tuple Attribute Access
-    +R1171.2 : +/2 l+1|Ranked Restrict Action : -/2 t-1|Model Attribute
+    +R1171.2 : +/2 l+1|Rank Restrict Action : -/2 t-1|Model Attribute

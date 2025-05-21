@@ -2,9 +2,9 @@ metadata
     Title : Table Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.14
-    Version : 0.7.0
+    Version : 0.7.1
     /// Creation date : August 22, 2022
-    Modification date : May 20, 2025
+    Modification date : May 21, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -91,14 +91,15 @@ attributes
     Activity : Activity Number {I, R1153}
     Domain : Domain Name {I, R1153}
 --
-class Ranked Restrict Action
+class Rank Restrict Action
 attributes
     ID : Action ID {I, R1150}
     Activity : Activity Number {I, R1150}
     Domain : Domain Name {I, R1150, R1171}
     Attribute : Attribute Name {R1171}
     Non scalar type : Type Name {R1171}
-    Order : Ascending Descending
+    Selection cardinality : Cardinality
+    Extent : Greatest Least
 --
 class Relational Action
 attributes
@@ -195,7 +196,7 @@ relationships
     Table Action +
         Table Restrict
         Project Action
-        Ranked Restrict Action
+        Rank Restrict Action
         Rename Action
         Extend Action
         Set Action
@@ -312,7 +313,7 @@ relationships
     Source Tuple Attribute Access.(Flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
 --
     R1171
-    ranks tuples by, 1 Model Attribute
-    is used to rank tuples by, Mc Ranked Restrict Action
-    Ranked Restrict Action.(Attribute, Non scalar type, Domain) -> Model Attribute.(Name, Non scalar type, Domain)
+    selects greatest or least value of, 1 Model Attribute
+    has greatest or least value selected by, Mc Rank Restrict Action
+    Rank Restrict Action.(Attribute, Non scalar type, Domain) -> Model Attribute.(Name, Non scalar type, Domain)
 --
