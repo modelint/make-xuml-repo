@@ -2,9 +2,9 @@ metadata
     Title : Table Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.14
-    Version : 0.5.8
+    Version : 0.7.0
     /// Creation date : August 22, 2022
-    Modification date : May 19, 2025
+    Modification date : May 20, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -91,20 +91,14 @@ attributes
     Activity : Activity Number {I, R1153}
     Domain : Domain Name {I, R1153}
 --
-class Ranking Criterion
+class Ranked Restrict Action
 attributes
-    ID : Criterion ID {I, R1159}
-    Action : Action ID {I, R1159}
-    Activity : Activity Number {I, R1159}
-    Attribute : Attribute Name {I, R1159}
-    Domain : Domain Name {I, R1159}
+    ID : Action ID {I, R1150}
+    Activity : Activity Number {I, R1150}
+    Domain : Domain Name {I, R1150, R1171}
+    Attribute : Attribute Name {R1171}
+    Non scalar type : Type Name {R1171}
     Order : Ascending Descending
---
-class Table Flow <import:Flow>
-attributes
-    ID {I}
-    Activity {I}
-    Domain {I}
 --
 class Relational Action
 attributes
@@ -178,6 +172,12 @@ attributes
     Table {I}
     Domain {I}
 --
+class Table Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
 class Table Restriction Condition
 attributes
     Restrict action : Action ID {I, R1154, R1152}
@@ -195,6 +195,7 @@ relationships
     Table Action +
         Table Restrict
         Project Action
+        Ranked Restrict Action
         Rename Action
         Extend Action
         Set Action
@@ -248,7 +249,6 @@ relationships
 --
     R1159
     Restriction Criterion +
-        Ranking Criterion
         Comparison Criterion
         Equivalence Criterion
     <subclass>.(ID, Action, Activity, Domain) -> Criterion.(ID, Action, Activity, Domain)
@@ -310,4 +310,9 @@ relationships
     outputs tuple value in, 1 Scalar Flow
     provides tuple value for, 1c Source Tuple Attribute Access
     Source Tuple Attribute Access.(Flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R1171
+    ranks tuples by, 1 Model Attribute
+    is used to rank tuples by, Mc Ranked Restrict Action
+    Ranked Restrict Action.(Attribute, Non scalar type, Domain) -> Model Attribute.(Name, Non scalar type, Domain)
 --
