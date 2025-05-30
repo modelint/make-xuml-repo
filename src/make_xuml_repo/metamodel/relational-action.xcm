@@ -2,9 +2,9 @@ metadata
     Title : Table Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.14
-    Version : 0.7.1
+    Version : 0.7.2
     /// Creation date : August 22, 2022
-    Modification date : May 21, 2025
+    Modification date : May 30, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -173,7 +173,7 @@ attributes
     Table {I}
     Domain {I}
 --
-class Table Flow <import:Flow>
+class Relation Flow <import:Flow>
 attributes
     ID {I}
     Activity {I}
@@ -244,9 +244,9 @@ relationships
     Table Action.(Input a flow, Activity, Domain) -> Non Scalar Flow.(ID, Activity, Domain)
 --
     R1158
-    outputs, 1 Table Flow
+    outputs, 1 Relation Flow
     is yielded by, 1c Table Action
-    Table Action.(Output flow, Activity, Domain) -> Table Flow.(ID, Activity, Domain)
+    Table Action.(Output flow, Activity, Domain) -> Relation Flow.(ID, Activity, Domain)
 --
     R1159
     Restriction Criterion +

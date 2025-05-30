@@ -19,7 +19,7 @@ nodes
     Model Attribute/2 50% 6,7
     Table Attribute 4-5,9 : 12,9-10
     Projected Attribute/2 7-8,8-9
-    Table Flow 8,12 >top
+    Relation Flow 8,12 >top
     Equivalence Criterion/2 8,3-4
     Comparison Criterion/2 6,3-4
     Scalar 8,1
@@ -41,7 +41,7 @@ connectors
     -R1155 : +/1 r|Model Attribute : +/1 l*|Rename Action
     +R1156 : -/1 t|Table Attribute : +/1 l-2|Rename Action
     +R1157.2 : -/1 r-1|Table Action : +/1 t|Non Scalar Flow
-    -R1158 : +/1 b*|Table Flow : +/1 t|Table Action
+    -R1158 : +/1 b*|Relation Flow : +/1 t|Table Action
     +R1159-1 : l|Criterion { r|Comparison Criterion, r|Equivalence Criterion : L4R+1 }
     -R1160 : +/2 l|Equivalence Criterion : +/2 r*|Scalar
     -R1161 : +/2 l|Comparison Criterion : +/2 r*|Scalar Flow
