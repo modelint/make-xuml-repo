@@ -2,9 +2,9 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 2.1.2
+    Version : 2.2.0
     /// Creation date : September 10, 2021
-    Modification date : April 11, 2025
+    Modification date : June 3, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -39,17 +39,25 @@ attributes
     Activity : Activity Number {I, R800}
     Domain : Domain Name {I, R800}
 --
-class Data Flow Switch
-attributes
-    Output flow : Flow ID {I, R110}
-    Activity : Activity Number {I, R110}
-    Domain : Domain Name {I, R110}
---
 class Flow
 attributes
     ID : Flow ID {I}
     Activity : Activity Number {I, R807}
     Domain : Domain Name {I, R807}
+--
+class Gate Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, I2, R901, R110}
+    Domain : Domain Name {I, I2, R901, R110}
+    Output flow : Flow ID {I2, R110}
+--
+class Gate Input
+attributes
+    Input flow : Flow ID {I, R111c}
+    Activity : Activity Number {I, R111}
+    Domain : Domain Name {I, R111}
+    Output flow : Flow ID {I, R111}
 --
 class Instance Flow
 attributes
@@ -100,13 +108,6 @@ attributes
     ID : Flow ID {I, R805}
     Activity : Activity Number {I, R805}
     Domain : Domain Name {I, R805}
---
-class Switched Data Flow
-attributes
-    Input flow : Flow ID {I, R111c}
-    Activity : Activity Number {I, R111}
-    Domain : Domain Name {I, R111}
-    Output flow : Flow ID {I, R111}
 --
 class Table <import:Type>
 attributes
@@ -190,16 +191,16 @@ relationships
     <subclass>.(ID, Activity, Domain) -> Relation Flow.(ID, Activity, Domain)
 --
     R810
-    is output by, 1c Data Flow Switch
+    is output by, 1c Gate Action
     outputs, 1 Data Flow
-    Data Flow Switch.(Output flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+    Gate Action.(Output flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --
     R811
-    feeds, Mc Data Flow Switch
+    feeds, Mc Gate Action
     switches among, M Data Flow
-    1 Switched Data Flow
-    Switched Data Flow.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
-    Switched Data Flow.(Output flow, Activity, Domain) -> Data Flow Switch.(Output flow, Activity, Domain)
+    1 Gate Input
+    Gate Input.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+    Gate Input.(Output flow, Activity, Domain) -> Gate Action.(Output flow, Activity, Domain)
 --
     R812
     is accessed in, Mc Activity
