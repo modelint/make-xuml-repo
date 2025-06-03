@@ -2,7 +2,7 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 2.2.0
+    Version : 2.2.1
     /// Creation date : September 10, 2021
     Modification date : June 3, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -54,10 +54,10 @@ attributes
 --
 class Gate Input
 attributes
-    Input flow : Flow ID {I, R111c}
-    Activity : Activity Number {I, R111}
-    Domain : Domain Name {I, R111}
-    Output flow : Flow ID {I, R111}
+    Gate action : Action ID {I, R811}
+    Input flow : Flow ID {I, R811c}
+    Activity : Activity Number {I, R811}
+    Domain : Domain Name {I, R811}
 --
 class Instance Flow
 attributes
@@ -200,7 +200,7 @@ relationships
     switches among, M Data Flow
     1 Gate Input
     Gate Input.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
-    Gate Input.(Output flow, Activity, Domain) -> Gate Action.(Output flow, Activity, Domain)
+    Gate Input.(Gate_action, Activity, Domain) -> Gate Action.(ID, Activity, Domain)
 --
     R812
     is accessed in, Mc Activity
