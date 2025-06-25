@@ -2,7 +2,7 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 1.3.0
+    Version : 1.3.1
     /// Creation date : August 13, 2022
     Modification date : June 24, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -209,7 +209,7 @@ relationships
     Lifecycle Activity.(Executing instance flow, Anum, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
     R839
-    delivers paritioning instance to, 1c Multiple Assigner Activity
-    obtains paritioning instance from, 1 Single Instance Flow
-    Multiple Assigner Activity.(Paritioning instance flow, Anum, Domain) -> Single Instance Flow.(ID, Activity, Domain)
+    delivers partitioning instance to, 1c Multiple Assigner Activity
+    obtains partitioning instance from, 1 Single Instance Flow
+    Multiple Assigner Activity.(Partitioning instance flow, Anum, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
