@@ -1,0 +1,15 @@
+diagram class
+notation Starr
+presentation default
+orientation landscape
+color recycle bin
+sheet A3
+padding l10 b150
+frame Model Integration Diagram
+frame_presentation default
+nodes
+    Scalar Action 4,3
+    Scalar Flow 2,3
+    Operand Input 3,4-5
+connectors
+    -R1225 : +/1 b|Scalar Action : +/1 t*|Scalar Flow, l|Operand Input

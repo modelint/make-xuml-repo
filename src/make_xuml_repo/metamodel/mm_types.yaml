@@ -43,6 +43,7 @@ Predicate : string
 Reference Type : string
 Relationship Number : string
 Restriction Expression : string
+Scalar Action Name : string
 Set Operation Name : string
 Spanning Element Label : string
 Side : string
