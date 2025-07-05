@@ -28,6 +28,7 @@ nodes
     Table Flow 3,10
     Unlabeled Flow 2,3-4
     Labeled Flow 2,5
+    Scalar Value 3-4,7
 connectors
     +R800 : r|Flow { l-2|Data Flow, l+1|Control Flow }
     +R801 : r|Data Flow { l|Scalar Flow, l-1|Non Scalar Flow }
@@ -43,3 +44,4 @@ connectors
     +R811.2 : -/1 l+1|Data Flow : +/1 l|Gate Action, r|Gate Input : L5R-2
     +R812 : +/1 r|Class : +/1 l*|Activity.2, t|Class Accessor
     +R813 : +/1 b|Class Accessor : +/1 r|Multiple Instance Flow
+    +R814 : +/1 t|Scalar Flow : +/1 b*|Scalar Value

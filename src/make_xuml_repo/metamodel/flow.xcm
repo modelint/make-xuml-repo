@@ -2,9 +2,9 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 2.2.1
+    Version : 2.3.0
     /// Creation date : September 10, 2021
-    Modification date : June 3, 2025
+    Modification date : July 5, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -97,6 +97,13 @@ attributes
     Activity : Activity Number {I, R801}
     Domain : Domain Name {I, R801, R806}
     Type : Type Name {R806}
+--
+class Scalar Value
+attributes
+    Name : Value Name {I}
+    Flow : Flow ID {I, R814}
+    Activity : Activity Number {I, R814}
+    Domain : Domain Name {I, R814}
 --
 class Scalar <import:Type>
 attributes
@@ -213,4 +220,9 @@ relationships
     outputs, 1 Multiple Instance Flow
     is output by, 1c Class Accessor
     Class Accessor.(Output flow, Activity, Domain) -> Multiple Instance Flow.(ID, Activity, Domain)
+--
+    R814
+    is preloaded with, 1c Scalar Value
+    preloads in, 1 Scalar Flow
+    Scalar Value.(Flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
 --
