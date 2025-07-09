@@ -14,6 +14,7 @@ Criterion ID : string
 Description : string
 Domain Alias : string
 Domain Name : string
+Duration : double
 EE Number : string
 EE Name : string
 Element Label : string
@@ -21,6 +22,7 @@ Element Number : int
 Enumeration Value : string
 Equivalence Op : string
 Event Name : string
+External Entity Name : string
 First Last All : string
 Flow ID : string
 Flow Name : string
@@ -55,6 +57,7 @@ Subsystem Name : string
 Subsystem Element Label : string
 System Name : string
 Table Name : string
+Time : string
 Type Number : string
 Type Name : string
 Value Name : string
