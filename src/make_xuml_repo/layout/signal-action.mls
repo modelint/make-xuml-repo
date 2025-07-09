@@ -1,16 +1,16 @@
-diagram class // Signal Action / Action Metamodel v0.6.x
+diagram class // Signal Action Subsystem
 notation Starr
 presentation default
 orientation landscape
 color pink eraser
-sheet D
-padding l300 b350
-frame OS Engineer
+sheet A1
+padding l200 b350
+frame Model Integration Diagram
 frame_presentation default
 nodes
     Event Specification 8,5-6
     Signal Action 6,5-6
-    Event Parameter 8,3
+    Parameter 8,3
     Supplied Parameter Value/2 6-7,1-2
     Data Flow 9,1-2
     Delivery Time 4,5-6
@@ -28,7 +28,7 @@ nodes
     Scalar Flow 4,3
     Multiple Assigner Partition Instance/2 1-2,9
 connectors
-    +R850 : -/1 l|Signal Action : -/2 b|Event Parameter, r|Supplied Parameter Value
+    +R850 : -/1 l|Signal Action : -/2 b|Parameter, r|Supplied Parameter Value
     +R851 : -/2 t|Signal Action : -/2 b*|Event Specification
     -R852 : +/2 t|Supplied Parameter Value : +/2 b*|Data Flow
     +R854-1 : r|Signal Action { l|Signal EE Action, l|Signal Instance Set Action, l|Signal Assigner Action, l|Initial Signal Action }
