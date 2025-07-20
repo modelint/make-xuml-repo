@@ -1,0 +1,39 @@
+diagram class
+notation Starr
+presentation default
+orientation landscape
+color butter
+sheet A0
+padding l300 b500
+frame Model Integration Diagram
+frame_presentation default
+nodes
+    Attribute 7,3
+    Attribute Initialization/2 6,4-5
+    Explicit Initialization/2 4-5,3
+    Reference Initialization/2 4-5,4-5
+    Default Initialization/2 4-5,6
+    Initializing Attribute Reference/2 3,3-4
+    Single Instance Flow/2 3,1
+    Initializing Instance Reference/2 2,2
+    Attribute Reference 2,4-5
+    Scalar Flow/2 4-5,1
+    Class 8-9,7
+    Create Action 6,7
+    Instance Initialization/2 7,6
+    Delegated Create Action/2 10,9
+    Local Create Action/2 5,9
+    New Instance Flow/2 7,9
+    Delete Action 2,9
+    Deletion Flow 1,8
+    Instance Flow 2,6-7
+connectors
+    +R975 : -/2 t|Create Action : -/1 b*|Class, r|Instance Initialization
+    +R976-1 : r|Create Action { l|Delegated Create Action, l|Local Create Action : L8R+1 }
+    +R978 : -/1 l|Instance Initialization : +/2 r*|Attribute, t|Attribute Initialization
+    -R979 : +/3 t|Local Create Action : +/3 b*|New Instance Flow
+    +R980 : b|Attribute Initialization { t|Explicit Initialization, t|Reference Initialization, t|Default Initialization }
+    +R982 : +/2 r*|Single Instance Flow : +/2 l|Initializing Attribute Reference, t|Initializing Instance Reference
+    -R983 : +/2 l|Delete Action : +/2 r*|Instance Flow, t|Deletion Flow
+    -R984 : +/2 r*|Scalar Flow : +/2 l|Explicit Initialization
+    +R985 : +/2 b|Reference Initialization : +/2 t*|Attribute Reference, r|Initializing Attribute Reference

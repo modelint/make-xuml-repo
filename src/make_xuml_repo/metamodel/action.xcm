@@ -28,6 +28,12 @@ attributes
     Activity {I, R901}
     Domain {I, R901}
 --
+class Create Action <import:Create Delete>
+attributes
+    ID {I, R901}
+    Activity {I, R901}
+    Domain {I, R901}
+--
 class Flow <import:Flow>
 attributes
     ID {I}
@@ -114,6 +120,7 @@ relationships
         Gate Action
         Scalar Action
         Signal Action
+        Create Action
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
     R902

@@ -1,0 +1,212 @@
+metadata
+    Title : (Partial) Create Delete Subsystem / Shlaer-Mellor Metamodel
+    Author : Leon Starr
+    Document ID : mint.sm-meta.action.td.9c
+    Version : 2.2.0
+    /// Creation date : November 07, 2021
+    Modification date : July 20, 2025
+    Organization : Model Integration, LLC / www.modelint.com
+    Copyright notice > MIT
+    Organization logo > mint
+domain Metamodel, META
+subsystem Creation Deletion, CRDEL 975-999
+class Attribute <import:Classes And Attributes>
+attributes
+    Name {I}
+    Class {I}
+    Domain {I}
+--
+class Attribute Initialization
+attributes
+    Create action : Action ID {I, R978}
+    Activity : Activity Number {I, R978}
+    Attribute : Attribute Name {I, R978}
+    Class : Type Name {I, R978}
+    Domain : Domain Name {I, R978}
+--
+class Attribute Reference <import:Class Attribute>
+attributes
+    From attribute {I}
+    From class {I}
+    To attribute {I}
+    To class {I}
+    Domain {I}
+    Rnum {I}
+--
+class Class <import:Classes And Attributes>
+attributes
+    Name {I}
+    Domain {I}
+--
+class Create Action
+attributes
+    Action : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901}
+--
+class Default Initialization
+attributes
+    Create action : Action ID {I, R980}
+    Activity : Activity Number {I, R980}
+    Attribute : Attribute Name {I, R980}
+    Class : Type Name {I, R980}
+    Domain : Domain Name {I, R980}
+--
+class Delegated Create Action
+attributes
+    Action : Action ID {I, R976}
+    Activity : Activity Number {I, R976}
+    Domain : Domain Name {I, R976, R984}
+--
+class Delete Action
+attributes
+    Action : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901}
+--
+class Deletion Flow
+attributes
+    Flow : Flow ID {I, R983}
+    Activity : Activity Number {I, R983}
+    Domain : Domain Name {I, R983}
+    Action : Action ID {R983}
+--
+class Explicit Initialization
+attributes
+    Create action : Action ID {I, R980}
+    Activity : Activity Number {I, R980, R984}
+    Attribute : Attribute Name {I, R980}
+    Class : Type Name {I, R980}
+    Domain : Domain Name {I, R980, R984}
+    Initial value flow : Flow ID {R984}
+--
+class Initializing Attribute Reference
+attributes
+    Create action : Action ID {I, R985}
+    Activity : Activity Number {I, R985}
+    From attribute : Attribute Name {I, R985}
+    From class : Type Name {I, R985}
+    To attribute : Attribute Name {I, R985}
+    To class : Type Name {I, R985}
+    Rnum : Relationship Number {I, R985}
+    Domain : Domain Name {I, R985}
+--
+class Initializing Instance Reference
+attributes
+    Create action : Action ID {I, R982}
+    Activity : Activity Number {I, R982}
+    From attribute : Attribute Name {I, R982}
+    From class : Type Name {I, R982}
+    To attribute : Attribute Name {I, R982}
+    To class : Type Name {I, R982}
+    Rnum : Relationship Number {I, R982}
+    Domain : Domain Name {I, R982}
+    Flow : Flow ID {R982}
+--
+class Instance Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Instance Initialization
+attributes
+    Create action : Action ID {I, R975}
+    Activity : Activity Number {I, R975}
+    Class : Type Name {I, R975}
+    Domain : Domain Name {I, R975}
+--
+class Local Create Action
+attributes
+    Action : Action ID {I, R976}
+    Activity : Activity Number {I, R976}
+    Domain : Domain Name {I, R976}
+--
+class New Instance Flow
+attributes
+    Create action : Action ID {I, R979}
+    Flow : Flow ID {I2}
+    Activity : Activity Number {I, I2, R979}
+    Domain : Domain Name {I, I2, R979}
+--
+class Reference Initialization
+attributes
+    Create action : Action ID {I, R980}
+    Activity : Activity Number {I, R980}
+    Attribute : Attribute Name {I, R980}
+    Class : Type Name {I, R980}
+    Domain : Domain Name {I, R980}
+--
+class Scalar Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Single Instance Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+relationships
+    R975
+    initializes attributes of, M Class
+    has attributes initialized by, Mc Create Action
+    1 Instance Initialization
+    Instance Initialization.(Class, Domain) -> Class.(Name, Domain)
+    Instance Initialization.(Create action, Activity, Domain) -> Create Action.(Action, Activity, Domain)
+--
+    R976
+    Create Action +
+        Delegated Create Action
+        Local Create Action
+    <subclass>.(Action, Activity, Domain) -> Create Action.(Action, Activity, Domain)
+--
+    R978
+    is initialized for, Mc Instance Initialization
+    initializes the value of, M Attribute
+    1 Attribute Initialization
+    Attribute Initialization.(Attribute, Class, Domain) -> Attribute.(Name, Class, Domain)
+    Attribute Initialization.(Create action, Activity, Class, Domain) -> Instance Initialization.(Create action, Activity, Class, Domain)
+--
+    R979
+    yields new instance reference in, 1c New Instance Flow
+    conveys reference to new instance produced by, 1 Local Create Action
+    New Instance Flow.(Create action, Activity, Domain) -> Loca Create Action.(Action, Activity, Domain)
+--
+    R980
+    Attribute Initialization +
+        Explicit Initialization
+        Initialization By Reference
+        Default Initialization
+    <subclass>.(Create action, Activity, Attribute, Class, Domain) -> Attribute Initialization.(Create action, Activity, Attribute, Class, Domain)
+--
+    R982
+    provides referenced instance for, Mc Initializing Attribute Reference
+    takes value from instance in, 1 Single Instance Flow
+    1 Initializing Instance Reference
+    Initializing Instance Reference.(Flow, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
+    Initializing Instance Reference.(Create action, Activity, From attribute, From class, To attribute, To class, Rnum, Domain) -> Initializing Attribute Reference.(Create action, Activity, From attribute, From class, To attribute, To class, Rnum, Domain)
+--
+    R983
+    deletes instances referenced in, M Instance Flow
+    is source of instances to, 1c Delete Action
+    1 Deletion Flow
+    Deletion Flow.(Flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
+    Deletion Flow.(Action, Activity, Domain) -> Delete Action.(Action, Activity, Domain)
+--
+    R984
+    supplies value for, Mc Explicit Initialization
+    gets value from, 1 Scalar Flow
+    Explicit Initialization.(Initial value flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R985
+    finds value across, M Attribute Reference
+    leads to value used for, Mc Reference Initialization
+    1 Initializing Attribute Reference
+    Initializing Attribute Reference.(Create action, Activity, From attribute, From class, Domain) ->
+        Reference Initialization.(Create action, Activity, Attribute, Class, Domain)
+    Initializing Attribute Reference.(From attribute, From class, To attribute, To class, Domain, Rnum) ->
+        Attribute Reference.(From attribute, From class, To attribute, To class, Domain, Rnum)
+--
