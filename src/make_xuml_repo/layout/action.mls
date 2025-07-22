@@ -16,16 +16,18 @@ nodes
     Wave Assignment 6,9
     Read Action 2,3
     Gate Action 2,4
-    Computation Action 2,7
+    Scalar Action 2,5
+    Create Action 2,6
+    Delete Action 2,7
+    Computation Action 2,8
+    Signal Action 2,9
     Switch Action 2,10
     Traverse Action 2,11
     Select Action 2,12
     Relation Action 2,15
-    Scalar Action 2,5
-    Create Action 2,6
 connectors
     -R900 : +/1 t|Action : +/1 b*|Activity
-    +R901 : b|Action { t|Gate Action, t|Scalar Action, t|Create Action, t|Select Action, t|Traverse Action, t|Read Action, t|Computation Action, t|Switch Action, t|Relation Action : L3 }
+    +R901 : b|Action { t|Signal Action, t|Gate Action, t|Scalar Action, t|Create Action, t|Delete Action, t|Select Action, t|Traverse Action, t|Read Action, t|Computation Action, t|Switch Action, t|Relation Action : L3 }
     +R902 : -/2 r|Activity : -/2 l*|Wave
     +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L10R-2 L11R-2
     -R904 : -/2 r|Action : +/2 b|Wave, t|Wave Assignment

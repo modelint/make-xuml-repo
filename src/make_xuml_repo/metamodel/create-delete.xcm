@@ -54,7 +54,7 @@ attributes
 --
 class Delegated Create Action
 attributes
-    Action : Action ID {I, R976}
+    ID : Action ID {I, R976}
     Activity : Activity Number {I, R976}
     Domain : Domain Name {I, R976, R984}
 --
@@ -118,7 +118,7 @@ attributes
 --
 class Local Create Action
 attributes
-    Action : Action ID {I, R976}
+    ID : Action ID {I, R976}
     Activity : Activity Number {I, R976}
     Domain : Domain Name {I, R976}
 --
@@ -155,7 +155,7 @@ relationships
     has attributes initialized by, Mc Create Action
     1 Instance Initialization
     Instance Initialization.(Class, Domain) -> Class.(Name, Domain)
-    Instance Initialization.(Create action, Activity, Domain) -> Create Action.(Action, Activity, Domain)
+    Instance Initialization.(Create action, Activity, Domain) -> Create Action.(ID, Activity, Domain)
 --
     R976
     Create Action +

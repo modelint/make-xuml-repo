@@ -55,7 +55,7 @@ attributes
 --
 class Initial Signal Action
 attributes
-    Action : Action ID {I, R854}
+    ID : Action ID {I, R854}
     Activity : Activity Number {I, R854, R860}
     Domain : Domain Name {I, R854, R860}
     Create action : Action ID {R860}
@@ -94,7 +94,7 @@ attributes
 --
 class Signal Action
 attributes
-    Action : Action ID {I, R901}
+    ID : Action ID {I, R901}
     Activity : Activity Number {I, R901}
     Domain : Domain Name {I, R901, R851, R853}
     Event spec : Event Name {R851}
@@ -102,14 +102,14 @@ attributes
 --
 class Signal Assigner Action
 attributes
-    Action : Action ID {I, R854}
+    ID : Action ID {I, R854}
     Activity : Activity Number {I, R854}
     Domain : Domain Name {I, R854, R858}
     Association : Relationship Number {R858}
 --
 class Signal EE Action
 attributes
-    Action : Action ID {I, R854}
+    ID : Action ID {I, R854}
     Activity : Activity Number {I, R854}
     Domain : Domain Name {I, R854, R861}
     EE name : External Entity Name {R861}
@@ -123,7 +123,7 @@ attributes
 --
 class Signal Instance Set Action
 attributes
-    Action : Action ID {I, R854}
+    ID : Action ID {I, R854}
     Activity : Activity Number {I, R854, R857}
     Domain : Domain Name {I, R854, R857}
     Instance flow : Flow ID {R857}
@@ -143,7 +143,7 @@ relationships
     specifies input, Mc Parameter
     1 Supplied Parameter Value
     Supplied Parameter Value.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
-    Supplied Parameter Value.(Action, Activity, Domain) -> Signal Action.(Action, Activity, Domain)
+    Supplied Parameter Value.(Action, Activity, Domain) -> Signal Action.(ID, Activity, Domain)
 --
     R851
     generates event for, 1 Event Specification
@@ -161,12 +161,12 @@ relationships
         Signal Assigner Action
         Initial Signal Action
         Signal EE Action
-    <subclass>.(Action, Activity, Domain) -> Signal Action.(Action, Activity, Domain)
+    <subclass>.(ID, Activity, Domain) -> Signal Action.(ID, Activity, Domain)
 --
     R855
     is sent at, 1c Delivery Time
     schedules delivery of, 1 Signal Action
-    Delivery Time.(Action, Activity, Domain) -> Signal Action.(Action, Activity, Domain)
+    Delivery Time.(Action, Activity, Domain) -> Signal Action.(ID, Activity, Domain)
 --
     R856
     Delivery Time +
@@ -188,13 +188,13 @@ relationships
     partitions multiple assigner, 1c Single Instance Flow
     is partition for multiple assigner in, Mc Signal Assigner Action
     1 Multiple Assigner Partition Instance
-    Multiple Assigner Partition Instance.(Action, Activity, Domain) -> Signal Assigner Action.(Action, Activity, Domain)
+    Multiple Assigner Partition Instance.(Action, Activity, Domain) -> Signal Assigner Action.(ID, Activity, Domain)
     Multiple Assigner Partition Instance.(Partition, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
     R860
     sends initial event in, 1 Delegated Create Action
     specifies, 1 Initial Signal Action
-    Initial Signal Action.(Action, Activity, Domain) -> Delegated Create Action.(Action, Activity, Domain)
+    Initial Signal Action.(ID, Activity, Domain) -> Delegated Create Action.(ID, Activity, Domain)
 --
     R861
     delivers signal to, 1 External Entity
