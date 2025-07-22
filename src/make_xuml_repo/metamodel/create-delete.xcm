@@ -40,7 +40,7 @@ attributes
 --
 class Create Action
 attributes
-    Action : Action ID {I, R901}
+    ID : Action ID {I, R901}
     Activity : Activity Number {I, R901}
     Domain : Domain Name {I, R901}
 --
@@ -60,7 +60,7 @@ attributes
 --
 class Delete Action
 attributes
-    Action : Action ID {I, R901}
+    ID : Action ID {I, R901}
     Activity : Activity Number {I, R901}
     Domain : Domain Name {I, R901}
 --
@@ -161,7 +161,7 @@ relationships
     Create Action +
         Delegated Create Action
         Local Create Action
-    <subclass>.(Action, Activity, Domain) -> Create Action.(Action, Activity, Domain)
+    <subclass>.(ID, Activity, Domain) -> Create Action.(ID, Activity, Domain)
 --
     R978
     is initialized for, Mc Instance Initialization
@@ -173,7 +173,7 @@ relationships
     R979
     yields new instance reference in, 1c New Instance Flow
     conveys reference to new instance produced by, 1 Local Create Action
-    New Instance Flow.(Create action, Activity, Domain) -> Loca Create Action.(Action, Activity, Domain)
+    New Instance Flow.(Create action, Activity, Domain) -> Local Create Action.(ID, Activity, Domain)
 --
     R980
     Attribute Initialization +
@@ -194,7 +194,7 @@ relationships
     is source of instances to, 1c Delete Action
     1 Deletion Flow
     Deletion Flow.(Flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
-    Deletion Flow.(Action, Activity, Domain) -> Delete Action.(Action, Activity, Domain)
+    Deletion Flow.(Action, Activity, Domain) -> Delete Action.(ID, Activity, Domain)
 --
     R984
     supplies value for, Mc Explicit Initialization

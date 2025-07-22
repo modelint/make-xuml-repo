@@ -1,0 +1,164 @@
+metadata
+    Title : Reference Action Subsystem / Shlaer-Mellor Metamodel
+    Author : Leon Starr
+    Document ID : mint.sm-meta.action.td.4
+    Version : 0.7.0
+    /// Creation date : November 07, 2021
+    Modification date : July 21, 2025
+    Organization : Model Integration, LLC / www.modelint.com
+    Copyright notice > MIT
+    Organization logo > mint
+domain Metamodel, META
+subsystem Reference Action, REF 775-799
+class Association <import:Relationship>
+attributes
+    Rnum {I}
+    Domain {I}
+--
+class Create Action <import:Create Delete>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class New Associative Reference Action
+attributes
+    ID : Action ID {I, R833}
+    Activity : Activity Number {I, R833, R837, R838}
+    Domain : Domain Name {I, R833, R837, R838}
+    T instance : Flow ID {R837}
+    P instance : Flow ID {R838}
+--
+class Reference Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901, R842}
+    Association : Relationship Number {R842}
+--
+class New Reference Action
+attributes
+    ID : Action ID {I, R831}
+    Activity : Activity Number {I, R831, R832}
+    Domain : Domain Name {I, R831, R832}
+    Create action : Action ID {R832}
+--
+class Update Reference Action
+attributes
+    ID : Action ID {I, R831}
+    Activity : Activity Number {I, R831, R839, R840}
+    Domain : Domain Name {I, R831, R839, R840}
+    From instance : Flow ID {R839}
+    To instance : Flow ID {R840}
+--
+class New Simple Reference Action
+attributes
+    ID : Action ID {I, R833}
+    Activity : Activity Number {I, R833, R836}
+    Domain : Domain Name {I, R833, R836}
+    Target instance : Flow ID {R836}
+--
+class Single Instance Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class From Ref Instance
+attributes
+    Flow : Flow ID {I, R834}
+    Activity : Activity Number {I, R834}
+    Domain : Domain Name {I, R834}
+--
+class To Ref Instance
+attributes
+    Flow : Flow ID {I, R834}
+    Activity : Activity Number {I, R834}
+    Domain : Domain Name {I, R834}
+--
+class T Ref Instance
+attributes
+    Flow : Flow ID {I, R834}
+    Activity : Activity Number {I, R834}
+    Domain : Domain Name {I, R834}
+--
+class P Ref Instance
+attributes
+    Flow : Flow ID {I, R834}
+    Activity : Activity Number {I, R834}
+    Domain : Domain Name {I, R834}
+--
+class Referenced Instance
+attributes
+    Flow : Flow ID {I, R835}
+    Activity : Activity Number {I, R835}
+    Domain : Domain Name {I, R835}
+--
+class Target Ref Instance
+attributes
+    Flow : Flow ID {I, R834}
+    Activity : Activity Number {I, R834}
+    Domain : Domain Name {I, R834}
+--
+relationships
+    R831
+    Reference Action +
+        New Reference Action
+        Update Reference Action
+    <subclass>.(ID, Activity, Domain) -> Reference Action.(ID, Activity, Domain)
+--
+    R832
+    creates referring instance with, 1 Create Action
+    creates referring instance for, Mc New Reference Action
+    New Reference Action.(Create action, Activity, Domain) -> Create Action.(ID, Activity, Domain)
+--
+    R833
+    New Reference Action +
+        New Simple Reference Action
+        New Associative Reference Action
+    <subclass>.(ID, Activity, Domain) -> New Reference Action.(ID, Activity, Domain)
+--
+    R834
+    Referenced Instance +
+        Target Ref Instance
+        T Ref Instance
+        P Ref Instance
+        From Ref Instance
+        To Ref Instance
+    <subclass>.(Flow, Activity, Domain) -> Referenced Instance.(Flow, Activity, Domain)
+--
+    R835
+    is provided by, 1 Single Instance Flow
+    provides, Mc Referenced Instance
+    Referenced Instance.(Flow, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
+--
+    R836
+    creates reference to, 1 Target Ref Instance
+    is created by, 1 Target Ref Instance
+    New Simple Reference Action.(Target instance, Activity, Domain) -> Target Ref Instance.(Flow, Activity, Domain)
+--
+    R837
+    creates reference to, 1 T Ref Instance
+    is created by, 1 Associative Reference Action
+    Associative Reference Action.(T instance, Activity, Domain) -> T Ref Instance.(Flow, Activity, Domain)
+--
+    R838
+    creates reference to, 1 P Ref Instance
+    is created by, 1 Associative Reference Action
+    Associative Reference Action.(P instance, Activity, Domain) -> P Ref Instance.(Flow, Activity, Domain)
+--
+    R839
+    updates reference at, 1 From Ref Instance
+    reference is updated by, 1 Update Reference Action
+    Update Reference Action.(From instance, Activity, Domain) -> From Ref Instance.(Flow, Activity, Domain)
+--
+    R840
+    updates reference to, 1 To Ref Instance
+    reference is updated by, 1 Update Reference Action
+    Update Reference Action.(To instance, Activity, Domain) -> To Ref Instance.(Flow, Activity, Domain)
+--
+    R842
+    changes reference across, 1 Association
+    reference is changed by, Mc Reference Action
+    Reference Action.(Association, Domain) -> Association.(Rnum, Domain)
+--
