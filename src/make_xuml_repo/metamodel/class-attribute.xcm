@@ -2,14 +2,14 @@ metadata
     Title : Class and Attribute Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.class.td.1
-    Version : 5.0.1
+    Version : 5.1.0
     /// Creation date : June 27, 2017
-    Modification date : August 30, 2023
+    Modification date : July 23, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
 domain Metamodel, META
-subsystem Class And Attribute, CA 25-49
+subsystem Class And Attribute, CA 20-49
 class Alias
 attributes
     Name : Alias Name {I}
@@ -62,6 +62,13 @@ attributes
     Attribute : Attribute Name {I2, R32}
     Domain : Domain Name {I, I2, R32}
 --
+class Default Initial Value
+attributes
+    Attribute : Attribute Name {I, R35}
+    Class : Type Name {I, R35}
+    Domain : Domain Name {I, R35}
+    Value : Value Representation
+--
 class Derived Attribute
 attributes
     Name : Attribute Name {I, R25}
@@ -108,7 +115,7 @@ attributes
     Rnum : Relationship Number {I}
     Domain : Domain Name {I}
 --
-class Scalar Type <import:Type>
+class Scalar <import:Type>
 attributes
     Name {I}
     Domain {I}
@@ -214,4 +221,9 @@ relationships
     values are constrained by, 1 Scalar Type
     constrains values of, Mc Attribute
     Attribute.(Type, Domain) -> Scalar Type.(Name, Domain)
+--
+    R35
+    sets value of, 1 Non Derived Attribute
+    has value set by, 1c Default Initial Value
+    Default Initial Value.(Attribute, Class, Domain) -> Attribute.(Name, Class, Domain)
 --
