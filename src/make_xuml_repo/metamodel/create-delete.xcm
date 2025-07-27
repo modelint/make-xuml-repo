@@ -2,9 +2,9 @@ metadata
     Title : (Partial) Create Delete Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.9c
-    Version : 2.3.0
+    Version : 2.3.1
     /// Creation date : November 07, 2021
-    Modification date : July 26, 2025
+    Modification date : July 27, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -42,6 +42,7 @@ attributes
     Attribute : Attribute Name {I, R980}
     Class : Type Name {I, R980}
     Domain : Domain Name {I, R980}
+    Initial value specified : Boolean
 --
 class Delegated Create Action
 attributes
