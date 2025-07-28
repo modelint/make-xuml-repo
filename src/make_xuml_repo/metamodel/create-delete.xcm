@@ -2,9 +2,9 @@ metadata
     Title : (Partial) Create Delete Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.9c
-    Version : 2.3.1
+    Version : 2.3.2
     /// Creation date : November 07, 2021
-    Modification date : July 27, 2025
+    Modification date : July 28, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -88,15 +88,15 @@ attributes
 class Local Create Action
 attributes
     ID : Action ID {I, R976}
-    Activity : Activity Number {I, R976}
-    Domain : Domain Name {I, R976}
+    Activity : Activity Number {I, I2, R976, R979}
+    Domain : Domain Name {I, I2, R976, R979}
+    New instance flow : Flow ID {I2, R979}
 --
-class New Instance Flow
+class Single Instance Flow <import:Flow>
 attributes
-    Create action : Action ID {I, R979}
-    Flow : Flow ID {I2}
-    Activity : Activity Number {I, I2, R979}
-    Domain : Domain Name {I, I2, R979}
+    ID {I}
+    Activity {I}
+    Domain {I}
 --
 class Reference Initialization
 attributes
@@ -156,9 +156,9 @@ relationships
     Attribute Initialization.(Create action, Activity, Class, Domain) -> Instance Initialization.(Create action, Activity, Class, Domain)
 --
     R979
-    yields new instance reference in, 1c New Instance Flow
-    conveys reference to new instance produced by, 1 Local Create Action
-    New Instance Flow.(Create action, Activity, Domain) -> Local Create Action.(ID, Activity, Domain)
+    yields new instance reference in, 1 Single Instance Flow
+    conveys reference to new instance produced by, 1c Local Create Action
+    Local Create Action.(New instance flow, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
     R980
     Attribute Initialization +
