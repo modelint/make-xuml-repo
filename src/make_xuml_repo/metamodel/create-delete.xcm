@@ -2,7 +2,7 @@ metadata
     Title : (Partial) Create Delete Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.9c
-    Version : 2.3.2
+    Version : 2.3.3
     /// Creation date : November 07, 2021
     Modification date : July 28, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -111,9 +111,9 @@ attributes
     Flow : Flow ID {I, R977}
     Activity : Activity Number {I, R977}
     Domain : Domain Name {I, R977}
-    Create action : Action ID {R977}
-    Attribute : Attribute Name {R977}
-    Class : Type Name {R977}
+    Create action : Action ID {I, R977}
+    Attribute : Attribute Name {I, R977}
+    Class : Type Name {I, R977}
 --
 class Scalar Flow <import:Flow>
 attributes
@@ -143,7 +143,7 @@ relationships
 --
     R977
     gets value from, M Tuple Flow
-    supplies value for, 1c Reference Initialization
+    supplies value for, Mc Reference Initialization
     1 Reference Value Input
     Reference Value Input.(Flow, Activity, Domain) -> Tuple Flow.(ID, Activity, Domain)
     Reference Value Input.(Create action, Attribute, Class, Activity, Domain) -> Reference Initialization.(Create action, Attribute, Class, Activity, Domain)
