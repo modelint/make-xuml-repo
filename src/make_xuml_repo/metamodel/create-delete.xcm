@@ -106,7 +106,22 @@ attributes
     Class : Type Name {I, R980}
     Domain : Domain Name {I, R980}
 --
+class Reference Value Input
+attributes
+    Flow : Flow ID {I, R977}
+    Activity : Activity Number {I, R977}
+    Domain : Domain Name {I, R977}
+    Create action : Action ID {R977}
+    Attribute : Attribute Name {R977}
+    Class : Type Name {R977}
+--
 class Scalar Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
+class Tuple Flow <import:Flow>
 attributes
     ID {I}
     Activity {I}
@@ -125,6 +140,13 @@ relationships
         Delegated Create Action
         Local Create Action
     <subclass>.(ID, Activity, Domain) -> Create Action.(ID, Activity, Domain)
+--
+    R977
+    gets value from, M Tuple Flow
+    supplies value for, 1c Reference Initialization
+    1 Reference Value Input
+    Reference Value Input.(Flow, Activity, Domain) -> Tuple Flow.(ID, Activity, Domain)
+    Reference Value Input.(Create action, Attribute, Class, Activity, Domain) -> Reference Initialization.(Create action, Attribute, Class, Activity, Domain)
 --
     R978
     is initialized for, Mc Instance Initialization

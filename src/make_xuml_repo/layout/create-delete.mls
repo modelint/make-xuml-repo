@@ -23,9 +23,12 @@ nodes
     Delete Action 2,9
     Deletion Flow 1,8
     Instance Flow 2,6-7
+    Tuple Flow 2,4-5
+    Reference Value Input/2 3,3-4
 connectors
     +R975 : -/2 t|Create Action : -/1 b*|Class, r|Instance Initialization
     +R976-1 : r|Create Action { l|Delegated Create Action, l|Local Create Action : L8R+1 }
+    +R977 : +/1 b|Reference Initialization : +/1 t*|Tuple Flow, r|Reference Value Input
     +R978 : -/1 l|Instance Initialization : +/2 r*|Attribute, t|Attribute Initialization
     -R979 : +/3 t|Local Create Action : +/3 b*|New Instance Flow
     +R980 : b|Attribute Initialization { t|Explicit Initialization, t|Reference Initialization, t|Default Initialization }
