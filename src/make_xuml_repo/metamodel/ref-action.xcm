@@ -2,9 +2,9 @@ metadata
     Title : Reference Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.4
-    Version : 0.7.0
+    Version : 0.7.1
     /// Creation date : November 07, 2021
-    Modification date : July 21, 2025
+    Modification date : July 29, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -21,6 +21,12 @@ attributes
     Activity {I}
     Domain {I}
 --
+class From Ref Instance
+attributes
+    Flow : Flow ID {I, R784}
+    Activity : Activity Number {I, R784}
+    Domain : Domain Name {I, R784}
+--
 class New Associative Reference Action
 attributes
     ID : Action ID {I, R783}
@@ -29,27 +35,12 @@ attributes
     T instance : Flow ID {R787}
     P instance : Flow ID {R788}
 --
-class Reference Action
-attributes
-    ID : Action ID {I, R901}
-    Activity : Activity Number {I, R901}
-    Domain : Domain Name {I, R901, R792}
-    Association : Relationship Number {R792}
---
 class New Reference Action
 attributes
     ID : Action ID {I, R781}
     Activity : Activity Number {I, R781, R782}
     Domain : Domain Name {I, R781, R782}
     Create action : Action ID {R782}
---
-class Update Reference Action
-attributes
-    ID : Action ID {I, R781}
-    Activity : Activity Number {I, R781, R789, R790}
-    Domain : Domain Name {I, R781, R789, R790}
-    From instance : Flow ID {R789}
-    To instance : Flow ID {R790}
 --
 class New Simple Reference Action
 attributes
@@ -58,13 +49,39 @@ attributes
     Domain : Domain Name {I, R783, R786}
     Target instance : Flow ID {R786}
 --
+class P Ref Instance
+attributes
+    Flow : Flow ID {I, R784}
+    Activity : Activity Number {I, R784}
+    Domain : Domain Name {I, R784}
+--
+class Reference Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, I2, R901, R791}
+    Domain : Domain Name {I, I2, R901, R792, R791}
+    Association : Relationship Number {R792}
+    Ref attr values : Flow ID {I2, R791}
+--
 class Single Instance Flow <import:Flow>
 attributes
     ID {I}
     Activity {I}
     Domain {I}
 --
-class From Ref Instance
+class Referenced Instance
+attributes
+    Flow : Flow ID {I, R785}
+    Activity : Activity Number {I, R785}
+    Domain : Domain Name {I, R785}
+--
+class T Ref Instance
+attributes
+    Flow : Flow ID {I, R784}
+    Activity : Activity Number {I, R784}
+    Domain : Domain Name {I, R784}
+--
+class Target Ref Instance
 attributes
     Flow : Flow ID {I, R784}
     Activity : Activity Number {I, R784}
@@ -76,29 +93,19 @@ attributes
     Activity : Activity Number {I, R784}
     Domain : Domain Name {I, R784}
 --
-class T Ref Instance
+class Tuple Flow <import:Flow>
 attributes
-    Flow : Flow ID {I, R784}
-    Activity : Activity Number {I, R784}
-    Domain : Domain Name {I, R784}
+    ID {I}
+    Activity {I}
+    Domain {I}
 --
-class P Ref Instance
+class Update Reference Action
 attributes
-    Flow : Flow ID {I, R784}
-    Activity : Activity Number {I, R784}
-    Domain : Domain Name {I, R784}
---
-class Referenced Instance
-attributes
-    Flow : Flow ID {I, R785}
-    Activity : Activity Number {I, R785}
-    Domain : Domain Name {I, R785}
---
-class Target Ref Instance
-attributes
-    Flow : Flow ID {I, R784}
-    Activity : Activity Number {I, R784}
-    Domain : Domain Name {I, R784}
+    ID : Action ID {I, R781}
+    Activity : Activity Number {I, R781, R789, R790}
+    Domain : Domain Name {I, R781, R789, R790}
+    From instance : Flow ID {R789}
+    To instance : Flow ID {R790}
 --
 relationships
     R781
@@ -156,6 +163,11 @@ relationships
     updates reference to, 1 To Ref Instance
     reference is updated by, 1 Update Reference Action
     Update Reference Action.(To instance, Activity, Domain) -> To Ref Instance.(Flow, Activity, Domain)
+--
+    R791
+    supplies referential attribute values as, 1 Tuple Flow
+    conveys referential attribute values for, 1c Reference Action
+    Reference Action.(Ref attr values, Activity, Domain) -> Tuple Flow.(ID, Activity, Domain)
 --
     R792
     changes reference across, 1 Association
