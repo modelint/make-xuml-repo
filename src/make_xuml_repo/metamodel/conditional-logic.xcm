@@ -4,7 +4,7 @@ metadata
     Document ID : mint.sm-meta.action.td.10
     Version : 0.7.1
     /// Creation date : May 12, 2022
-    Modification date : September 28, 2023
+    Modification date : July 30, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -47,7 +47,6 @@ attributes
     ID : Action ID {I, R901}
     Activity : Activity Number {I, R901}
     Domain : Domain Name {I, R901}
-    Predicate : Predicate
 --
 class Decision Input
 attributes
