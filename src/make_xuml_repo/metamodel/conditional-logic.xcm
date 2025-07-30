@@ -2,7 +2,7 @@ metadata
     Title : Conditional Logic Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.10
-    Version : 0.7.1
+    Version : 0.7.2
     /// Creation date : May 12, 2022
     Modification date : July 30, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -45,15 +45,9 @@ attributes
 class Decision Action
 attributes
     ID : Action ID {I, R901}
-    Activity : Activity Number {I, R901}
-    Domain : Domain Name {I, R901}
---
-class Decision Input
-attributes
-    Decision action : Action ID {I, R1057}
-    Flow : Flow ID {I, R1057}
-    Activity : Activity Number {I, R1057}
-    Domain : Domain Name {I, R1057}
+    Activity : Activity Number {I, R901, R1057}
+    Domain : Domain Name {I, R901, R1057}
+    Boolean_input : Flow ID {R1057}
 --
 class Emitter
 attributes
@@ -169,11 +163,9 @@ relationships
     Scalar Switch Action.(Scalar input, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
 --
     R1057
-    is based on input from, Mc Data Flow
+    is based on input from, 1 Data Flow
     provides input to, Mc Decision Action
-    1 Decision Input
-    Decision Input.(Decision action, Activity, Domain) -> Decision Action.(ID, Activity, Domain)
-    Decision Input.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+    Decision Action.(Boolean input, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --
     R1058
     Switch Action +
