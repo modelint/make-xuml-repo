@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 1.3.2
+    Version : 1.4.0
     /// Creation date : August 13, 2022
-    Modification date : July 8, 2025
+    Modification date : July 31, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -44,6 +44,20 @@ attributes
     Class : Type Name {I2, R827}
     Domain : Domain Name {I, I2, R826, R827, R832}
     Executing instance flow : Flow ID {R832}
+--
+class Method Call
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901, R840}
+    Method : Activity Number {R840}
+--
+class Method Call Parameter
+attributes
+    Method call : Action ID {I, R841}
+    Flow : Flow ID {I, R841}
+    Method : Activity Number {I, R841}
+    Domain : Domain Name {I, R841}
 --
 class Method Signature
 attributes
@@ -212,4 +226,16 @@ relationships
     delivers partitioning instance to, 1c Multiple Assigner Activity
     obtains partitioning instance from, 1 Single Instance Flow
     Multiple Assigner Activity.(Partitioning instance flow, Anum, Domain) -> Single Instance Flow.(ID, Activity, Domain)
+--
+    R840
+    invokes, 1 Method
+    is invoked by, Mc Method Call
+    Method Call.(Method, Domain) -> Method.(Anum, Domain)
+--
+    R841
+    gets parameter value from, M Data Flow
+    supplies parameter value for, Mc Method Call
+    1 Method Call Parameter
+    Method Call Parameter.(Flow, Method, Domain) -> Data Flow.(ID, Activity, Domain)
+    Method Call Parameter.(Method call, Method, Domain) -> Method Call.(ID, Activity, Domain)
 --

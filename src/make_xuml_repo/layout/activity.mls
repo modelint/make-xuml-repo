@@ -4,7 +4,7 @@ presentation default
 orientation landscape
 color teal
 sheet A1
-padding l200 b350
+padding l50 b150
 frame Model Integration Diagram
 frame_presentation default
 nodes
@@ -18,7 +18,9 @@ nodes
     Asynchronous Operation/2 6,7-8
     Synchronous Operation/2 6,11
     Operation/2 9,13
-    Method 6,9
+    Method 7,9
+    Method Call 7,12
+    Method Call Parameter/2 6,15
     Method Signature 9,9
     Operation Signature/2 9,10-11
     Signature 11,7-8
@@ -46,3 +48,5 @@ connectors
     +R837 : b|Signature { t|State Signature, t|Method Signature, t|Operation Signature }
     +R838 : +/2 b+2|Single Instance Flow : -/2 l|Lifecycle Activity
     +R839 : -/2 b-2|Single Instance Flow : -/2 l|Multiple Assigner Activity
+    +R840 : -/1 r|Method : -/1 l*|Method Call
+    -R841 : +/2 r|Method Call : +/2 t|Data Flow.2, l|Method Call Parameter

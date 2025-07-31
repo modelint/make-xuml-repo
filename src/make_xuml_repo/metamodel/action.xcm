@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.7.3
+    Version : 0.7.4
     /// Creation date : September 7, 2021
-    Modification date : July 28, 2025
+    Modification date : July 31, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -59,6 +59,12 @@ attributes
     Activity : Activity Number {I, R905}
     Domain : Domain Name {I, R905}
     Flow : Flow ID {R906}
+--
+class Method Call <import:Activity>
+attributes
+    ID {I, R901}
+    Activity {I, R901}
+    Domain {I, R901}
 --
 class Read Action <import:Attribute Access>
 attributes
@@ -141,6 +147,7 @@ relationships
         Create Action
         Delete Action
         Reference Action
+        Method Call
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
     R902
