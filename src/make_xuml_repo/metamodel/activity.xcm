@@ -2,7 +2,7 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 1.5.3
+    Version : 1.5.4
     /// Creation date : August 13, 2022
     Modification date : August 2, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -56,9 +56,10 @@ attributes
 class Method Call
 attributes
     ID : Action ID {I, R901}
-    Activity : Activity Number {I, R901}
-    Domain : Domain Name {I, R901, R840}
+    Activity : Activity Number {I, R901, R844}
+    Domain : Domain Name {I, R901, R840, R844}
     Method : Activity Number {R840}
+    Instance flow : Flow ID {R844}
 --
 class Method Call Parameter
 attributes
@@ -258,4 +259,9 @@ relationships
     supplies value for, Mc Method Call Parameter
     gets value from, 1 Data Flow
     Method Call Parameter.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
+    R844
+    is invoked on instance in, 1 Single Instance Flow
+    provides target instance to, Mc Method Call
+    Method Call.(Instance flow, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
