@@ -17,26 +17,26 @@ nodes
     Single Assigner Activity/2 2,5
     Asynchronous Operation/2 4,8-9
     Synchronous Operation/2 4,12
-    Operation/2 7,14
+    Operation/2 6,11-12
     Method 5,10
     Method Call 5,13
-    Method Call Parameter/2 4,16
-    Method Signature 7,10
-    Operation Signature/2 7,11-12
+    Method Call Parameter/2 7,15
+    Method Signature 8,10
+    Operation Signature/2 8,11-12
     Signature 9,9
     Class 4-5,7-8
     Non State Signature/2 6,10
-    State Signature 7,8
+    State Signature 8,8
     Parameter 11,9
     Synchronous Output/2 1-2,12-13
-    Type 11,12 : 2-3,14
+    Type 10,7 : 2-3,14
     Data Flow 7-8,5 : 1-2,15
     Single Instance Flow/2 25% 6,3
     Activity Input 10,5
 connectors
     +R825 : t|Activity { b|Asynchronous Activity, b|Synchronous Activity }
     +R826 : t|Synchronous Activity { b|Synchronous Operation, b|Method }
-    -R827 :  +/2 r|Parameter : +/2 l*|Type
+    +R827 :  -/2 l-2|Parameter : -/2 t|Type
     -R828 :  +/2 t|Signature : +/2 b*|Parameter
     +R829 :  +/2 r|Synchronous Activity : +/2 l*|Type.2, t|Synchronous Output
     +R830 : t|Asynchronous Activity { b|Asynchronous Operation, b|State Activity }
@@ -45,10 +45,11 @@ connectors
     -R833 : +/2 t|Data Flow : +/2 b*|Activity Input
     +R834 : l|State Activity { r|Lifecycle Activity, r|Multiple Assigner Activity, r|Single Assigner Activity : L6R-2 }
     +R835 : +/2 b|Method Signature : +/2 t*|Method
-    -R836 : +/2 r|Operation Signature : +/2 l*|Operation
+    -R836 : +/2 b|Operation Signature : +/2 t*|Operation
     +R837 : b|Signature { t|State Signature, t|Method Signature, t|Operation Signature }
     +R838 : +/2 b+2|Single Instance Flow : -/2 l|Lifecycle Activity
     +R839 : -/2 b-2|Single Instance Flow : -/2 l|Multiple Assigner Activity
     +R840 : -/1 r|Method : -/1 l*|Method Call
-    -R841 : +/2 r|Method Call : +/2 t|Data Flow.2, l|Method Call Parameter
-    +R842.3 : +/2 l|Activity : +/2 l|Parameter, t|Activity Input : L2R-2
+    +R841 : +/2 t|Method Call : +/2 r|Parameter, l|Method Call Parameter
+    +R842.3 : +/2 l|Activity : +/2 l+2|Parameter, t|Activity Input : L2R-2
+    +R843 : +/2 b|Method Call Parameter : +/2 t*|Data Flow.2

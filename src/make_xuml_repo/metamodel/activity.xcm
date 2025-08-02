@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 1.5.2
+    Version : 1.5.3
     /// Creation date : August 13, 2022
-    Modification date : August 1, 2025
+    Modification date : August 2, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -63,9 +63,11 @@ attributes
 class Method Call Parameter
 attributes
     Method call : Action ID {I, R841}
-    Flow : Flow ID {I, R841}
-    Method : Activity Number {I, R841}
-    Domain : Domain Name {I, R841}
+    Activity : Activity Number {I, I2, R841, R843}
+    Parameter : Parameter Name {I, R841}
+    Signature : Signature Number {I, R841}
+    Domain : Domain Name {I, I2, R841, R843}
+    Flow : Flow ID {I2, R843}
 --
 class Method Signature
 attributes
@@ -239,11 +241,11 @@ relationships
     Method Call.(Method, Domain) -> Method.(Anum, Domain)
 --
     R841
-    gets parameter value from, Mc Data Flow
-    supplies parameter value for, Mc Method Call
+    supplies, Mc Parameter
+    is supplied by, Mc Method Call
     1 Method Call Parameter
-    Method Call Parameter.(Flow, Method, Domain) -> Data Flow.(ID, Activity, Domain)
-    Method Call Parameter.(Method call, Method, Domain) -> Method Call.(ID, Activity, Domain)
+    Method Call Parameter.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
+    Method Call Parameter.(Method call, Activity, Domain) -> Method Call.(ID, Activity, Domain)
 --
     R842
     flows data into, Mc Activity
@@ -251,4 +253,9 @@ relationships
     1 Activity Input
     Activity Input.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
     Activity Input.(Activity, Domain) -> Activity.(Anum, Domain)
+--
+    R843
+    supplies value for, Mc Method Call Parameter
+    gets value from, 1 Data Flow
+    Method Call Parameter.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --
