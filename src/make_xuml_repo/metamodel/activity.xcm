@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 1.5.4
+    Version : 1.5.6
     /// Creation date : August 13, 2022
-    Modification date : August 2, 2025
+    Modification date : August 3, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -242,8 +242,8 @@ relationships
     Method Call.(Method, Domain) -> Method.(Anum, Domain)
 --
     R841
-    supplies, Mc Parameter
-    is supplied by, Mc Method Call
+    fills out, Mc Parameter
+    is filled out by, Mc Method Call
     1 Method Call Parameter
     Method Call Parameter.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
     Method Call Parameter.(Method call, Activity, Domain) -> Method Call.(ID, Activity, Domain)

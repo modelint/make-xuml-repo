@@ -50,7 +50,7 @@ connectors
     +R838 : +/2 b+2|Single Instance Flow : -/2 l|Lifecycle Activity
     +R839 : -/2 b-2|Single Instance Flow : -/2 l|Multiple Assigner Activity
     +R840 : -/1 r|Method : -/1 l*|Method Call
-    +R841 : +/2 t+2|Method Call : +/2 r|Parameter, l|Method Call Parameter
+    +R841 : +/1 t+2|Method Call : +/1 r|Parameter, l|Method Call Parameter
     +R842.3 : +/2 l|Activity : +/2 l+2|Parameter, t|Activity Input : L2R-2
     +R843 : +/2 b|Method Call Parameter : +/2 t*|Data Flow.2
     +R844 : +/2 r+2|Single Instance Flow : -/2 t-2|Method Call
