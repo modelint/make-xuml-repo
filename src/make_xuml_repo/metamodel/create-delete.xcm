@@ -2,9 +2,9 @@ metadata
     Title : (Partial) Create Delete Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.9c
-    Version : 2.3.3
+    Version : 2.3.4
     /// Creation date : November 07, 2021
-    Modification date : July 28, 2025
+    Modification date : August 4, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -55,13 +55,7 @@ attributes
     ID : Action ID {I, R901}
     Activity : Activity Number {I, R901}
     Domain : Domain Name {I, R901}
---
-class Deletion Flow
-attributes
     Flow : Flow ID {I, R983}
-    Activity : Activity Number {I, R983}
-    Domain : Domain Name {I, R983}
-    Action : Action ID {R983}
 --
 class Explicit Initialization
 attributes
@@ -168,11 +162,9 @@ relationships
     <subclass>.(Create action, Activity, Attribute, Class, Domain) -> Attribute Initialization.(Create action, Activity, Attribute, Class, Domain)
 --
     R983
-    deletes instances referenced in, M Instance Flow
+    deletes instances referenced in, 1 Instance Flow
     is source of instances to, 1c Delete Action
-    1 Deletion Flow
-    Deletion Flow.(Flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
-    Deletion Flow.(Action, Activity, Domain) -> Delete Action.(ID, Activity, Domain)
+    Deletion Action.(Flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
 --
     R984
     supplies value for, Mc Explicit Initialization
