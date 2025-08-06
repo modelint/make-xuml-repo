@@ -2,9 +2,9 @@ metadata
     Title : Signal Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.1a
-    Version : 0.6.1
+    Version : 0.7.0
     /// Creation date : September 10, 2021
-    Modification date : July 8, 2025
+    Modification date : August 6, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -47,11 +47,11 @@ attributes
     Subsystem element {I}
     Domain {I}
 --
-class External Entity <import:Domain>
+class External Signal Action
 attributes
-    Name {I}
-    Class {I}
-    Domain {I}
+    ID : Action ID {I, R854}
+    Activity : Activity Number {I, R854}
+    Domain : Domain Name {I, R854, R861}
 --
 class Initial Signal Action
 attributes
@@ -107,14 +107,6 @@ attributes
     Domain : Domain Name {I, R854, R858}
     Association : Relationship Number {R858}
 --
-class Signal EE Action
-attributes
-    ID : Action ID {I, R854}
-    Activity : Activity Number {I, R854}
-    Domain : Domain Name {I, R854, R861}
-    EE name : External Entity Name {R861}
-    EE class : Type Name {R861}
---
 class Single Instance Flow <import:Flow>
 attributes
     ID {I}
@@ -160,7 +152,7 @@ relationships
         Signal Instance Set Action
         Signal Assigner Action
         Initial Signal Action
-        Signal EE Action
+        External Signal Action
     <subclass>.(ID, Activity, Domain) -> Signal Action.(ID, Activity, Domain)
 --
     R855
@@ -195,11 +187,6 @@ relationships
     sends initial event in, 1 Delegated Create Action
     specifies, 1 Initial Signal Action
     Initial Signal Action.(ID, Activity, Domain) -> Delegated Create Action.(ID, Activity, Domain)
---
-    R861
-    delivers signal to, 1 External Entity
-    receives signal from, Mc Signal EE Action
-    Signal EE Action.(EE name, EE class, Domain) -> External Entity.(Name, Class, Domain)
 --
     R862
     flows value as, Mc Delivery Time

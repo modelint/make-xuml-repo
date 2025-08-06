@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 1.5.6
+    Version : 2.0.1
     /// Creation date : August 13, 2022
-    Modification date : August 3, 2025
+    Modification date : August 6, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -22,16 +22,6 @@ attributes
     Activity : Activity Number {I, I2, R842, R833}
     Domain : Domain Name {I, I2, R842, R833}
     Flow : Flow ID {I2, R842, R833}
---
-class Asynchronous Activity
-attributes
-    Anum : Activity Number {I, R825}
-    Domain : Domain Name {I, R825}
---
-class Asynchronous Operation <import:External Entity>
-attributes
-    Anum {I, R830}
-    Domain {I, R830}
 --
 class Data Flow <import:Flow>
 attributes
@@ -83,19 +73,6 @@ attributes
     Domain : Domain Name {I, R834, R839}
     Partitioning instance flow : Flow ID {R839}
 --
-class Operation <import:External Entity>
-attributes
-    Name {I}
-    EE {I}
-    Domain {I}
---
-class Operation Signature
-attributes
-    SIGnum : Signature Number {I, R837}
-    EE : EE Name {I2, R836}
-    Operation : Operation Name {I2, R836}
-    Domain : Domain Name {I, I2, R837, R836}
---
 class Parameter
 attributes
     Name : Parameter Name {I}
@@ -129,16 +106,6 @@ attributes
     SIGnum {I}
     Domain {I}
 --
-class Synchronous Activity
-attributes
-    Anum : Activity Number {I, R825}
-    Domain : Domain Name {I, R825}
---
-class Synchronous Operation <import:External Entity>
-attributes
-    Anum {I, R826}
-    Domain {I, R826}
---
 class Synchronous Output
 attributes
     Anum : Activity Number {I, R829, R831}
@@ -154,14 +121,8 @@ attributes
 relationships
     R825
     Activity +
-        Asynchronous Activity
-        Synchronous Activity
-    <subclass>.(Anum, Domain) -> Activity.(Anum, Domain)
---
-    R826
-    Synchronous Activity +
+        State Activity
         Method
-        Synchronous Operation
     <subclass>.(Anum, Domain) -> Activity.(Anum, Domain)
 --
     R827
@@ -180,12 +141,6 @@ relationships
     1 Synchronous Output
     Synchronous Output.(Anum, Domain) -> Synchronous Activity.(Anum, Domain)
     Synchronous Output.(Type, Domain) -> Type.(Name, Domain)
---
-    R830
-    Asynchronous Activity +
-        State Activity
-        Asynchronous Operation
-    <subclass>.(Anum, Domain) -> Activity.(Anum, Domain)
 --
     R831
     yields value in, 1 Data Flow
@@ -214,16 +169,10 @@ relationships
     specifies required input with, 1 Method Signature
     Method Signature.(Method, Class, Domain) -> Method.(Name, Class, Domain)
 --
-    R836
-    defines input into, 1 External Entity Operation
-    specifies required input with, 1 Operation Signature
-    Operation Signature.(Operation, EE, Domain) -> External Entity Operation.(Name, EE, Domain)
---
     R837
     Signature +
         State Signature
         Method Signature
-        Operation Signature
     <subclass>.(SIGnum, Domain) -> Signature.(SIGnum, Domain)
 --
     R838

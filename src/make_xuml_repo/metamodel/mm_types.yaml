@@ -15,8 +15,6 @@ Description : string
 Domain Alias : string
 Domain Name : string
 Duration : double
-EE Number : string
-EE Name : string
 Element Label : string
 Element Number : int
 Enumeration Value : string
