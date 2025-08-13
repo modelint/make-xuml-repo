@@ -1,21 +1,21 @@
 metadata
     Title : Scalar Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
-    Document ID : mint.sm-meta.action.td.17
-    Version : 0.1.0
+    Document ID : mint.sm-meta.action.td.18
+    Version : 0.2.0
     /// Creation date : July 4, 2025
-    Modification date : July 4, 2025
+    Modification date : August 13, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
 domain Metamodel, META
-subsystem Scalar Action, SCA 1225-1249
+subsystem Scalar Action, SCA 1250-1274
 class Operand Input
 attributes
-    Scalar flow : Flow ID {I, R1225}
-    Activity : Activity Number {I, R1225}
-    Domain : Domain Name {I, R1225}
-    Action : Action ID {R1225}
+    Scalar flow : Flow ID {I, R1250}
+    Activity : Activity Number {I, R1250}
+    Domain : Domain Name {I, R1250}
+    Action : Action ID {R1250}
 --
 class Scalar Action
 attributes
@@ -31,7 +31,7 @@ attributes
     Domain {I}
 --
 relationships
-    R1225
+    R1250
     operates on, M Scalar Flow
     supplies operand in, 1c Scalar Action
     1 Operand Input

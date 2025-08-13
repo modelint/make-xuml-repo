@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 2.0.1
+    Version : 2.1.0
     /// Creation date : August 13, 2022
-    Modification date : August 6, 2025
+    Modification date : August 13, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -39,26 +39,9 @@ class Method
 attributes
     Anum : Activity Number {I, R826, R832}
     Name : Method Name {I2}
-    Class : Type Name {I2, R827}
-    Domain : Domain Name {I, I2, R826, R827, R832}
+    Class : Type Name {I2, R24}
+    Domain : Domain Name {I, I2, R826, R24, R832}
     Executing instance flow : Flow ID {R832}
---
-class Method Call
-attributes
-    ID : Action ID {I, R901}
-    Activity : Activity Number {I, R901, R844}
-    Domain : Domain Name {I, R901, R840, R844}
-    Method : Activity Number {R840}
-    Instance flow : Flow ID {R844}
---
-class Method Call Parameter
-attributes
-    Method call : Action ID {I, R841}
-    Activity : Activity Number {I, I2, R841, R843}
-    Parameter : Parameter Name {I, R841}
-    Signature : Signature Number {I, R841}
-    Domain : Domain Name {I, I2, R841, R843}
-    Flow : Flow ID {I2, R843}
 --
 class Method Signature
 attributes
@@ -185,32 +168,10 @@ relationships
     obtains partitioning instance from, 1 Single Instance Flow
     Multiple Assigner Activity.(Partitioning instance flow, Anum, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
-    R840
-    invokes, 1 Method
-    is invoked by, Mc Method Call
-    Method Call.(Method, Domain) -> Method.(Anum, Domain)
---
-    R841
-    fills out, Mc Parameter
-    is filled out by, Mc Method Call
-    1 Method Call Parameter
-    Method Call Parameter.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
-    Method Call Parameter.(Method call, Activity, Domain) -> Method Call.(ID, Activity, Domain)
---
     R842
     flows data into, Mc Activity
     inputs data from, Mc Parameter
     1 Activity Input
     Activity Input.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
     Activity Input.(Activity, Domain) -> Activity.(Anum, Domain)
---
-    R843
-    supplies value for, Mc Method Call Parameter
-    gets value from, 1 Data Flow
-    Method Call Parameter.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
---
-    R844
-    is invoked on instance in, 1 Single Instance Flow
-    provides target instance to, Mc Method Call
-    Method Call.(Instance flow, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
