@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.7.4
+    Version : 0.8.1
     /// Creation date : September 7, 2021
-    Modification date : July 31, 2025
+    Modification date : August 14, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -21,6 +21,12 @@ class Activity <import:Activity>
 attributes
     Anum {I}
     Domain {I}
+--
+class Instance Action
+attributes
+    ID : Action ID {I, R907}
+    Activity : Activity Number {I, R907}
+    Domain : Domain Name {I, R907}
 --
 class Computation Action <import:Computation>
 attributes
@@ -60,7 +66,13 @@ attributes
     Domain : Domain Name {I, R905}
     Flow : Flow ID {R906}
 --
-class Method Call <import:Activity>
+class Method Call <import:Method Call>
+attributes
+    ID {I, R901}
+    Activity {I, R901}
+    Domain {I, R901}
+--
+class Pass Action <import:Method Call>
 attributes
     ID {I, R901}
     Activity {I, R901}
@@ -134,11 +146,10 @@ relationships
     Action.(Activity, Domain) -> Activity.(Anum, Domain)
 --
     R901
-    Action +
+    Instance Action +
         Computation Action
         Select Action
         Traverse Action
-        Relation Action
         Read Action
         Switch Action
         Gate Action
@@ -148,6 +159,7 @@ relationships
         Delete Action
         Reference Action
         Method Call
+        Pass Action
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
     R902
@@ -177,4 +189,10 @@ relationships
     establishes, Mc Flow Dependency
     is established by, 1 Flow
     Flow Dependency.(Flow, Activity, Domain) -> Flow.(ID, Activity, Domain)
+--
+    R907
+    Action +
+        Instance Action
+        Relation Action
+    <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --

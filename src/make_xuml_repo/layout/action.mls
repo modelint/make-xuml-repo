@@ -4,16 +4,18 @@ presentation default
 orientation landscape
 color blue steel
 sheet A1
-padding l10 b350
+padding b350
 frame Model Integration Diagram
 frame_presentation default
 nodes
-    Action 7,7
-    Flow Dependency 7,5
-    Activity 9,7
-    Flow 7,2-3
-    Wave 9,10
-    Wave Assignment 6,9
+    Action 6,7
+    Instance Action 4,6
+    Relation Action 4,11
+    Flow Dependency 6,5
+    Activity 8,7
+    Flow 6,2-3
+    Wave 8,10
+    Wave Assignment 6-7,11
     Read Action 2,3
     Gate Action 2,4
     Scalar Action 2,5
@@ -26,12 +28,13 @@ nodes
     Traverse Action 2,12
     Select Action 2,13
     Method Call 2,14
-    Relation Action 2,15
+    Pass Action 2,15
 connectors
     -R900 : +/1 t|Action : +/1 b*|Activity
-    +R901 : b|Action { t|Method Call, t|Signal Action, t|Gate Action, t|Scalar Action, t|Create Action, t|Delete Action, t|Select Action, t|Traverse Action, t|Read Action, t|Reference Action, t|Computation Action, t|Switch Action, t|Relation Action : L3 }
+    +R901 : b|Instance Action { t|Method Call, t|Pass Action, t|Signal Action, t|Gate Action, t|Scalar Action, t|Create Action, t|Delete Action, t|Select Action, t|Traverse Action, t|Read Action, t|Reference Action, t|Computation Action, t|Switch Action : L3 }
     +R902 : -/2 r|Activity : -/2 l*|Wave
-    +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L10R-2 L11R-2
-    -R904 : -/2 r|Action : +/2 b|Wave, t|Wave Assignment
+    +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L9R-2 L11R-2
+    -R904 : -/2 r|Action : +/2 b|Wave, l|Wave Assignment
     +R905.2-1 : +/1 l+2|Action : -/1 l-2|Action, r|Flow Dependency : L6
     -R906 : +/1 l|Flow Dependency : +/1 r*|Flow
+    +R907 : b|Action { t|Instance Action, t|Relation Action }
