@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.8.2
+    Version : 0.8.3
     /// Creation date : September 7, 2021
-    Modification date : August 14, 2025
+    Modification date : August 17, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -115,6 +115,12 @@ attributes
     Domain {I, R901}
 --
 class Traverse Action <import:Navigation>
+attributes
+    ID {I, R901}
+    Activity {I, R901}
+    Domain {I, R901}
+--
+class Type Operation Action <import:Type>
 attributes
     ID {I, R901}
     Activity {I, R901}

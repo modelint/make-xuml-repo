@@ -15,8 +15,12 @@ nodes
     Table Attribute 3,4
     Model Attribute 1-2,5
     Attribute 3,6
+    Scalar Flow 8,5
+    Type Operation Action/2 8,2
 connectors
-    +R1125 : b|Type { t|Scalar, t|Class, t|Table }
+    +R1125 : b|Type { t+1|Scalar, t|Class, t|Table }
     +R1127 : -/1 b|Table : -/1 t*|Table Attribute
-    +R1128 : -/1 b|Scalar : -/1 l|Table Attribute
+    -R1128.2 : -/2 b|Scalar : -/2 l|Table Attribute
     +R1129 : t|Model Attribute { b|Table Attribute, b|Attribute }
+    +R1130 : -/1 l*|Scalar Flow : -/2 r|Type Operation Action
+    +R1131 : -/1 t-1|Scalar : -/2 b*|Type Operation Action

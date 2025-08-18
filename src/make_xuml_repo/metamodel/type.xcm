@@ -2,9 +2,9 @@ metadata
     Title : Type Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.15
-    Version : 0.5.1
+    Version : 0.6.0
     /// Creation date : June 20, 2023
-    Modification date : August 11, 2023
+    Modification date : August 17, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -32,6 +32,12 @@ attributes
     Name : Type Name {I, R1125}
     Domain : Domain Name {I, R1125}
 --
+class Scalar Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
+--
 class Table
 attributes
     Name : Type Name {I, R1125}
@@ -48,6 +54,12 @@ class Type
 attributes
     Name : Type Name {I}
     Domain : Domain Name {I, R17}
+--
+class Type Operation Action <import:Type>
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901}
 --
 relationships
     R1125
@@ -73,4 +85,14 @@ relationships
         Table Attribute
     Attribute.(Name, Class, Domain) -> Model Attribute.(Name, Non scalar type, Domain)
     Table Attribute.(Name, Table, Domain) -> Model Attribute.(Name, Non scalar type, Domain)
+--
+    R1130
+    outputs, 1 Scalar Flow
+    is output by, 1c Type Operation Action
+    Type Operation Action.(Output flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R1131
+    operates on, 1 Scalar
+    is operated on by, Mc Type Operation Action
+    Type Operation Action.(Scalar, Domain) -> Scalar.(Name, Domain)
 --
