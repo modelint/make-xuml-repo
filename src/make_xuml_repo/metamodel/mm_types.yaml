@@ -58,6 +58,7 @@ Table Name : string
 Time : string
 Type Number : string
 Type Name : string
+Type Operation Name : string
 Value Name : string
 Value Representation : string
 Wave Number : int
