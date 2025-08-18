@@ -4,23 +4,25 @@ presentation default
 orientation landscape
 color recycle bin
 sheet A2
-padding l150 b250
+padding l150 b200
 frame Model Integration Diagram
 frame_presentation default
 nodes
-    Type 6-7,4
-    Scalar 5,2 >top
-    Class 5,6
-    Table 5,4 >top
-    Table Attribute 3,4
-    Model Attribute 1-2,5
-    Attribute 3,6
-    Scalar Flow 8,5
-    Type Operation Action/2 8,2
+    Type 6-7,7
+    Scalar 5,5 >top
+    Class 5,9
+    Table 5,7 >top
+    Table Attribute 3,7
+    Model Attribute 1-2,8
+    Attribute 3,9
+    Scalar Flow 2,1-2
+    Type Operation Action/2 5,1-2
+    Type Operation Input/2 3,3-4
 connectors
     +R1125 : b|Type { t+1|Scalar, t|Class, t|Table }
     +R1127 : -/1 b|Table : -/1 t*|Table Attribute
-    -R1128.2 : -/2 b|Scalar : -/2 l|Table Attribute
+    -R1128.2 : +/2 b|Scalar : -/2 l|Table Attribute
     +R1129 : t|Model Attribute { b|Table Attribute, b|Attribute }
-    +R1130 : -/1 l*|Scalar Flow : -/2 r|Type Operation Action
-    +R1131 : -/1 t-1|Scalar : -/2 b*|Type Operation Action
+    -R1130 : -/1 t*|Scalar Flow : -/1 b|Type Operation Action
+    +R1131 : -/1 l|Scalar : -/1 r*|Type Operation Action
+    -R1132.2 : -/1 r|Scalar Flow : +/1 r-2|Type Operation Action, l|Type Operation Input : L3R-2
