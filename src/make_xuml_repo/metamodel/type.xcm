@@ -2,7 +2,7 @@ metadata
     Title : Type Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.15
-    Version : 0.6.3
+    Version : 0.6.4
     /// Creation date : June 20, 2023
     Modification date : August 18, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -40,7 +40,7 @@ attributes
 --
 class Selector
 attributes
-    Operation : Action ID {I, R1133}
+    ID : Action ID {I, R1133}
     Activity : Activity Number {I, R1133}
     Domain : Domain Name {I, R1133}
     Value : Value Representation
@@ -62,21 +62,21 @@ attributes
     Name : Type Name {I}
     Domain : Domain Name {I, R17}
 --
-class Type Operation Action
+class Type Action
 attributes
     ID : Action ID {I, I2, R901}
     Activity : Activity Number {I, R901, R1130}
     Domain : Domain Name {I, I2, R901, R1130, R1131}
-    Name : Type Operation Name
     Scalar : Type Name {I2, R1131}
     Output flow : Flow ID {R1130}
 --
-class Type Operation Input
+class Type Operation
 attributes
-    Operation : Action ID {I, R1132}
-    Activity : Activity Number {I, R1132}
-    Domain : Domain Name {I, R1132}
-    Flow : Flow ID {R1132}
+    ID : Action ID {I, R1133}
+    Activity : Activity Number {I, R1133}
+    Domain : Domain Name {I, R1133}
+    Name : Type Operation Name
+    Input flow : Flow ID {R1132}
 --
 relationships
     R1125
@@ -105,23 +105,22 @@ relationships
 --
     R1130
     outputs, 1 Scalar Flow
-    is output by, 1c Type Operation Action
-    Type Operation Action.(Output flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+    is output by, 1c Type Action
+    Type Action.(Output flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
 --
     R1131
     operates on, 1 Scalar
-    is operated on by, Mc Type Operation Action
-    Type Operation Action.(Scalar, Domain) -> Scalar.(Name, Domain)
+    is operated on by, Mc Type Action
+    Type Action.(Scalar, Domain) -> Scalar.(Name, Domain)
 --
     R1132
-    inputs, 1c Scalar Flow
-    is input by, Mc Type Operation Action
-    1 Type Operation Input
-    Type Operation Input.(Operation, Activity, Domain) -> Type Operation Action.(ID, Activity, Domain)
-    Type Operation Input.(Flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+    inputs, 1 Scalar Flow
+    is input by, Mc Type Operation
+    Type Operation.(Input flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
 --
     R1133
-    selects, 1c Selector
-    is selected by, 1 Type Operation Action
-    Selector.(Operation, Activity, Domain) -> Type Operation Action.(ID, Activity, Domain)
+    Type Action +
+        Type Operation
+        Selector
+    <subclass>.(ID, Activity, Domain) -> Type Action.(ID, Activity, Domain)
 --
