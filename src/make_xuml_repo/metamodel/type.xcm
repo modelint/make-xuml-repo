@@ -2,7 +2,7 @@ metadata
     Title : Type Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.15
-    Version : 0.6.2
+    Version : 0.6.3
     /// Creation date : June 20, 2023
     Modification date : August 18, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -37,6 +37,13 @@ attributes
     ID {I}
     Activity {I}
     Domain {I}
+--
+class Selector
+attributes
+    Operation : Action ID {I, R1133}
+    Activity : Activity Number {I, R1133}
+    Domain : Domain Name {I, R1133}
+    Value : Value Representation
 --
 class Table
 attributes
@@ -112,4 +119,9 @@ relationships
     1 Type Operation Input
     Type Operation Input.(Operation, Activity, Domain) -> Type Operation Action.(ID, Activity, Domain)
     Type Operation Input.(Flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R1133
+    selects, 1c Selector
+    is selected by, 1 Type Operation Action
+    Selector.(Operation, Activity, Domain) -> Type Operation Action.(ID, Activity, Domain)
 --

@@ -18,6 +18,7 @@ nodes
     Scalar Flow 2,1-2
     Type Operation Action/2 5,1-2
     Type Operation Input/2 3,3-4
+    Selector 7,1-2
 connectors
     +R1125 : b|Type { t+1|Scalar, t|Class, t|Table }
     +R1127 : -/1 b|Table : -/1 t*|Table Attribute
@@ -26,3 +27,4 @@ connectors
     -R1130 : -/1 t*|Scalar Flow : -/1 b|Type Operation Action
     +R1131 : -/1 l|Scalar : -/1 r*|Type Operation Action
     -R1132.2 : -/1 r|Scalar Flow : +/1 r-2|Type Operation Action, l|Type Operation Input : L3R-2
+    -R1133 : +/1 b|Selector : +/1 t*|Type Operation Action
