@@ -2,7 +2,7 @@ metadata
     Title : Computation Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.13
-    Version : 0.3.0
+    Version : 0.3.1
     /// Creation date : August 13, 2022
     Modification date : August 19, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -59,12 +59,12 @@ relationships
 --
     R1101
     outputs result as, 1 Scalar Flow
-    provides result from, 1 Math Action
+    provides result from, 1c Math Action
     Math Action.(Output flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
 --
     R1102
     outputs result as, 1 Data Flow
-    provides result from, 1 Boolean Action
+    provides result from, 1c Boolean Action
     Boolean Action.(Output flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --
     R1103
