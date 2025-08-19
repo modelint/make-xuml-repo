@@ -9,6 +9,7 @@ Boolean : boolean
 Cardinality : string
 Class Number : string
 Comp Op : string
+Computation : string
 Constrained Loop Number : string
 Criterion ID : string
 Description : string

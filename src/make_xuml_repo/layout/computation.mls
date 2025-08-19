@@ -1,0 +1,21 @@
+diagram class // Computation Subsystem
+notation Starr
+presentation default
+orientation landscape
+color teal
+sheet A2
+padding l300 b300
+frame Model Integration Diagram
+frame_presentation default
+nodes
+    Computation Action 5,3-4
+    Math Action 3-4,2
+    Boolean Action 3-4,5
+    Scalar Flow 1,2
+    Data Flow 1,5
+    Computation Input 3,7
+connectors
+    +R1100 : b|Computation Action { t|Boolean Action, t|Math Action }
+    -R1101 : +/1 b|Math Action : +/1 t*|Scalar Flow
+    -R1102 : +/1 b|Boolean Action : +/1 t*|Data Flow
+    +R1103.2+2 : -/1 r|Data Flow : +/1 r|Computation Action, l|Computation Input : L6
