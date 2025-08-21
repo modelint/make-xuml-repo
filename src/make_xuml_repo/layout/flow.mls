@@ -10,10 +10,12 @@ frame_presentation default
 nodes
     Activity 4,1 : 9-10,13
     Class Accessor 8,12
-    Gate Action 7-8,5-6
+    Flow Connector 9-10,4
+    Pass Action 8,2
+    Gate Action 8,5-6
     Gate Input/2 6,4
     Flow 4,4
-    Data Flow 5,5-6
+    Data Flow 25% 5,5-6 : 6,2
     Control Flow 3-4,5-6
     Scalar Flow 1-2,7
     Non Scalar Flow 6,7
@@ -45,3 +47,5 @@ connectors
     +R812 : +/1 r|Class : +/1 l*|Activity.2, t|Class Accessor
     +R813 : +/1 b|Class Accessor : +/1 r|Multiple Instance Flow
     +R814 : +/1 t|Scalar Flow : +/1 b*|Scalar Value
+    +R815.2+1 : -/1 t-2|Data Flow.2 : +/1 t+2|Data Flow.2, b|Pass Action : L7R-2
+    +R816 : b|Flow Connector { t|Pass Action, t|Gate Action }

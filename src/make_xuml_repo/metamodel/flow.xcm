@@ -2,9 +2,9 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 2.3.0
+    Version : 2.4.0
     /// Creation date : September 10, 2021
-    Modification date : July 5, 2025
+    Modification date : August 21, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -45,6 +45,12 @@ attributes
     Activity : Activity Number {I, R807}
     Domain : Domain Name {I, R807}
 --
+class Flow Connector
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901}
+--
 class Gate Action
 attributes
     ID : Action ID {I, R901}
@@ -84,6 +90,14 @@ attributes
     ID : Flow ID {I, R801}
     Activity : Activity Number {I, R801}
     Domain : Domain Name {I, R801}
+--
+class Pass Action
+attributes
+    ID : Action ID {I, R901}
+    Activity : Activity Number {I, I2, I3, R815, R901}
+    Domain : Domain Name {I, I2, I3, R815, R901}
+    Input flow : Flow ID {I2, R815}
+    Output flow : Flow ID {I3, R815}
 --
 class Table Flow
 attributes
@@ -225,4 +239,17 @@ relationships
     is preloaded with, 1c Scalar Value
     preloads in, 1 Scalar Flow
     Scalar Value.(Flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R815
+    passes to, 1c Data Flow
+    is passed from, 1c Data Flow
+    1 Pass Action
+    Pass Action.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+    Pass Action.(Output flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
+    R816
+    Flow Connector +
+        Pass Action
+        Gate Action
+    <subclass>.(ID, Activity, Domain) -> Flow Connector.(ID, Activity, Domain)
 --

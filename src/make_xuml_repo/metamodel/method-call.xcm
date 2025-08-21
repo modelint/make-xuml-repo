@@ -2,9 +2,9 @@ metadata
     Title : Method Call Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.17
-    Version : 0.3.0
+    Version : 0.4.0
     /// Creation date : August 13, 2025
-    Modification date : August 14, 2025
+    Modification date : August 21, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -45,14 +45,6 @@ attributes
     Signature : Signature Number {I, R1226}
     Domain : Domain Name {I, I2, R1226, R1227}
     Flow : Flow ID {I2, R1227}
---
-class Pass Action
-attributes
-    ID : Action ID {I, R901}
-    Activity : Activity Number {I, I2, R901}
-    Domain : Domain Name {I, I2, R901}
-    Input flow : Flow ID {R1231}
-    Output flow : Flow ID {I2, R1232c}
 --
 class Parameter <import:Activity>
 attributes
@@ -105,14 +97,4 @@ relationships
     produces value in, 1 Data Flow
     value is produced by, 1c Method Call Output
     Method Call Output.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
---
-    R1231
-    is input to, Mc Pass Action
-    accepts content from, 1 Data Flow
-    Pass Action.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
---
-    R1232
-    is output from, 1c Pass Action
-    passes unmodified content out through, 1 Data Flow
-    Pass Action.(Output flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --

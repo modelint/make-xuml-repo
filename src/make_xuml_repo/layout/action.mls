@@ -17,7 +17,6 @@ nodes
     Wave 8,10
     Wave Assignment 6-7,11
     Read Action 2,3
-    Gate Action 2,4
     Type Operation Action/2 2,5
     Create Action 2,6
     Delete Action 2,7
@@ -28,10 +27,10 @@ nodes
     Traverse Action 2,12
     Select Action 2,13
     Method Call 2,14
-    Pass Action 2,15
+    Flow Connector 2,15
 connectors
     -R900 : +/1 t|Action : +/1 b*|Activity
-    +R901 : b|Instance Action { t|Type Operation Action, t|Method Call, t|Pass Action, t|Signal Action, t|Gate Action, t|Create Action, t|Delete Action, t|Select Action, t|Traverse Action, t|Read Action, t|Reference Action, t|Computation Action, t|Switch Action : L3 }
+    +R901 : b|Instance Action { t|Type Operation Action, t|Method Call, t|Flow Connector, t|Signal Action, t|Create Action, t|Delete Action, t|Select Action, t|Traverse Action, t|Read Action, t|Reference Action, t|Computation Action, t|Switch Action : L3 }
     +R902 : -/2 r|Activity : -/2 l*|Wave
     +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L9R-2 L11R-2
     -R904 : -/2 r|Action : +/2 b|Wave, l|Wave Assignment

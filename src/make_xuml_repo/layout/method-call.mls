@@ -16,13 +16,10 @@ nodes
     Method Call Output/2 5,2
     Synchronous Output/2 4,3
     Data Flow 2,5
-    Pass Action 2,8
 connectors
     +R1225 : -/1 b|Method : -/1 t*|Method Call
     +R1226 : -/1 r|Method Call : -/1 l*|Parameter, t|Method Call Parameter
-    -R1227 : -/2 b*|Method Call Parameter : -/1 t-1|Data Flow
+    -R1227 : -/2 b*|Method Call Parameter : -/1 t|Data Flow
     +R1228.2 : -/2 b|Single Instance Flow : -/2 l|Method Call
     +R1229 : +/2 b|Method Call : +/2 t*|Synchronous Output, r|Method Call Output
     +R1230 : -/2 b|Method Call Output : -/2 l|Data Flow
-    +R1231.2 : +/1 t+1|Data Flow : +/1 t|Pass Action : L3
-    -R1232.2 : +/2 b+1|Data Flow : +/1 b|Pass Action : L1
