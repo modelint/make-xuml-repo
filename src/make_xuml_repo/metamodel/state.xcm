@@ -2,9 +2,9 @@ metadata
     Title : State Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.class.td.4
-    Version : 3.7.1 /// Based on 3.6.0 in SM Metamodel
+    Version : 3.8.0
     /// Creation date : January 21, 2012
-    Modification date : February 4, 2023
+    Modification date : August 25, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -30,6 +30,11 @@ attributes
     CLnum {I}
     Domain {I}
 --
+class Delegated Creation Activity <import:Activity>
+attributes
+    Anum {I}
+    Domain {I}
+--
 class Deletion State
 attributes
     Name : State Name {I, R511}
@@ -53,7 +58,8 @@ class Initial Pseudo State
 attributes
     Name : State Name {I, R510, R508} /// ID necessary to support R509 -> Transition
     Class : Type Name {I, R510, R508}
-    Domain : Domain Name {I, R510, R508}
+    Domain : Domain Name {I, R510, R508, R519}
+    Creation activity : Activity Number {I2, R519}
 --
 class Initial Transition
 attributes
@@ -236,4 +242,9 @@ relationships
     managed instance subset is partitioned by, 1 Class
     partitions managed instance subset for, Mc Multiple Assigner
     Multiple Assigner.(Partitioning class, Domain) -> Class.(Name, Domain)
+--
+    R519
+    creates instance transitioning from, 1 Initial Pseudo State
+    creates instance with, 1 Delegated Creation Activity
+    Initial Psuedo State.(Creation activity, Domain) -> Delegated Creation Activity.(Anum, Domain)
 --

@@ -11,8 +11,9 @@ nodes
     Activity 1,8
     State Activity 4,6-7
     Lifecycle Activity/2 5,5
-    Multiple Assigner Activity/2 3-4,5
-    Single Assigner Activity/2 2,5
+    Multiple Assigner Activity/2 4,5
+    Single Assigner Activity/2 3,5
+    Delegated Creation Activity/2 2,5
     Method 4-5,9
     Method Signature 7,9
     State Signature 7,11
@@ -32,7 +33,7 @@ connectors
     +R831 : -/2 r|Synchronous Output : -/2 l*|Data Flow
     +R832 : -/2 r-1|Single Instance Flow : -/3 t-2|Method
     +R833 : +/1 t|Data Flow : +/1 r|Activity Input
-    +R834 : l|State Activity { r|Lifecycle Activity, r|Multiple Assigner Activity, r|Single Assigner Activity : L6R-2 }
+    +R834 : l|State Activity { r|Delegated Creation Activity, r|Lifecycle Activity, r|Multiple Assigner Activity, r|Single Assigner Activity : L6R-2 }
     +R835 : +/2 b|Method Signature : +/2 t*|Method
     +R837 : b|Signature { t|State Signature, t|Method Signature }
     +R838 : +/2 b+2|Single Instance Flow : -/2 l|Lifecycle Activity

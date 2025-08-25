@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 2.1.0
+    Version : 2.2.0
     /// Creation date : August 13, 2022
-    Modification date : August 13, 2025
+    Modification date : August 25, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -28,6 +28,11 @@ attributes
     ID {I}
     Activity {I}
     Domain {I}
+--
+class Delegated Creation Activity
+attributes
+    Anum : Activity Number {I, R834}
+    Domain : Domain Name {I, R834}
 --
 class Lifecycle Activity
 attributes
@@ -145,6 +150,7 @@ relationships
         Lifecycle Activity
         Multiple Assigner Activity
         Assigner Activity
+        Delegated Creation Activity
     <subclass>.(Anum, Domain) -> State Activity.(Anum, Domain)
 --
     R835
