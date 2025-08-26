@@ -9,11 +9,12 @@ frame Model Integration Diagram
 frame_presentation default
 nodes
     Activity 1,8
-    State Activity 4,6-7
-    Lifecycle Activity/2 5,5
-    Multiple Assigner Activity/2 4,5
-    Single Assigner Activity/2 3,5
-    Delegated Creation Activity/2 2,5
+    State Activity 3-4,7
+    Real State Activity/2 4,5-6
+    Lifecycle Activity/2 5,4
+    Multiple Assigner Activity/2 4,4
+    Single Assigner Activity/2 3,4
+    Delegated Creation Activity/2 2,5-6
     Method 4-5,9
     Method Signature 7,9
     State Signature 7,11
@@ -23,7 +24,7 @@ nodes
     Synchronous Output/2 3,11-12
     Type 7,6 : 2,10
     Data Flow 3,14
-    Single Instance Flow/2 25% 6,3
+    Single Instance Flow/2 25% 6,2
     Activity Input 10,5
 connectors
     +R825 : t|Activity { b|State Activity, b|Method }
@@ -33,9 +34,10 @@ connectors
     +R831 : -/2 r|Synchronous Output : -/2 l*|Data Flow
     +R832 : -/2 r-1|Single Instance Flow : -/3 t-2|Method
     +R833 : +/1 t|Data Flow : +/1 r|Activity Input
-    +R834 : l|State Activity { r|Delegated Creation Activity, r|Lifecycle Activity, r|Multiple Assigner Activity, r|Single Assigner Activity : L6R-2 }
+    +R834 : l|Real State Activity { r|Lifecycle Activity, r|Multiple Assigner Activity, r|Single Assigner Activity }
     +R835 : +/2 b|Method Signature : +/2 t*|Method
     +R837 : b|Signature { t|State Signature, t|Method Signature }
     +R838 : +/2 b+2|Single Instance Flow : -/2 l|Lifecycle Activity
     +R839 : -/2 b-2|Single Instance Flow : -/2 l|Multiple Assigner Activity
-    +R842.3 : +/2 l|Activity : +/2 l|Parameter, b|Activity Input : L2R-2
+    +R840 : l|State Activity { r|Real State Activity, r|Delegated Creation Activity }
+    +R842.3 : +/2 l|Activity : +/2 l|Parameter, b|Activity Input : L1R-1

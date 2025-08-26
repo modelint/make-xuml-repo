@@ -26,7 +26,7 @@ nodes
     Event Response 3,7-8 >top
     Transition 1,6-7
     Non Transition 1,8
-    State Activity 5-6,4
+    Real State Activity/2 5-6,4
     State Signature 5-6,9
     Initial Transition/2 3,2
 connectors
@@ -34,7 +34,7 @@ connectors
     -R501 : +/2 t|Assigner : +/2 b*|Association
     -R502 : t|State Model { b+1|Lifecycle, b|Assigner }
     -R503 : +/2 t*|Non Deletion State : +/2 b|State Model
-    -R504 : +/2 l|Real State : +/2 r*|State Activity
+    -R504 : +/2 l|Real State : +/2 r*|Real State Activity
     +R505 : +/1 r|State : +/2 l*|Effective Event, t|Event Response
     +R506 : b|Event Response { t+2|Transition, t|Non Transition }
     -R507 : -/1 t-1|Transition : +/1 b*|Real State

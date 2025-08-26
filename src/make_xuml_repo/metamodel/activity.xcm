@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 2.2.0
+    Version : 2.2.1
     /// Creation date : August 13, 2022
-    Modification date : August 25, 2025
+    Modification date : August 26, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -31,8 +31,8 @@ attributes
 --
 class Delegated Creation Activity
 attributes
-    Anum : Activity Number {I, R834}
-    Domain : Domain Name {I, R834}
+    Anum : Activity Number {I, R840}
+    Domain : Domain Name {I, R840}
 --
 class Lifecycle Activity
 attributes
@@ -42,10 +42,10 @@ attributes
 --
 class Method
 attributes
-    Anum : Activity Number {I, R826, R832}
+    Anum : Activity Number {I, R825, R832}
     Name : Method Name {I2}
     Class : Type Name {I2, R24}
-    Domain : Domain Name {I, I2, R826, R24, R832}
+    Domain : Domain Name {I, I2, R825, R24, R832}
     Executing instance flow : Flow ID {R832}
 --
 class Method Signature
@@ -68,6 +68,11 @@ attributes
     Domain : Domain Name {I, R828, R827}
     Type : Type Name {R827}
 --
+class Real State Activity
+attributes
+    Anum : Activity Number {I, R840}
+    Domain : Domain Name {I, R840}
+--
 class Signature
 attributes
     SIGnum : Signature Number {I, R17}
@@ -86,8 +91,8 @@ attributes
 --
 class State Activity
 attributes
-    Anum : Activity Number {I, R830}
-    Domain : Domain Name {I, R830}
+    Anum : Activity Number {I, R825}
+    Domain : Domain Name {I, R825}
 --
 class State Signature <import:State>
 attributes
@@ -146,11 +151,10 @@ relationships
     Activity Input.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --
     R834
-    State Activity +
+    Real State Activity +
         Lifecycle Activity
         Multiple Assigner Activity
         Assigner Activity
-        Delegated Creation Activity
     <subclass>.(Anum, Domain) -> State Activity.(Anum, Domain)
 --
     R835
@@ -173,6 +177,12 @@ relationships
     delivers partitioning instance to, 1c Multiple Assigner Activity
     obtains partitioning instance from, 1 Single Instance Flow
     Multiple Assigner Activity.(Partitioning instance flow, Anum, Domain) -> Single Instance Flow.(ID, Activity, Domain)
+--
+    R840
+    State Activity +
+        Real State Activity
+        Delegated Creation Activity
+    <subclass>.(Anum, Domain) -> State Activity.(Anum, Domain)
 --
     R842
     flows data into, Mc Activity

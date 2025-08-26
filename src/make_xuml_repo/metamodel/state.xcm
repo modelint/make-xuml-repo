@@ -2,9 +2,9 @@ metadata
     Title : State Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.class.td.4
-    Version : 3.8.0
+    Version : 3.8.1
     /// Creation date : January 21, 2012
-    Modification date : August 25, 2025
+    Modification date : August 26, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -114,7 +114,7 @@ attributes
     State model : State Model Name {I}
     Domain : Domain Name {I}
 --
-class State Activity <import:Activity>
+class Real State Activity <import:Activity>
 attributes
     Anum {I}
     Domain {I}
@@ -164,7 +164,7 @@ relationships
     R504
     entry executes, 1 State Activity
     is executed on transition into, 1 Real State
-    Real State.(Activity, Domain) -> State Activity.(Anum, Domain)
+    Real State.(Activity, Domain) -> Real State Activity.(Anum, Domain)
 --
     R505
     specifies response to, Mc Effective Event
