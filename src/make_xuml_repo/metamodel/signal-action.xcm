@@ -2,9 +2,9 @@ metadata
     Title : Signal Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.1a
-    Version : 0.7.0
+    Version : 0.7.1
     /// Creation date : September 10, 2021
-    Modification date : August 6, 2025
+    Modification date : August 26, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -22,15 +22,14 @@ attributes
     Rnum {I}
     Domain {I}
 --
+class Class <import:Class and Attribute>
+attributes
+    Name {I}
+    Domain {I}
+--
 class Data Flow <import:Flow>
 attributes
     ID {I}
-    Activity {I}
-    Domain {I}
---
-class Delegated Create Action <import:Create Delete>
-attributes
-    Action {I}
     Activity {I}
     Domain {I}
 --
@@ -58,7 +57,7 @@ attributes
     ID : Action ID {I, R854}
     Activity : Activity Number {I, R854, R860}
     Domain : Domain Name {I, R854, R860}
-    Create action : Action ID {R860}
+    Target class : Type Name {R860}
 --
 class Instance Flow <import:Flow>
 attributes
@@ -184,9 +183,9 @@ relationships
     Multiple Assigner Partition Instance.(Partition, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
     R860
-    sends initial event in, 1 Delegated Create Action
-    specifies, 1 Initial Signal Action
-    Initial Signal Action.(ID, Activity, Domain) -> Delegated Create Action.(ID, Activity, Domain)
+    sends initial event to, 1 Class
+    receives initial event from, Mc Initial Signal Action
+    Initial Signal Action.(Target class, Domain) -> Class.(Name, Domain)
 --
     R862
     flows value as, Mc Delivery Time
