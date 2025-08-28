@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 2.2.1
+    Version : 2.3.0
     /// Creation date : August 13, 2022
-    Modification date : August 26, 2025
+    Modification date : August 27, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -33,6 +33,14 @@ class Delegated Creation Activity
 attributes
     Anum : Activity Number {I, R840}
     Domain : Domain Name {I, R840}
+--
+class Initialization Source
+attributes
+    Source flow : Flow ID {I, R843}
+    Delegating activity : Activity Number {I, R843c}
+    Creation activity : Activity Number {I, R843, R844}
+    Local flow : Flow ID {R844}
+    Domain : Domain Name {I, R843, R844}
 --
 class Lifecycle Activity
 attributes
@@ -190,4 +198,16 @@ relationships
     1 Activity Input
     Activity Input.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
     Activity Input.(Activity, Domain) -> Activity.(Anum, Domain)
+--
+    R843
+    requires initializaiton data in, Mc Data Flow
+    carries initialization data for, Mc Delegated Creation Activity
+    1 Initialization Source
+    Initialization Source.(Creation activity, Domain) -> Delegated Creation Activity.(Anum, Domain)
+    Initialization Source.(Source flow, Delegating activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
+    R844
+    copies data from, 1 Data Flow
+    has data copied to, Mc Initialization Source
+    Initialization Source.(Local flow, Creation activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --
