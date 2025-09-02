@@ -1,0 +1,40 @@
+diagram class // Shlaer-Mellor Meta Model / Event Subsystem
+notation Starr
+presentation default
+orientation landscape
+color mint
+sheet A1
+padding l200 b200
+frame Model Integration Diagram
+frame_presentation default
+nodes
+    Class 11,4-5
+    Polymorphic Event Specification/2 10,6-7
+    Monomorphic Event Specification/2 8,6-7
+    State Model 7,4-5
+    Event Specification 8-9,5
+    Monomorphic Event/2 5-6,6-7
+    Effective Event 3-4,7-8
+    Forwarded Effective Event/2 7-8,9
+    Root Delegated Event/2 5-6,10-11
+    Forwarded Delegated Event/2 5-6,12
+    Delegated Event 3-4,11-12
+    Event 2,9
+    Generalization 1,11-12
+    Delegation On Generalization/2 2,12-13
+    Subclass 2,15
+    Forwarded Event 7,14
+    State Signature 8-9,2
+connectors
+    +R550-1 : r|Event Specification { l|Monomorphic Event Specification, l|Polymorphic Event Specification }
+    -R551.2 : +/1 r|Class : +/1 t|Polymorphic Event Specification
+    +R552 : l|Forwarded Event { r|Forwarded Delegated Event, r|Forwarded Effective Event }
+    -R553 : +/1 r|Delegation On Generalization : +/1 l*|Subclass, b|Forwarded Event
+    +R554 : t|Effective Event { b|Monomorphic Event, b|Forwarded Effective Event : L4R+2 }
+    +R557 : +/1 b+1|Monomorphic Event Specification : -/1 t*|Monomorphic Event
+    +R558.2 : +/1 r|Polymorphic Event Specification : +/2 t|Root Delegated Event
+    +R560 : t|Event { b|Effective Event, b-1|Delegated Event }
+    +R561 : t|Delegated Event { b|Root Delegated Event, b|Forwarded Delegated Event }
+    -R563 : +/2 l|Event Specification : +/2 r*|State Signature
+    -R565.2 : +/1 r|State Model : -/1 b-2|Monomorphic Event Specification
+    -R569 : -/1 t*|Generalization : +/2 b+1|Delegated Event, l|Delegation On Generalization

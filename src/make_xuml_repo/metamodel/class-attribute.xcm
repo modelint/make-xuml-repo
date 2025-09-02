@@ -2,9 +2,9 @@ metadata
     Title : Class and Attribute Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.class.td.1
-    Version : 5.1.0
+    Version : 5.2.1
     /// Creation date : June 27, 2017
-    Modification date : July 23, 2025
+    Modification date : September 2, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -74,6 +74,12 @@ attributes
     Name : Attribute Name {I, R25}
     Class : Type Name {I, R25}
     Domain : Domain Name {I, R25}
+--
+class External Event Specification <import:Activity>
+attributes
+    Name {I}
+    Class {I, R36}
+    Domain {I, R36}
 --
 class Identifier
 attributes
@@ -226,4 +232,9 @@ relationships
     sets value of, 1 Non Derived Attribute
     has value set by, 1c Default Initial Value
     Default Initial Value.(Attribute, Class, Domain) -> Attribute.(Name, Class, Domain)
+--
+    R36
+    is defined on, 1 Class
+    defines, Mc External Event Specification
+    External Event Specification.(Class, Domain) -> Class.(Name, Domain)
 --

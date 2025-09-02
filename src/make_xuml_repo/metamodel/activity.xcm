@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 2.3.0
+    Version : 2.4.0
     /// Creation date : August 13, 2022
-    Modification date : August 27, 2025
+    Modification date : September 1, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -33,6 +33,18 @@ class Delegated Creation Activity
 attributes
     Anum : Activity Number {I, R840}
     Domain : Domain Name {I, R840}
+--
+class External Event Specification
+attributes
+    Name : Event Name {I}
+    Class : Type Name {I, R36}
+    Domain : Domain Name {I, I2, R36, R826}
+    Signature : Signature Number {I2, R826}
+--
+class External Signature
+attributes
+    SIGnum : Signature Number {I, R837}
+    Domain : Domain Name {I, R837}
 --
 class Initialization Source
 attributes
@@ -126,6 +138,11 @@ relationships
         Method
     <subclass>.(Anum, Domain) -> Activity.(Anum, Domain)
 --
+    R826
+    specifies required input with, 1 External Signature
+    defines input into, 1 External Event
+    External Event.(Signature, Domain) -> External Signature.(SIGnum, Domain)
+--
     R827
     constrains input to, Mc Parameter
     input is constrained by, 1 Type
@@ -174,6 +191,7 @@ relationships
     Signature +
         State Signature
         Method Signature
+        External Signature
     <subclass>.(SIGnum, Domain) -> Signature.(SIGnum, Domain)
 --
     R838

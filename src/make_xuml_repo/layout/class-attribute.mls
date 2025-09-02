@@ -11,6 +11,7 @@ nodes
     Class 6,3
     Alias 7,4-5
     Method 4,3
+    External Event Specification/2 4,2
     Attribute 6,6-7
     Derived Attribute/2 4-5,6
     Non Derived Attribute/2 4-5,7
@@ -46,3 +47,4 @@ connectors
     +R33 : -/2 l*|Subclass : -/2 r|Classifier Attribute, b|Subclass Classification Value
     +R34 : -/2 r|Attribute : -/2 l*|Scalar
     +R35 : -/2 r|Non Derived Attribute : -/2 l*|Default Initial Value
+    -R36.2 : +/1 l-2|Class : -/2 t|External Event Specification
