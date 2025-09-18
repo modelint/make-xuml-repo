@@ -21,7 +21,7 @@ Element Number : int
 Enumeration Value : string
 Equivalence Op : string
 Event Name : string
-External Entity Name : string
+External Service Name : string
 First Last All : string
 Flow ID : string
 Flow Name : string

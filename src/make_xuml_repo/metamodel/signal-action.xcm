@@ -2,9 +2,9 @@ metadata
     Title : Signal Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.1a
-    Version : 0.8.0
+    Version : 0.8.1
     /// Creation date : September 10, 2021
-    Modification date : September 2, 2025
+    Modification date : September 17, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -22,11 +22,6 @@ attributes
     Rnum {I}
     Domain {I}
 --
-//class Class <import:Class and Attribute>
-//attributes
-//    Name {I}
-//    Domain {I}
-//--
 class Data Flow <import:Flow>
 attributes
     ID {I}
@@ -45,12 +40,6 @@ attributes
     Name {I}
     Subsystem element {I}
     Domain {I}
---
-class External Signal Action
-attributes
-    ID : Action ID {I, R854}
-    Activity : Activity Number {I, R854}
-    Domain : Domain Name {I, R854, R861}
 --
 class Initial Signal Action
 attributes
@@ -158,7 +147,6 @@ relationships
         Signal Instance Set Action
         Signal Assigner Action
         Initial Signal Action
-        External Signal Action
     <subclass>.(ID, Activity, Domain) -> Signal Action.(ID, Activity, Domain)
 --
     R855

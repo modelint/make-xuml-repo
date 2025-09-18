@@ -20,7 +20,6 @@ nodes
     Method Signature 9,9
     State Signature 9,11
     External Signature 9,12-13 >top
-    External Event Specification/2 7,12-13
     Signature 10-11,10
     Non State Signature/2 6,10
     Parameter 10-11,8
@@ -31,7 +30,6 @@ nodes
     Activity Input 12,5
 connectors
     +R825 : t|Activity { b|State Activity, b|Method }
-    +R826 :  -/3 b|External Signature : -/2 t*|External Event Specification
     +R827 :  -/2 b|Parameter : -/2 r|Type
     -R828 :  +/2 l|Signature : +/2 r*|Parameter
     -R829 :  +/2 r-2|Method : +/2 t|Type.2, l|Synchronous Output
