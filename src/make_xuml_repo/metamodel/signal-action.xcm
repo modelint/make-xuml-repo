@@ -2,21 +2,14 @@ metadata
     Title : Signal Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.1a
-    Version : 0.8.1
+    Version : 0.8.2
     /// Creation date : September 10, 2021
-    Modification date : September 17, 2025
+    Modification date : September 22, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
 domain Metamodel, META
 subsystem Signal Action, SIGNAL 850-899
-class Absolute Delivery Time
-attributes
-    Action : Action ID {I, R856}
-    Activity : Activity Number {I, R856}
-    Domain : Domain Name {I, R856}
-    When : Time
---
 class Association <import:Relationship>
 attributes
     Rnum {I}
@@ -34,6 +27,7 @@ attributes
     Activity : Activity Number {I, R855, R862}
     Domain : Domain Name {I, R855, R862}
     Flow : Flow ID {R862}
+    Relative : Boolean
 --
 class Event Specification <import:Event>
 attributes
@@ -46,7 +40,6 @@ attributes
     ID : Action ID {I, R854}
     Activity : Activity Number {I, R854, R860}
     Domain : Domain Name {I, R854, R860}
-//    Target class : Type Name {R860}
 --
 class Instance Flow <import:Flow>
 attributes
@@ -66,13 +59,6 @@ attributes
     Name {I}
     Signature {I}
     Domain {I}
---
-class Relative Delivery Time
-attributes
-    Action : Action ID {I, R856}
-    Activity : Activity Number {I, R856}
-    Domain : Domain Name {I, R856}
-    Delay : Duration
 --
 class Scalar Flow <import:Flow>
 attributes
@@ -154,12 +140,6 @@ relationships
     schedules delivery of, 1 Signal Action
     Delivery Time.(Action, Activity, Domain) -> Signal Action.(ID, Activity, Domain)
 --
-    R856
-    Delivery Time +
-        Absolute Delivery Time
-        Relative Delivery Time
-    <subclass>.(Action, Activity, Domain) -> Delivery Time.(Action, Activity, Domain)
---
     R857
     delivers signals to each member of, 1 Instance Flow
     each member recieves signal from, Mc Signal Instance Set Action
@@ -177,11 +157,6 @@ relationships
     Multiple Assigner Partition Instance.(Action, Activity, Domain) -> Signal Assigner Action.(ID, Activity, Domain)
     Multiple Assigner Partition Instance.(Partition, Activity, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
-//    R860
-//    sends initial event to, 1 Class
-//    receives initial event from, Mc Initial Signal Action
-//    Initial Signal Action.(Target class, Domain) -> Class.(Name, Domain)
-//--
     R862
     flows value as, Mc Delivery Time
     obtains value from, 1 Scalar Flow
