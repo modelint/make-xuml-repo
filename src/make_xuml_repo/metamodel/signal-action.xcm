@@ -2,7 +2,7 @@ metadata
     Title : Signal Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.1a
-    Version : 0.9.0
+    Version : 0.9.1
     /// Creation date : September 10, 2021
     Modification date : September 23, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -169,7 +169,7 @@ relationships
 --
     R857
     delivers signals to each member of, 1 Instance Flow
-    each member recieves signal from, Mc Signal Instance Set Action
+    each member receives signal from, Mc Signal Instance Set Action
     Signal Instance Set Action.(Instance flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
 --
     R858
@@ -191,7 +191,7 @@ relationships
 --
     R861
     cancels signal to each member of, 1 Instance Flow
-    each member recieves cancellation from, Mc Cancel Signal Action
+    each member receives cancellation from, Mc Cancel Signal Action
     Signal Instance Set Action.(Instance flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
 --
     R862
