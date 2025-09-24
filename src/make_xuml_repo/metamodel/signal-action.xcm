@@ -2,7 +2,7 @@ metadata
     Title : Signal Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.1a
-    Version : 0.9.1
+    Version : 0.9.2
     /// Creation date : September 10, 2021
     Modification date : September 23, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -15,12 +15,23 @@ attributes
     Rnum {I}
     Domain {I}
 --
-class Cancel Signal Action
+class Cancel Delayed Signal Action
 attributes
     ID : Action ID {I, R854}
-    Activity : Activity Number {I, R854, R856, R860}
-    Domain : Domain Name {I, R854, R856, R860}
-    Instance flow : Flow ID {R856}
+    Activity : Activity Number {I, R854}
+    Domain : Domain Name {I, R854}
+--
+class Cancel Delayed Completion Signal
+attributes
+    ID : Action ID {I, R861}
+    Activity : Activity Number {I, R861}
+    Domain : Domain Name {I, R861}
+--
+class Cancel Delayed Interaction Signal
+attributes
+    ID : Action ID {I, R861, R863}
+    Activity : Activity Number {I, R861, R863}
+    Domain : Domain Name {I, R861, R863}
 --
 class Data Flow <import:Flow>
 attributes
@@ -62,6 +73,13 @@ attributes
     Activity {I}
     Domain {I}
 --
+class Interaction Signal Action
+attributes
+    ID : Action ID {I}
+    Activity : Activity Number {I, R857}
+    Domain : Domain Name {I, R857}
+    Instance flow : Flow ID {R857}
+--
 class Multiple Assigner Partition Instance
 attributes
     Action : Action ID {I, R859}
@@ -98,9 +116,9 @@ attributes
 --
 class Signal Completion Action
 attributes
-    ID : Action ID {I, R854}
-    Activity : Activity Number {I, R854}
-    Domain : Domain Name {I, R854}
+    ID : Action ID {I, R853}
+    Activity : Activity Number {I, R853}
+    Domain : Domain Name {I, R853}
 --
 class Single Instance Flow <import:Flow>
 attributes
@@ -116,10 +134,9 @@ attributes
 --
 class Signal Instance Set Action
 attributes
-    ID : Action ID {I, R854}
-    Activity : Activity Number {I, R854, R857}
-    Domain : Domain Name {I, R854, R857}
-    Instance flow : Flow ID {R857}
+    ID : Action ID {I, R853, R863}
+    Activity : Activity Number {I, R853, R863}
+    Domain : Domain Name {I, R853, R863}
 --
 class Supplied Parameter Value
 attributes
@@ -159,7 +176,7 @@ relationships
         Signal Instance Action
         Signal Assigner Action
         Initial Signal Action
-        Cancel Signal Action
+        Cancel Delayed Signal Action
     <subclass>.(ID, Activity, Domain) -> Signal Action.(ID, Activity, Domain)
 --
     R855
@@ -168,9 +185,9 @@ relationships
     Delivery Time.(Action, Activity, Domain) -> Signal Instance Action.(ID, Activity, Domain)
 --
     R857
-    delivers signals to each member of, 1 Instance Flow
-    each member receives signal from, Mc Signal Instance Set Action
-    Signal Instance Set Action.(Instance flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
+    delivers or cancels signals to, 1 Instance Flow
+    has signals canceled or delivered by, Mc Interaction Signal Action
+    Interaction Signal Action.(Instance flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
 --
     R858
     directs signal to assigner on, 1 Association
@@ -190,12 +207,19 @@ relationships
     Initial Signal Action.(Pseudo state, Class, Domain) -> Initial Pseudo State.(Name, Class, Domain)
 --
     R861
-    cancels signal to each member of, 1 Instance Flow
-    each member receives cancellation from, Mc Cancel Signal Action
-    Signal Instance Set Action.(Instance flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
+    Cancel Delayed Signal Action +
+        Cancel Delayed Completion Signal
+        Cancel Delayed Interaction Signal
+    <subclass>.(ID, Activity, Domain) -> Cancel Delayed Signal Action.(ID, Activity, Domain)
 --
     R862
     flows value as, Mc Delivery Time
     obtains value from, 1 Scalar Flow
     Delivery Time.(Flow, Activity, Domain) -> Scalar Flow.(ID, Activity, Domain)
+--
+    R863
+    Interaction Signal Action +
+        Signal Instance Set Action
+        Cancel Delayed Interaction Signal
+    <subclass>.(ID, Activity, Domain) -> Cancel Delayed Signal Action.(ID, Activity, Domain)
 --

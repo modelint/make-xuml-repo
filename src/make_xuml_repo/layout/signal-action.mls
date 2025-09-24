@@ -4,7 +4,7 @@ presentation default
 orientation landscape
 color pink eraser
 sheet A1
-padding l250 b250
+padding l150 b200
 frame Model Integration Diagram
 frame_presentation default
 nodes
@@ -13,29 +13,34 @@ nodes
     Parameter 6,2-3
     Supplied Parameter Value/2 5,4
     Data Flow 3,4
-    Delivery Time 5-6,9
+    Delivery Time 5,9
     Signal Assigner Action/2 4,7-8
-    Signal Instance Action/2 7-8,7-8
+    Signal Instance Action/2 6-7,7-8
     Association 4,10-11
-    Cancel Signal Action/2 9,7-8
-    Signal Completion Action/2 8,9
+    Cancel Delayed Signal Action/2 8-9,7-8
+    Cancel Delayed Completion Signal/2 9,9
+    Cancel Delayed Interaction Signal/2 8,9
+    Signal Completion Action/2 6,9
     Single Instance Flow/2 2-3,10-11
     Signal Instance Set Action/2 7,9
-    Initial Signal Action/2 10-11,7-8
-    Initial Pseudo State/2 10-11,11
-    Instance Flow 7,12
-    Scalar Flow 5-6,11
+    Initial Signal Action/2 10,7-8
+    Initial Pseudo State/2 10,10
+    Instance Flow 7-8,13
+    Scalar Flow 5,11
     Multiple Assigner Partition Instance/2 1-2,9
+    Interaction Signal Action/2 7-8,10-11
 connectors
     +R850 : -/1 l|Signal Action : -/2 r*|Parameter, t|Supplied Parameter Value
     +R851 : -/2 t|Signal Action : -/2 b*|Event Specification
     -R852 : +/2 b|Supplied Parameter Value : +/2 t*|Data Flow
     +R853-1 : r|Signal Instance Action { l|Signal Instance Set Action, l|Signal Completion Action }
-    +R854-1 : r|Signal Action { l|Cancel Signal Action, l|Initial Signal Action, l|Signal Instance Action, l|Signal Assigner Action }
+    +R854-1 : r|Signal Action { l|Cancel Delayed Signal Action, l|Initial Signal Action, l|Signal Instance Action, l|Signal Assigner Action }
     +R855.2 : -/1 l|Delivery Time : -/2 b|Signal Instance Action
-    -R857 : +/2 r|Signal Instance Set Action : +/2 l*|Instance Flow
+    -R857 : +/2 r|Interaction Signal Action : +/2 l*|Instance Flow
     -R858 : +/2 r|Signal Assigner Action : +/3 l*|Association
     -R859-1 : -/3 b|Signal Assigner Action : +/3 l|Single Instance Flow, t|Multiple Assigner Partition Instance
     -R860 : +/3 r|Initial Signal Action : +/3 l*|Initial Pseudo State
-    -R861.2 : +/3 r|Cancel Signal Action : +/3 t|Instance Flow
+    +R861 : r|Cancel Delayed Signal Action { l|Cancel Delayed Completion Signal, l|Cancel Delayed Interaction Signal }
+//    -R861.2 : +/3 r|Cancel Delayed Signal Action : +/3 t|Instance Flow
     -R862 : +/2 l*|Scalar Flow : +/2 r|Delivery Time
+    +R863 : l|Interaction Signal Action { r|Signal Instance Set Action, r|Cancel Delayed Interaction Signal }
