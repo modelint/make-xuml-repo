@@ -2,9 +2,9 @@ metadata
     Title : Type Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.15
-    Version : 0.6.4
+    Version : 0.6.5
     /// Creation date : June 20, 2023
-    Modification date : August 18, 2025
+    Modification date : October 3, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -64,10 +64,10 @@ attributes
 --
 class Type Action
 attributes
-    ID : Action ID {I, I2, R901}
+    ID : Action ID {I, R901}
     Activity : Activity Number {I, R901, R1130}
-    Domain : Domain Name {I, I2, R901, R1130, R1131}
-    Scalar : Type Name {I2, R1131}
+    Domain : Domain Name {I, R901, R1130, R1131}
+    Scalar : Type Name {R1131}
     Output flow : Flow ID {R1130}
 --
 class Type Operation
