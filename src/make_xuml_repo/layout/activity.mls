@@ -29,7 +29,6 @@ nodes
     Type 10-11,9 : 4-5,12
     Data Flow 3,1
     Single Instance Flow/2 25% 8,2
-    Activity Input 6,14
 connectors
     +R825 : t|Activity { b|State Activity, b|Method }
     +R827 :  -/2 l|Parameter : -/2 r*|Type
@@ -42,7 +41,6 @@ connectors
     +R838 : +/2 b+2|Single Instance Flow : -/2 l|Lifecycle Activity
     +R839 : -/2 b-2|Single Instance Flow : -/2 l|Multiple Assigner Activity
     +R840 : l|State Activity { r|Real State Activity, r|Delegated Creation Activity }
-    -R842.2 : +/2 r|Activity : +/2 r|Parameter, l|Activity Input : L13
     +R843 : +/2 r|Data Flow : +/2 l*|Signaled Creation, t|Initialization Source
     -R844-2 : +/2 l|Initialization Source : -/2 b|Data Flow
     +R845 : +/1 r|Initial Signal Action : +/2 l*|Delegated Creation Activity, t|Signaled Creation

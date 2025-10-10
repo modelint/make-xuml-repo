@@ -2,7 +2,7 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 2.5.0
+    Version : 2.5.1
     /// Creation date : August 13, 2022
     Modification date : October 9, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -14,13 +14,6 @@ class Activity
 attributes
     Anum : Activity Number {I}
     Domain : Domain Name {I}
---
-class Activity Input
-attributes
-    Parameter : Parameter Name {I, R842}
-    Signature : Signature Number {I, R842}
-    Activity : Activity Number {I, R842}
-    Domain : Domain Name {I, R842}
 --
 class Data Flow <import:Flow>
 attributes
@@ -209,13 +202,6 @@ relationships
         Real State Activity
         Delegated Creation Activity
     <subclass>.(Anum, Domain) -> State Activity.(Anum, Domain)
---
-    R842
-    flows data into, Mc Activity
-    inputs data from, Mc Parameter
-    1 Activity Input
-    Activity Input.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
-    Activity Input.(Activity, Domain) -> Activity.(Anum, Domain)
 --
     R843
     requires initialization data in, Mc Data Flow
