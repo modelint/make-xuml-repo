@@ -2,7 +2,7 @@ metadata
     Title : External Service Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.19
-    Version : 0.1.4
+    Version : 0.1.5
     /// Creation date : September 17, 2025
     Modification date : October 15, 2025
     Organization : Model Integration, LLC / www.modelint.com
@@ -36,6 +36,7 @@ attributes
     Operation : External Service Name {I, R1276}
     Domain : Domain Name {I, R1276}
     Type : Type Name {R1276}
+    Name : Flow Name
 --
 class External Service
 attributes
