@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.9.1
+    Version : 0.10.0
     /// Creation date : September 7, 2021
-    Modification date : October 15, 2025
+    Modification date : October 19, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -21,12 +21,6 @@ class Activity <import:Activity>
 attributes
     Anum {I}
     Domain {I}
---
-class Instance Action
-attributes
-    ID : Action ID {I, R907}
-    Activity : Activity Number {I, R907}
-    Domain : Domain Name {I, R907}
 --
 class Computation Action <import:Computation>
 attributes
@@ -46,6 +40,12 @@ attributes
     Activity {I, R901}
     Domain {I, R901}
 --
+class External Signal Action <import:External Service>
+attributes
+    ID {I, R901}
+    Activity {I, R901}
+    Domain {I, R901}
+--
 class Flow <import:Flow>
 attributes
     ID {I}
@@ -59,6 +59,12 @@ attributes
     Activity : Activity Number {I, R905}
     Domain : Domain Name {I, R905}
     Flow : Flow ID {R906}
+--
+class Instance Action
+attributes
+    ID : Action ID {I, R907}
+    Activity : Activity Number {I, R907}
+    Domain : Domain Name {I, R907}
 --
 class Method Call <import:Method Call>
 attributes
@@ -159,6 +165,7 @@ relationships
         Method Call
         Operation Call
         Flow Connector
+        External Signal Action
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
     R902
