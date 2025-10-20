@@ -2,9 +2,9 @@ metadata
     Title : External Service Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.19
-    Version : 0.1.7
+    Version : 0.2.0
     /// Creation date : September 17, 2025
-    Modification date : October 15, 2025
+    Modification date : October 20, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -51,6 +51,15 @@ attributes
     Activity : Activity Number {I, R901}
     Domain : Domain Name {I, R901, R1281}
     External event : External Service Name {R1281}
+--
+class External Signal Parameter
+attributes
+    Signal action : Action ID {I, R1285}
+    Activity : Activity Number {I, R1285, R1286}
+    Domain : Domain Name {I, R1285, R1286}
+    Parameter : Parameter Name {I, R1285}
+    Signature : Signature Number {I, R1285}
+    Flow : Flow ID {I2, R1286}
 --
 class External Signature <import:Activity>
 attributes
@@ -149,4 +158,16 @@ relationships
     gets value from, 1 Data Flow
     supplies value for, Mc Operation Call Parameter
     Output Call Parameter.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
+    R1285
+    fills out, Mc Parameter
+    is filled out by, Mc External Signal Action
+    1 External Signal Parameter
+    External Signal Parameter.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
+    External Signal Parameter.(Signal action, Activity, Domain) -> External Signal Action.(ID, Activity, Domain)
+--
+    R1286
+    gets value from, 1 Data Flow
+    supplies value for, Mc External Signal Parameter
+    External Signal Parameter.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
 --
