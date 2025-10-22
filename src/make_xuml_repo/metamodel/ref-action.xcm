@@ -2,9 +2,9 @@ metadata
     Title : Reference Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.4
-    Version : 0.7.1
+    Version : 0.8.0
     /// Creation date : November 07, 2021
-    Modification date : July 29, 2025
+    Modification date : Octovber 22, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -38,9 +38,10 @@ attributes
 class New Reference Action
 attributes
     ID : Action ID {I, R781}
-    Activity : Activity Number {I, R781, R782}
-    Domain : Domain Name {I, R781, R782}
+    Activity : Activity Number {I, I2, R781, R782, R791}
+    Domain : Domain Name {I, I2, R781, R782, R791}
     Create action : Action ID {R782}
+    Ref attr values : Flow ID {I2, R791}
 --
 class New Simple Reference Action
 attributes
@@ -58,22 +59,21 @@ attributes
 class Reference Action
 attributes
     ID : Action ID {I, R901}
-    Activity : Activity Number {I, I2, R901, R791}
-    Domain : Domain Name {I, I2, R901, R792, R791}
+    Activity : Activity Number {I, R901}
+    Domain : Domain Name {I, R901, R792}
     Association : Relationship Number {R792}
-    Ref attr values : Flow ID {I2, R791}
---
-class Single Instance Flow <import:Flow>
-attributes
-    ID {I}
-    Activity {I}
-    Domain {I}
 --
 class Referenced Instance
 attributes
     Flow : Flow ID {I, R785}
     Activity : Activity Number {I, R785}
     Domain : Domain Name {I, R785}
+--
+class Single Instance Flow <import:Flow>
+attributes
+    ID {I}
+    Activity {I}
+    Domain {I}
 --
 class T Ref Instance
 attributes
@@ -166,8 +166,8 @@ relationships
 --
     R791
     supplies referential attribute values as, 1 Tuple Flow
-    conveys referential attribute values for, 1c Reference Action
-    Reference Action.(Ref attr values, Activity, Domain) -> Tuple Flow.(ID, Activity, Domain)
+    conveys referential attribute values for, 1c New Reference Action
+    New Reference Action.(Ref attr values, Activity, Domain) -> Tuple Flow.(ID, Activity, Domain)
 --
     R792
     changes reference across, 1 Association
