@@ -2,9 +2,9 @@ metadata
     Title : Table Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.14
-    Version : 0.7.2
+    Version : 0.7.3
     /// Creation date : August 22, 2022
-    Modification date : May 30, 2025
+    Modification date : November 13, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -234,8 +234,8 @@ relationships
     Rename Action.(From attribute, From non scalar type, Domain) -> Model Attribute.(Name, Non scalar type, Domain)
 --
     R1156
-    creates, 1 Table Attribute
-    is created by, 1c Rename Action
+    renames to, 1 Table Attribute
+    is the target of, Mc Rename Action
     Rename Action.(To attribute, To table, Domain) -> Table Attribute.(Name, Table, Domain)
 --
     R1157
