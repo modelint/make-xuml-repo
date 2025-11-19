@@ -2,9 +2,9 @@ metadata
     Title : Flow Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.2
-    Version : 2.4.1
+    Version : 2.5.1
     /// Creation date : September 10, 2021
-    Modification date : September 10, 2025
+    Modification date : November 18, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -64,6 +64,14 @@ attributes
     Input flow : Flow ID {I, R811c}
     Activity : Activity Number {I, R811}
     Domain : Domain Name {I, R811}
+--
+class Identifier Projection
+attributes
+    ID : Action ID {I, R816}
+    Activity : Activity Number {I, I2, R817, R816}
+    Domain : Domain Name {I, I2, R816, R817}
+    Instance flow : Flow ID {I2, R817}
+    Relation flow : Flow ID {R817}
 --
 class Instance Flow
 attributes
@@ -251,5 +259,13 @@ relationships
     Flow Connector +
         Pass Action
         Gate Action
+        Identifier Projection
     <subclass>.(ID, Activity, Domain) -> Flow Connector.(ID, Activity, Domain)
+--
+    R817
+    projects from, 1c Relation Flow
+    projects to, Mc Instance Flow
+    1 Identifier Projection
+    Identifier Projection.(Instance flow, Activity, Domain) -> Instance Flow.(ID, Activity, Domain)
+    Identifier Projection.(Relation flow, Activity, Domain) -> Relation Flow.(ID, Activity, Domain)
 --
