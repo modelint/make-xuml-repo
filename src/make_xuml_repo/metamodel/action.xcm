@@ -2,9 +2,9 @@ metadata
     Title : Action Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.5
-    Version : 0.10.0
+    Version : 0.10.1
     /// Creation date : September 7, 2021
-    Modification date : October 19, 2025
+    Modification date : December 12, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -166,6 +166,7 @@ relationships
         Operation Call
         Flow Connector
         External Signal Action
+        Iterator
     <subclass>.(ID, Activity, Domain) -> Action.(ID, Activity, Domain)
 --
     R902
