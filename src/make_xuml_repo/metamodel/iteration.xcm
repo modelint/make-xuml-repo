@@ -2,9 +2,9 @@ metadata
     Title : Iteration Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.11
-    Version : 0.8.1
+    Version : 0.8.2
     /// Creation date : May 20, 2022
-    Modification date : December 12, 2025
+    Modification date : December 13, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -32,14 +32,14 @@ attributes
 --
 class Iterated Instance Flow
 attributes
-    Iterator {I, R1026}
+    Iterator : Action ID {I, R1026}
     Activity : Activity Number {I, R1026}
     Domain : Domain Name {I, R1026}
     Flow : Flow ID {R1026}
 --
 class Iterator
 attributes
-    Action : Action ID {I, R901}
+    ID : Action ID {I, R901}
     Activity : Activity Number {I, R901, R1025}
     Domain : Domain Name {I, R901, R1025}
     Input flow : Flow ID {R1025}
@@ -73,7 +73,7 @@ attributes
     ID : Action ID {I, R1027}
     Activity : Activity Number {I, R1027}
     Domain : Domain Name {I, R1027, R1030}
-    Oridinal relationship : Rnum {R1030}
+    Ordinal relationship : Relationship Number {R1030}
     Ascending : Boolean
 --
 class Reflexive Sequencer
@@ -81,7 +81,7 @@ attributes
     ID : Action ID {I, R1029}
     Activity : Activity Number {I, R1029}
     Domain : Domain Name {I, R1029, R1030}
-    Reflexive perspective {R1030c}
+    Reflexive perspective : Relationship Number {R1030c}
     Side : Side {R1030}
 --
 class Scalar Flow <import:Flow>
@@ -111,9 +111,9 @@ attributes
 class Sorting Attribute
 attributes
     Sort order : Ordinal {I2, OR1033}
-    Attribute {I, R1032}
-    Class {I, I2, R1032c, OR1033}
-    Iteration action : Action ID {I, I2, R1032, OR1033}
+    Attribute : Attribute Name {I, R1032}
+    Class : Type Name {I, I2, R1032c, OR1033}
+    Sequencer : Action ID {I, I2, R1032, OR1033}
     Activity : Activity Number {I, I2, R1032, OR1033}
     Domain : Domain Name {I, I2, R1032, OR1033}
     Ascending : Boolean
@@ -175,8 +175,8 @@ relationships
     Ordinal Sequencer.(Ordinal relationship, Domain) -> Ordinal Relationship.(Rnum, Domain)
 --
     R1031
-    defines, Mc Reflexive Sequencer
-    is defined by, 1 Asymmetric Perspective
+    is iterative target of, Mc Reflexive Sequencer
+    hops iteratively to, 1 Asymmetric Perspective
     Reflexive Sequencer.(Side, Reflexive perspective, Domain) -> Asymmetric Perspective.(Side, Rnum, Domain)
 --
     R1032
