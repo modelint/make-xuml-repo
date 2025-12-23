@@ -8,14 +8,12 @@ padding b350
 frame Model Integration Diagram
 frame_presentation default
 nodes
-    Action 6,7
+    Activity 9,8
+    Action 7,8
+    Flow Dependency 7,6
+    Flow 7,3-4
     Instance Action 4,6
     Relation Action 4,11
-    Flow Dependency 6,5
-    Activity 8,7
-    Flow 6,2-3
-    Wave 8,10
-    Wave Assignment 6-7,11
     Read Action 2,1
     Create Action 2,2
     Delete Action 2,3
@@ -33,9 +31,6 @@ nodes
 connectors
     -R900 : +/1 t|Action : +/1 b*|Activity
     +R901 : b|Instance Action { t|Type Operation Action, t|Method Call, t|Flow Connector, t|Signal Action, t|Create Action, t|Delete Action, t|Select Action, t|Traverse Action, t|Read Action, t|Reference Action, t|Computation Action, t|Switch Action, t|Operation Call, t|External Signal Action : L3 }
-    +R902 : -/2 r|Activity : -/2 l*|Wave
-    +OR903.2 : -/2 t+2|Wave : -/2 r+2|Wave : L9R-2 L11R-2
-    -R904 : -/2 r|Action : +/2 b|Wave, l|Wave Assignment
-    +R905.2-1 : +/1 l+2|Action : -/1 l-2|Action, r|Flow Dependency : L6
+    +R905.2-1 : +/1 l+2|Action : -/1 l-2|Action, r|Flow Dependency : L7
     -R906 : +/1 l|Flow Dependency : +/1 r*|Flow
     +R907 : b|Action { t|Instance Action, t|Relation Action }
