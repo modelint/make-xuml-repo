@@ -2,9 +2,9 @@ metadata
     Title : Activity Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.12
-    Version : 2.5.1
+    Version : 2.5.4
     /// Creation date : August 13, 2022
-    Modification date : October 9, 2025
+    Modification date : December 29, 2025
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -14,6 +14,14 @@ class Activity
 attributes
     Anum : Activity Number {I}
     Domain : Domain Name {I}
+--
+class Activity Input
+attributes
+    Parameter : Parameter Name {I, R842}
+    Signature : Signature Number {I, R842}
+    Activity : Activity Number {I, R842, R833}
+    Domain : Domain Name {I, R842, R833}
+    Input flow : Flow ID {R833}
 --
 class Data Flow <import:Flow>
 attributes
@@ -78,7 +86,7 @@ attributes
     Name : Parameter Name {I}
     Signature : Signature Number {I, R828}
     Domain : Domain Name {I, R828, R827}
-    Type : Type Name {R827}
+    Type : Type Name {R827c}
 --
 class Real State Activity
 attributes
@@ -120,9 +128,10 @@ attributes
 --
 class Synchronous Output
 attributes
-    Anum : Activity Number {I, R829}
-    Domain : Domain Name {I, R829}
-    Type : Type Name {R829}
+    Anum : Activity Number {I, R829, R831}
+    Domain : Domain Name {I, R829, R831}
+    Type : Type Name {R829c}
+    Output flow : Flow ID {R831}
 --
 class Type <import:Type>
 attributes
@@ -153,21 +162,21 @@ relationships
     Synchronous Output.(Anum, Domain) -> Synchronous Activity.(Anum, Domain)
     Synchronous Output.(Type, Domain) -> Type.(Name, Domain)
 --
-//    R831
-//    yields value in, 1 Data Flow
-//    transmits value from, 1c Synchronous Output
-//    Synchronous Output.(Output flow, Anum, Domain) -> Data Flow.(ID, Activity, Domain)
-//--
+    R831
+    yields value in, 1 Data Flow
+    transmits value from, 1c Synchronous Output
+    Synchronous Output.(Output flow, Anum, Domain) -> Data Flow.(ID, Activity, Domain)
+--
     R832
     obtains executing instance from, 1 Single Instance Flow
     supplies executing instance to, 1c Method
     Method.(Executing instance flow, Anum, Domain) -> Single Instance Flow.(ID, Activity, Domain)
 --
-//    R833
-//    provides value for, 1c Activity Input
-//    gets value from, 1 Data Flow
-//    Activity Input.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
-//--
+    R833
+    provides value for, 1c Activity Input
+    gets value from, 1 Data Flow
+    Activity Input.(Input flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
     R834
     Real State Activity +
         Lifecycle Activity
@@ -202,6 +211,13 @@ relationships
         Real State Activity
         Delegated Creation Activity
     <subclass>.(Anum, Domain) -> State Activity.(Anum, Domain)
+--
+    R842
+    flows data into, Mc Activity
+    inputs data from, Mc Parameter
+    1 Activity Input
+    Activity Input.(Parameter, Signature, Domain) -> Parameter.(Name, Signature, Domain)
+    Activity Input.(Activity, Domain) -> Activity.(Anum, Domain)
 --
     R843
     requires initialization data in, Mc Data Flow
