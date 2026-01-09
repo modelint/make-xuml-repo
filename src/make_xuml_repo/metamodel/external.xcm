@@ -2,9 +2,9 @@ metadata
     Title : External Service Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.19
-    Version : 0.2.0
+    Version : 0.2.1
     /// Creation date : September 17, 2025
-    Modification date : October 20, 2025
+    Modification date : January 9, 2026
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -55,8 +55,8 @@ attributes
 class External Signal Parameter
 attributes
     Signal action : Action ID {I, R1285}
-    Activity : Activity Number {I, R1285, R1286}
-    Domain : Domain Name {I, R1285, R1286}
+    Activity : Activity Number {I, I2, R1285, R1286}
+    Domain : Domain Name {I, I2, R1285, R1286}
     Parameter : Parameter Name {I, R1285}
     Signature : Signature Number {I, R1285}
     Flow : Flow ID {I2, R1286}
