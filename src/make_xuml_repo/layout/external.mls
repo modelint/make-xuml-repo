@@ -3,25 +3,27 @@ notation Starr
 presentation default
 orientation landscape
 color butterscotch
-sheet A2
-padding l150 b150
+sheet A1
+padding l250 b300
 frame Model Integration Diagram
 frame_presentation default
 nodes
-    Class 9,1
+    External Entity 9,1
     External Service 9,4
-    External Event 7-8,2
+    External Event 7,2-3
     External Operation 7-8,8
+    Event Specification 7,5
     Scalar 5,8
     External Operation Output/2 6,9
     Operation Call 4,7
     Operation Call Output/2 3,8-9
     Data Flow 1,8-9
     External Signature 9,7
-    External Signal Action/2 4,2
-    External Signal Parameter/2 3,3
-    Parameter 4,4-5
+    External Signal Action/2 4,2-3
+    External Signal Parameter/2 3,4
+    Parameter 4,5
     Operation Call Parameter 3,6
+    Service Response 6,4
 connectors
     +R1275 : b|External Service { t|External Event, t|External Operation }
     +R1276 : -/2 b|External Operation : -/2 t*|Scalar, l|External Operation Output
@@ -30,8 +32,9 @@ connectors
     -R1279.2 : +/1 r|Operation Call : +/1 b|External Operation Output, t|Operation Call Output
     -R1280 : +/2 b|Operation Call Output : +/1 t*|Data Flow
     +R1281 : -/2 b|External Event : -/1 t*|External Signal Action
-    -R1282 : +/1 r|Class : +/1 l*|External Service
+    -R1282 : +/1 r|External Entity : +/1 l*|External Service
     -R1283 : +/1 r|Parameter : +/1 l*|Operation Call, t|Operation Call Parameter
     -R1284 : +/1 b|Operation Call Parameter : +/1 l+2|Data Flow
     -R1285 : +/1 l|Parameter : +/1 r*|External Signal Action, t|External Signal Parameter
     -R1286 : +/1 b|External Signal Parameter : +/1 l-2|Data Flow
+    -R1287 : +/1 r|External Event : +/1 l*|Event Specification, t|Service Response

@@ -2,24 +2,30 @@ metadata
     Title : External Service Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.19
-    Version : 0.2.1
+    Version : 0.3.0
     /// Creation date : September 17, 2025
-    Modification date : January 9, 2026
+    Modification date : January 10, 2026
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
 domain Metamodel, META
 subsystem External Service, EXT 1275-1299
-class Class <import:Class And Attribute>
-attributes
-    Name {I}
-    Domain {I}
---
 class Data Flow <import:Flow>
 attributes
     ID {I}
     Activity {I}
     Domain {I}
+--
+class Event Specification <import:Event>
+attributes
+    Name {I}
+    State model {I}
+    Domain {I}
+--
+class External Entity
+attributes
+    Name : EE Name {I}
+    Domain : Domain Name {I}
 --
 class External Event
 attributes
@@ -43,7 +49,7 @@ attributes
     Name : External Service Name {I}
     Domain : Domain Name {I, I2, R1277, R1283}
     Signature : Signature Number {I2, R1277}
-    Class : Type Name {R1283}
+    EE : EE Name {R1283}
 --
 class External Signal Action
 attributes
@@ -101,6 +107,13 @@ attributes
     Name {I}
     Domain {I}
 --
+class Service Response
+attributes
+    External event : External Service Name {I, R1287}
+    Response event : Event Name {I, R1287}
+    State model : State Model Name {I, R1287}
+    Domain : Domain Name {I, R1287}
+--
 relationships
     R1275
     External Service +
@@ -143,9 +156,9 @@ relationships
     External Signal Action.(External event, Domain) -> External Event.(Name, Domain)
 --
     R1282
-    is delegated by, 1 Class
-    delegates, Mc External Service
-    External Service.(Class, Domain) -> Class.(Name, Domain)
+    is serviced by, 1 External Entity
+    services, Mc External Service
+    External Service.(EE, Domain) -> External Entity.(Name, Domain)
 --
     R1283
     fills out, Mc Parameter
@@ -170,4 +183,11 @@ relationships
     gets value from, 1 Data Flow
     supplies value for, Mc External Signal Parameter
     External Signal Parameter.(Flow, Activity, Domain) -> Data Flow.(ID, Activity, Domain)
+--
+    R1287
+    is requested response to, M External Event
+    responds using, Mc Event Specification
+    1 Service Response
+    Service Response.(External event, Domain) -> External Event.(Name, Domain)
+    Service Response.(Response event, State model, Domain) -> Event Specification.(Name, State model, Domain)
 --
