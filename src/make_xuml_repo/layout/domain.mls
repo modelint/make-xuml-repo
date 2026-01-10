@@ -12,6 +12,7 @@ nodes
     Signature 1,4
     Constrained Loop 1,3
     Domain 8-9,4
+    External Entity 9,7
     Element 4,5
     Lineage 1,2
     Modeled Domain 7,5
@@ -27,9 +28,10 @@ nodes
 connectors
     -R1 : +/2 b*|Domain Partition : +/2 t|Subsystem
     +OR2.3 : -/2 r|Domain Partition : -/2 t|Domain Partition : L8R-2 L8R-1
-    -R3 : +/2 r|Modeled Domain : +/1 l*|Domain Partition
+    +R3 : -/2 r|Modeled Domain : -/1 l*|Domain Partition
     +R4 : b|Domain { t|Modeled Domain, t|Realized Domain }
     -R5 : +/2 t|Type : +/1 l|Modeled Domain
+    -R6 : +/2 t+2|Modeled Domain : +/2 l|External Entity
     +R13 : +/1 b|Subsystem : +/1 t*|Subsystem Element
     +R14 : b|Subsystem Element { t|Relationship, t|Class }
     -R15 : +/1 b|Modeled Domain : +/1 t*|Element

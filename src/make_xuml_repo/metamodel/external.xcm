@@ -2,7 +2,7 @@ metadata
     Title : External Service Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.19
-    Version : 0.3.0
+    Version : 0.3.1
     /// Creation date : September 17, 2025
     Modification date : January 10, 2026
     Organization : Model Integration, LLC / www.modelint.com
@@ -25,7 +25,7 @@ attributes
 class External Entity
 attributes
     Name : EE Name {I}
-    Domain : Domain Name {I}
+    Domain : Domain Name {I, R6}
 --
 class External Event
 attributes
