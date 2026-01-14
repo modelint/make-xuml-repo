@@ -2,9 +2,9 @@ metadata
     Title : External Service Subsystem / Shlaer-Mellor Metamodel
     Author : Leon Starr
     Document ID : mint.sm-meta.action.td.19
-    Version : 0.3.5
+    Version : 0.3.6
     /// Creation date : September 17, 2025
-    Modification date : January 12, 2026
+    Modification date : January 14, 2026
     Organization : Model Integration, LLC / www.modelint.com
     Copyright notice > MIT
     Organization logo > mint
@@ -16,6 +16,10 @@ attributes
     Activity {I}
     Domain {I}
 --
+class Domain <import:Domain>
+attributes
+    Name {I}
+--
 class Event Specification <import:Event>
 attributes
     Name {I}
@@ -26,6 +30,7 @@ class External Entity
 attributes
     Name : EE Name {I}
     Domain : Domain Name {I, R6}
+    Service domain : Domain Name {R1288c}
 --
 class External Event
 attributes
@@ -198,4 +203,9 @@ relationships
     1 Service Response
     Service Response.(External event, EE, Domain) -> External Event.(Name, EE, Domain)
     Service Response.(Response event, State model, Domain) -> Event Specification.(Name, State model, Domain)
+--
+    R1288
+    represents interactions with, 1 Domain
+    has interactions represented by, Mc External Entity
+    External Entity.Service domain -> Domain.Name
 --
