@@ -37,6 +37,7 @@ attributes
     Name : External Service Name {I, R1275}
     EE : EE Name {I, R1275}
     Domain : Domain Name {I, R1275}
+    Implicit : Boolean
 --
 class External Operation
 attributes
