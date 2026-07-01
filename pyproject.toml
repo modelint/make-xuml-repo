@@ -16,7 +16,7 @@ classifiers = [
 ]
 keywords = ["action language", "executable uml", "mbse", "xuml", "xtuml", "platform independent", "sysml"]
 dependencies = ["PyYAML", "xcm-parser", "mi-pyral"]
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.14"
 
 [project.optional-dependencies]
 build = ["build", "twine"]
