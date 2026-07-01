@@ -8,6 +8,7 @@ Make an xUML repo
 import logging
 import logging.config
 import sys
+import atexit
 import argparse
 from pathlib import Path
 
@@ -18,6 +19,10 @@ from make_xuml_repo import version
 _logpath = Path("make_xuml_repo.log")
 _progname = 'Make xUML repository'
 
+def clean_up():
+    """Normal and exception exit activities"""
+    _logpath.unlink(missing_ok=True)
+
 def get_logger():
     """Initiate the logger"""
     log_conf_path = Path(__file__).parent / 'log.conf'  # Logging configuration is in this file
@@ -26,17 +31,13 @@ def get_logger():
 
 # Configure the expected parameters and actions for the argparse module
 def parse(cl_input):
-    """
-    The command line interface is for diagnostic purposes
-
-    :param cl_input:
-    :return:
-    """
     parser = argparse.ArgumentParser(description=_progname)
     parser.add_argument('-D', '--debug', action='store_true',
                         help='Debug mode'),
     parser.add_argument('-V', '--version', action='store_true',
                         help='Print the current version of parser')
+    parser.add_argument('-L', '--log', action='store_true',
+                        help='Generate a diagnostic make_xuml_repo.log file')
     return parser.parse_args(cl_input)
 
 
@@ -48,9 +49,14 @@ def main():
     # Parse the command line args
     args = parse(sys.argv[1:])
 
+    if not args.log:
+        # If no log file is requested, remove the log file before termination
+        atexit.register(clean_up)
+
     if args.version:
         # Just print the version and quit
         print(f'{_progname} version: {version}')
+        sys.exit(0)
 
     Metamodel.create_db()
 
