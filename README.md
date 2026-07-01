@@ -1,12 +1,46 @@
 # Make an Executable UML Repository
 
-Creates a model repository database from a Shlaer-Mellor Executable UML metamodel.
+This is the first step in the model execution tool chain.
 
-The latest [Shlaer-Mellor metamodel](https://github.com/modelint/shlaer-mellor-metamodel/wiki) is specified inside this package as a folder of .xcm (executable class model) files and a types.yaml file.
+The `make-xuml-repo` command generates an empty metamodel database that can be populated with the modeled
+components of your system.
 
-Each subsystem of the metamodel (class-attribute, state, etc) is defined in a single .xcm file all within a single foler. That folder also contains one types.yaml file specifying the db type (data type) to use for each metamodel attribute type. The db type 'string', for example, is associated with the `State Name` metamodel type.
+We say 'metamodel' because the generated database schema defines the 
+[Shlaer-Mellor Executable UML modeling language](https://github.com/modelint/shlaer-mellor-metamodel/wiki). It defines
+all structures necessary to describe platform independent domains, class models, state models, as well as the complete 
+computational activities driven by each state transition and method call.
 
-We target the little known, but exceptionally useful TclRAL database. It's lean and mean and supports a true relational algebra as defined by [C.J. Date and Hugh Darwen](https://github.com/modelint/shlaer-mellor-metamodel/wiki/Resources#ttm-databases-types-and-the-relational-model-the-third-manifesto-cj-date-hugh-darwen----links-to-the-actual-book-as-a-downloadable-pdf). So we can use nested relational algrebra without any of that SQL mess. It is implemented in C and Tcl, but we provide a python front end called PyRAL to keep everything pythonic.
+#### Output
+
+The output consists of these three files:
+
+- `mmdb.ral` -- The database
+- `mmdb.txt` -- Human readable text that displays all of the database tables (relvars / relational variables)
+- `mmclass_nt.py` -- A set of python named tuples, one per metamodel class, used for model population. Each metamodel class corresponds to a similarly named relvar (table).
+
+#### Input
+
+The input to `make-xuml-repo` is a set of *.xcm (Executable Class Model) files. The files are parsed using
+the [xcm-parser](https://github.com/modelint/xcm-parser). You can view these files here: `<TBD>`
+
+This file set defines a subset of the full modeling language though the bulk of the language is, in fact, supported.
+But work continues and, as the `.xcm` files upgrade, it will be necessary to refresh your metamodel database
+by re-running make-xuml-repo.
+
+The latest [Shlaer-Mellor metamodel](https://github.com/modelint/shlaer-mellor-metamodel/wiki) is specified inside this 
+package as a folder of .xcm (executable class model) files and a types.yaml file.
+
+Each subsystem of the metamodel (class-attribute, state, etc) is defined in a single .xcm file all within 
+a single foler. That folder also contains one types.yaml file specifying the db type (data type) to use for each 
+metamodel attribute type. The db type 'string', for example, is associated with the `State Name` metamodel type.
+
+#### Database
+
+Rather than a traditional SQL database, we use Andrew Mangogna's open source tclRAL Relational Algebra Library.
+
+It is an implementation of relational algebra as defined by [C.J. Date and Hugh Darwen](https://github.com/modelint/shlaer-mellor-metamodel/wiki/Resources#ttm-databases-types-and-the-relational-model-the-third-manifesto-cj-date-hugh-darwen----links-to-the-actual-book-as-a-downloadable-pdf). So we can use nested relational algrebra 
+without any of that SQL mess. It is implemented in C and Tcl, but we provide a python front end 
+called [PyRAL]() to keep everything pythonic.
 
 ### Why you need this
 
