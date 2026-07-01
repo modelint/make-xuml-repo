@@ -46,6 +46,8 @@ def parse(cl_input):
                         help='Show warnings on the console')
     parser.add_argument('-L', '--log', action='store_true',
                         help='Generate a diagnostic make_xuml_repo.log file')
+    parser.add_argument('-M', '--models', action='store_true',
+                        help='Copy the metamodel and layout directories into the current directory')
     return parser.parse_args(cl_input)
 
 
@@ -64,6 +66,21 @@ def main():
     if args.version:
         # Just print the version and quit
         print(f'{_progname} version: {version}')
+        sys.exit(0)
+
+    if args.models:
+        # Copy the metamodel and layout directories into the user's local directory
+        import shutil
+        pkg_path = Path(__file__).parent
+        for dname in ('metamodel', 'layout'):
+            local_path = Path.cwd() / dname
+            if local_path.exists():
+                logger.warning(f"'{dname}' already exists in the current directory. "
+                               f"Delete or move it if you want the latest.")
+            else:
+                logger.info(f"Copying '{dname}' directory into user's local directory")
+                shutil.copytree(pkg_path / dname, local_path)
+        # Just quit here; the user is requesting the model files, not a db build
         sys.exit(0)
 
     Metamodel.create_db()
