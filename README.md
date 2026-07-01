@@ -27,12 +27,7 @@ This file set defines a subset of the full modeling language though the bulk of 
 But work continues and, as the `.xcm` files upgrade, it will be necessary to refresh your metamodel database
 by re-running make-xuml-repo.
 
-The latest [Shlaer-Mellor metamodel](https://github.com/modelint/shlaer-mellor-metamodel/wiki) is specified inside this 
-package as a folder of .xcm (executable class model) files and a types.yaml file.
-
-Each subsystem of the metamodel (class-attribute, state, etc) is defined in a single .xcm file all within 
-a single foler. That folder also contains one types.yaml file specifying the db type (data type) to use for each 
-metamodel attribute type. The db type 'string', for example, is associated with the `State Name` metamodel type.
+Go to the [Shlaer-Mellor Metamodel Wiki](https://github.com/modelint/shlaer-mellor-metamodel/wiki) for the complete and not fully implemented model set and model documentation.  What is actually implemented, though, is maintained here in the `make-xuml-repo` repository.
 
 #### Database
 
