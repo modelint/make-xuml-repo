@@ -52,26 +52,52 @@ might come in handy.
 
 ### Installation
 
-Create or use a python 3.11+ environment (early python versions may or may not work).
+Create or activate a Python 3.11+ environment (earlier versions may or may not work), then install
+from PyPI:
 
-% pip install make-xuml-repo
+    % pip install make-xuml-repo
 
-At this point you can invoke the repository generator via the command line.
+It's a good idea to upgrade `pip` first if you haven't in a while:
 
-#### From the command line
+    % pip install --upgrade pip
 
-With the default usage just type:
+Once installed, you can invoke the repository generator with the `makexumlrepo` command.
+
+### Usage
+
+Run the command in the directory where you want the output files created:
 
     % makexumlrepo
 
-Two files will be created in this directory as a result. An mmdb.ral file and a mmclass_ntuples.py file.
+This generates three files in the current directory:
 
-The mmdb.ral file is actually a text file that can be opened by TclRAL (via PyRAL) and it will establish an empty relvar per
-metamodel class. You can use the previously mentioned populator, or your own, to load it up with
-instances of your modeled domains.
+- `mmdb.ral` — The database. Although it is a text file, it can be opened by TclRAL (via PyRAL) to
+  establish an empty relvar (table) per metamodel class, ready to be populated with instances of your
+  modeled domains.
+- `mmdb.txt` — A human readable listing of every relvar in the database.
+- `mmclass_nt.py` — A set of Python named tuples, one per metamodel class, with a field for each of that
+  class's attributes. PyRAL uses these to insert one or more tuples into the corresponding relvar.
 
-The mmclass_ntuples.py file is a handy set of python named tuples. Each named tuple corresponds to a
-metamodel class and provides a field for each attribute of that class. PyRal then uses this to insert one or
-more tuples into the corresponding relvar.
+You can load these with the metamodel populator (coming soon) or your own tooling. In my own workflow I
+generate the files and copy them into my metamodel populator package.
 
-In my case, I generate the two files and then copy them into my metamodel populator package.
+### Command line options
+
+| Option | Long form | Description |
+| ------ | --------- | ----------- |
+| `-h` | `--help` | Show a summary of all options and exit. |
+| `-V` | `--version` | Print the installed version and exit. |
+| `-M` | `--models` | Copy the packaged `metamodel` and `layout` directories into the current directory, then exit. Existing directories are left untouched (a warning is issued). No database is built. |
+| `-v` | `--verbose` | Show warnings on the console. By default warnings are suppressed on the console (but still recorded in the log file when `-L` is used). |
+| `-L` | `--log` | Keep the diagnostic `make_xuml_repo.log` file. Without this flag the log is removed on exit. |
+| `-D` | `--debug` | Run in debug mode. |
+
+#### Inspecting or customizing the metamodel
+
+If you want to look at the `.xcm` metamodel files or the layout sheets that ship with the package, copy
+them into your working directory with:
+
+    % makexumlrepo -M
+
+This creates a `metamodel` directory (the `.xcm` files and `mm_types.yaml`) and a `layout` directory in
+the current directory. No database is generated when `-M` is supplied.
