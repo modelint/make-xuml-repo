@@ -69,7 +69,8 @@ def main():
     Metamodel.create_db()
 
     logger.info("No problemo")  # We didn't die on an exception, basically
-    print("\nNo problemo")
+    if args.verbose:
+        print("\nNo problemo")
 
 
 if __name__ == "__main__":
